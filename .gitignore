@@ -1,0 +1,5 @@
+node_modules/
+#忽略工具包文件夹
+
+webpack.config.js
+#忽略webpack配置文件
