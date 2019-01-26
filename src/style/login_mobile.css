@@ -14,14 +14,6 @@ input{
     line-height:4rem;
     color: #9599a2;
 }
-html{
-    width: 100%;
-    height:100%;
-    background-color:#232a34;
-    position:relative;
-    font-size:62.5%;
-    background-size:100% 100%;
-}
 .pagepic{
     position:absolute;
     width:8rem;
@@ -83,6 +75,18 @@ html{
     text-align:center;
     line-height:4rem;
     color: #9599a2;
+}
+s
+/* 公用 */
+.back_btn{
+    position:absolute;
+    width:2.5rem;
+    height:2.5rem;
+    background-image: url(./img/back.png);
+    background-size:2.5rem;
+    background-repeat: no-repeat;
+    top:2%;
+    left:2%;
 }
 .register{
     position:absolute;

@@ -7,12 +7,6 @@
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href=".\login_mobile.css" />
 <style>
-*{
-    margin:0;
-    padding:0;
-    list-style: none;
-    text-decoration: none;
-}
 a{
     color:#fff;
 }
@@ -22,18 +16,7 @@ html{
     background-color:#232a34;
     position:relative;
     font-size:62.5%;
-    background-size:100% 100%;
-}
-.headline{
-    position:absolute;
-    width:33rem;
-    font-size:3rem;
-    font-weight:90;
-    text-align:center;
-    color:#fff;
-    left:50%;
-    margin-left:-16.5rem;
-    top:15.5rem;
+ 
 }
 .login{
     position:absolute;
@@ -66,14 +49,12 @@ html{
 </head>
 <body>
     <div class="headline">移动应用开发实验室</div>
-    <div class="login">
-        <a href="#/login">login</a>
-    </div> 
-    <div class="logup">
-        <a href="#/logup">logup</a>
-    </div> 
-         
-    
+        <a href="#/login">
+            <div class="login">login</div>
+        </a>
+        <a href="#/logup">
+            <div class="logup">logup</div>   
+        </a>
 </body>
 <script src="./login_mobile.js"></script>
 </html>
