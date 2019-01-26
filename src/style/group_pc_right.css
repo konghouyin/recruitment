@@ -1,0 +1,154 @@
+  /*page-1--------------------------------------------------------------*/
+    /*page-2--------------------------------------------------------------*/
+    #page-2{
+        position: absolute;
+        left:20rem;
+        top: 5rem;
+        width:100rem;
+    }
+    table,th,td {
+        border:rgb(220,220,220) solid 0.1rem;
+        padding-left:0.05rem
+    }
+    .sore {
+        border-collapse:collapse;
+        font-size:0.08em; 
+        border:0.5rem;
+        width:90%;
+        height:1.3em;
+        text-align: center;
+    }
+    .sore th{
+        color:white;
+        height:3.5rem;
+    }
+    .sore td{
+        height:3.5rem;
+    }
+    #student-more{
+        color:#00b7a9;
+        font-weight:900;
+        font-size:2rem;
+    }
+    .student-more:hover{
+        cursor:pointer;
+    }
+    .student-state{
+        display:inline-block;
+        padding:.3rem .7rem .3rem .7rem;
+        color:white;
+        border-radius: 1.2rem;
+        background-color:#7b5cac;
+        box-shadow: 1px 1px 2px #888888;
+    }
+    .studentstates div{
+        display:inline-block;
+        display:inline-block;
+        padding:.3rem .7rem .3rem .7rem;
+        color:white;
+        border-radius: 1.2rem;
+        margin-bottom:.5rem;
+        cursor:pointer;
+    }
+    .studentstates div:active{
+        box-shadow: 4px 12px 15px 0 rgba(0,0,0,0.24), 4px 17px 17px 0 rgba(0,0,0,0.19);
+        box-sizing: border-box;
+    }
+    #studentstate-1{
+        background-color:#7b5cac;
+    }
+    #studentstate-2{
+        background-color:#ff9103;
+    }
+    #studentstate-3{
+        background-color:#00d037;
+    }
+    #studentstate-4{
+        background-color:#f70004;
+    }
+    /*page-3--------------------------------------------------------------*/
+    .find-student form{
+        font-size: 1.5rem;
+        margin-bottom:0.5rem; 
+    }
+    .find-student select{
+        width: 6rem;
+        height:2rem;
+        font-size: 1.5rem;
+
+    }
+    #page-3{
+        position: absolute;
+        left:20rem;
+        top: 5rem;
+        width:100rem;
+    }
+    table,th,td {
+        border:rgb(220,220,220) solid 0.1rem;
+        padding-left:0.05rem
+    }
+    .sore {
+        border-collapse:collapse;
+        font-size:0.08em; 
+        border:0.5rem;
+        width:90%;
+        height:1.3em;
+        text-align: center;
+    }
+    .sore th{
+        color:white;
+        height:3.5rem;
+    }
+    .sore td{
+        height:3.5rem;
+    }
+    .student-more{
+        color:#00b7a9;
+        font-weight:900;
+        font-size:2rem;
+    }
+    .student-more:hover{
+        cursor:pointer;
+    }
+    /*--page-4-------------------------------------------------------------------*/
+
+ .middle{
+    position:absolute;
+    top:4rem;
+    left:50%;
+    transform:translate(-20%);
+    width: 30rem;
+    height: 2.5rem;
+    background-color: white;
+    padding: .8rem;
+    opacity: .85;
+    z-index: -1; 
+}
+.middle input{
+    width: 20rem;
+    height: 2.5rem;
+    color: black;
+    position:absolute; 
+    left: 3rem;
+    top: 0rem;
+    border:none;
+    font-size: 1.6rem;
+    outline:medium; 
+}
+.big-find{
+    position: relative;
+}
+.middle button{
+    width: 7rem;
+    height: 2.5rem;
+    position: absolute;
+    right: 0;
+    top: .8rem;
+    background-color: white;
+    
+    border:none;
+    border-left:.1rem solid #ccd3d3;;
+    outline:medium;
+    font-size: 1.6rem;
+    color: black;
+}
