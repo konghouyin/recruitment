@@ -56,7 +56,7 @@
 │ ├── js
 │ │ └── xxx.js
 │ ├── xxx.html
-├── sever#后台自定义共用文件
+├── server#后台自定义共用文件
 ├── xxx_server.js #服务后台
 ├── package.json #项目配置文件
 ├── package-lock.json #模块配置文件
@@ -168,7 +168,7 @@ sql.sever(pool,SQLString,function(data){
 
 ​     封装sql数据库命令sever，通过获取sql命令以及回调函数，实现包括从连接池获取连接，使用完释放连接的完整SQL查询。
 
-**参数说明：**
+**参数说明：** 
 
 - pool：<Object> 连接池
 
@@ -176,9 +176,9 @@ sql.sever(pool,SQLString,function(data){
 
 - fn：<Function> 回调函数（传入参数是查询结果的数组）
 
-**提示：**可以将SQLString生成函数，最后的回调函数，提取出来，优化代码。
+**提示：** 可以将SQLString生成函数，最后的回调函数，提取出来，优化代码。
 
-**注意：**输入的SQLString要求要进行转义，防止SQL注入。
+**注意：** 输入的SQLString要求要进行转义，防止SQL注入。
 
 3. sql语句转换
 
@@ -199,7 +199,7 @@ sql.escape(name);
 - undefined / null 会被转义成 NULL
 - NaN / Infinity 将会被原样传入。由于MySQL 并不支持这些值，在它们得到支持之前，插入这些值将会导致MySQL报错。
 
-**注意：**所有从前端获取的内容，不能直接拼接进入sql语句，必须转换后再使用。
+**注意：** 所有从前端获取的内容，不能直接拼接进入sql语句，必须转换后再使用。
 
 4. SELECT语句拼接
 
@@ -209,15 +209,15 @@ sql.select（type，tablename[，where]）;
 
 数据库查询命令拼接select，通过输入对应参数，返回拼接好的sql查询语句。
 
-**参数说明：**
+**参数说明：** 
 
 - type：<Array> 查询的字段
 - tablename：<String> 查询的表
 - where：<String> where过滤语句（参数可选）
 
-**注意：**当有多条Where过滤条件时，注意拼接时的空格。
+**注意：** 当有多条Where过滤条件时，注意拼接时的空格。
 
-**示例：**
+**示例：** 
 
 ```js
 obj={
@@ -252,13 +252,13 @@ return sql.insert("registryinformation",["password","phoneNum"],["asd",13345]);
 
 数据库插入命令拼接insert，通过输入对应参数，返回拼接好的sql插入语句。
 
-**参数说明：**
+**参数说明：** 
 
 - tablename：<String> 查询的表
 - type：<Array> 插入的字段
 - valuse：<Array> 插入的值
 
-**注意：**插入字段与插入值的个数应该相同。
+**注意：** 插入字段与插入值的个数应该相同。
 
 6. UPDATE语句拼接
 
@@ -267,14 +267,14 @@ sql.update(tablename, type, value[,where]);
 sql.update("registryinformation",["password","phoneNum"],["123",123],"name='樊宗渤'");
 ```
 
-**参数说明：**
+**参数说明：** 
 
 - tablename：<String> 查询的表
 - type：<Array> 插入的字段
 - valuse：<Array> 插入的值
 - where：<String> where过滤语句（参数可选）
 
-**注意：**当有多条Where过滤条件时，注意拼接时的空格。修改字段与修改值的个数应该相同。
+**注意：** 当有多条Where过滤条件时，注意拼接时的空格。修改字段与修改值的个数应该相同。
 
 7. DELETE语句拼接
 
@@ -283,14 +283,14 @@ sql.del(tablename[,where]);
 sql.del("registryinformation","name='樊宗渤'");
 ```
 
-**参数说明：**
+**参数说明：** 
 
 - tablename：<String> 查询的表
 - where：<String> where过滤语句（参数可选）
 
-**注意：**当有多条Where过滤条件时，注意拼接时的空格。
+**注意：** 当有多条Where过滤条件时，注意拼接时的空格。
 
-**警告：**此接口不使用where参数会导致删除数据表，请谨慎使用。
+**警告：** 此接口不使用where参数会导致删除数据表，请谨慎使用。
 
 ### 2.注册登录
 
