@@ -4,6 +4,13 @@
     list-style: none;
     text-decoration: none;
 }
+html{
+    width: 100%;
+    height:100%;
+    background-color:#232a34;
+    position:relative;
+    font-size:62.5%;
+}
 input{
     background:none;
     outline:none;
@@ -13,6 +20,7 @@ input{
     text-align:center;
     line-height:4rem;
     color: #9599a2;
+    background-color: #fff;
 }
 .pagepic{
     position:absolute;
@@ -25,6 +33,36 @@ input{
     left:50%;
     margin-left:-4rem;
 }
+.logup_btn1{
+    position:absolute;
+    width:22rem;
+    height:4rem;
+    background-color:#303741;
+    left:50%;
+    margin-left:-11.5rem;
+    top:51%;
+    font-size:2rem;
+    font-weight:90;
+    text-align:center;
+    line-height:4rem;
+    color: #9599a2;
+}
+.logup_btn2{
+    position:absolute;
+    width:22rem;
+    height:4rem;
+    background-color:#303741;
+    left:50%;
+    margin-left:-11.5rem;
+    top:61%;
+    font-size:2rem;
+    font-weight:90;
+    text-align:center;
+    line-height:4rem;
+    color: #9599a2;
+}
+
+/* 公用 */
 .headline{
     position:absolute;
     width:33rem;
@@ -47,37 +85,6 @@ input{
     margin-left:-16.5rem;
     top:20rem;
 }
-.logup_btn1{
-    position:absolute;
-    width:22rem;
-    height:4rem;
-    background-color:#303741;
-    left:50%;
-    margin-left:-11.5rem;
-    top:51%;
-    font-size:2rem;
-    font-weight:90;
-    text-align:center;
-    line-height:4rem;
-    color: #9599a2;
-
-}
-.logup_btn2{
-    position:absolute;
-    width:22rem;
-    height:4rem;
-    background-color:#303741;
-    left:50%;
-    margin-left:-11.5rem;
-    top:61%;
-    font-size:2rem;
-    font-weight:90;
-    text-align:center;
-    line-height:4rem;
-    color: #9599a2;
-}
-s
-/* 公用 */
 .back_btn{
     position:absolute;
     width:2.5rem;
@@ -103,6 +110,50 @@ s
     line-height:5rem;
     color: #f9f9fa;
 }
+.btn_text1,.btn_text2,.btn_text3{
+    position:absolute;
+    height:4rem;
+    background-color:#303741;
+    left:4%;
+    top:0%;
+    font-size:1.8rem;
+    font-weight:90;
+    text-align:center;
+    line-height:4rem;
+    color: #9599a2;
+    background-color: aquamarine;
+}
+#see{
+    position:absolute;
+    width:2rem;
+    height:2rem;
+    background-image: url(./img/see.png);
+    background-size:2rem;
+    background-repeat: no-repeat;
+    top:23%;
+    right:5%;
+    background-color: blue;
+}
+.btn_see{
+    position:absolute;
+    width:2rem;
+    height:2rem;
+    background-image: url(./img/see.png);
+    background-size:2rem;
+    background-repeat: no-repeat;
+    top:23%;
+    right:5%;
+}
+.btn_notsee{
+    position:absolute;
+    width:2rem;
+    height:2rem;
+    background-image: url(./img/not_see.png);
+    background-size:2rem;
+    background-repeat: no-repeat;
+    top:23%;
+    right:5%;
+}
 
 /* 注册 */
 .login_btn1{
@@ -117,8 +168,6 @@ s
     font-weight:90;
     text-align:center;
     line-height:4rem;
-    color: #9599a2;
-
 }
 .login_btn2{
     position:absolute;
@@ -132,7 +181,6 @@ s
     font-weight:90;
     text-align:center;
     line-height:4rem;
-    color: #9599a2;
 }
 .login_btn3{
     position:absolute;
@@ -146,5 +194,4 @@ s
     font-weight:90;
     text-align:center;
     line-height:4rem;
-    color: #9599a2;
 }
