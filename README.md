@@ -132,7 +132,7 @@ master为主分支，需要时刻保持准确。个人完成一部分功能后�
 1. 创建mysql数据库连接池
 
 ```js
-var sql = require('./sever/public_sql');
+var sql = require('./server/public_sql');
 var pool  = sql.createPool({
   connectionLimit : 10,
   host            : '132.232.169.227',
@@ -298,6 +298,48 @@ sql.del("registryinformation","name='樊宗渤'");
 
 #### b.后端
 
+1.申请图片验证图像
+
+- url：/picyzm
+
+- 方法：GET
+
+- 参数：无
+
+- 返回
+
+```json
+<svg>...</svg>
+```
+
+2.验证图片验证码，并发送短信
+
+- url：/phone
+- 方法：post
+- 参数：phone=153····&picyzm=4s5d
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    style：0	//0验证码错误，-1验证码失效，1成功，-2此电话已注册
+}
+```
+
+3.注册验证
+
+- url：/login
+- 方法：post
+- 参数：password=（MD5加密）&yzm=4s5d
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    style：0	//0验证码错误，-1验证码失效，1成功，
+}
+```
+
 ### 3.密码找回
 
 #### a.前端
@@ -335,6 +377,13 @@ sql.del("registryinformation","name='樊宗渤'");
 #### b.后端
 
 ## 五、重要问题记录
+
+### 1.上线需要调整参数
+
+- 跨域参数Allow-origin
+- 跨后台登录，携带cookie。两后台验证加密秘钥
+- 数据库登录密码
+- 各后台session，cookie，秘钥数组，签名
 
 
 
