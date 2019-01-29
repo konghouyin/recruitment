@@ -1,10 +1,5 @@
 var mysql = require('mysql');
 
-function changeString(obj) {
-	return obj.join(',');
-}
-//数组转字符串
-
 module.exports = {
 
 	createPool: function(obj) {
