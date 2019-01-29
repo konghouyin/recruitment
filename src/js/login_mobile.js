@@ -86,51 +86,57 @@ function flogin() {
     var login_btn2=document.getElementsByClassName("login_btn2")[0];
     login_btn2.insertBefore(input2,login_btn2.children[0]); 
 
-
     var div = document.createElement("div");
     div.setAttribute("class","btn_text2");
     login_btn2.insertBefore(div,login_btn2.children[1]);  
     var btn_text2=document.getElementsByClassName("btn_text2")[0];
-    btn_text2.style.display="none";
+    btn_text1.style.display="none";
 
     input2.onfocus= function () {
-        see.style.display="block";
         if(this.value=='Password'){
             this.value='';
             input2.type="password";
         }
         btn_text2.style.display="block";
         btn_text2.innerHTML='密码';
+        see.style.display="block";
     }
 
     var div = document.createElement("div");//眼睛
-    div.setAttribute("id","see");   
+    div.setAttribute("id","see"); 
     login_btn2.insertBefore(div,login_btn2.children[2]);
-    see=document.getElementById("see"); //眼睛公用部分
+    see=document.getElementById("see");
     see.style.display="none";
     //眼睛部分
-    count=0;
-    see.addEventListener("touchstart", function () {
-        console.log(count);
-        count++;
-        if(count/2+1){
-            see.style.className  = "btn_notsee";
-            input2.type="pass";
-        }else if(count/2){
-            see.style.className  = "btn_see";
-            input2.type="text";
-        }
-    })
-
-    input2.onblur= function () {
+    function blur()  {
         if(this.value==''){
             this.value='Password';
             input2.type="text";
         }
         var btn_text2=document.getElementsByClassName("btn_text2")[0];
-        btn_text2.innerHTML='';
+        btn_text2.style.display = "none";
         see.style.display="none";
     }
+    input2.onblur = blur; //回调函数执行
+
+    count=1;
+    see.addEventListener("mousedown", function () {
+        console.log(count);
+        if(count%2){
+            see.className  = "btn_notsee";
+            input2.type="text";
+        }else{
+            see.className  = "btn_see";
+            input2.type="password";
+        }
+        if(input2.value!=''){
+            count++;  //还未输入就按，第一次会失效
+        }
+        setTimeout(function(){
+            input2.focus();
+            // input2.onblur = blur;
+        },1)
+    })
 
     var div = document.createElement("div");
     div.setAttribute("class","login_btn3");
@@ -229,7 +235,7 @@ function flogup() {
         btn_text1.innerHTML='';
     }
     
-    var div = document.createElement("div");
+    var div = document.createElement("div");//2
     div.setAttribute("class","logup_btn2");
     html.appendChild(div);
     var input2 = document.createElement('input'); 
@@ -247,44 +253,51 @@ function flogup() {
     btn_text1.style.display="none";
 
     input2.onfocus= function () {
-        see.style.display="block";
         if(this.value=='Password'){
             this.value='';
             input2.type="password";
         }
-        btn_text1.style.display="block";
+        btn_text2.style.display="block";
         btn_text2.innerHTML='密码';
+        see.style.display="block";
     }
 
     var div = document.createElement("div");//眼睛
-    div.setAttribute("id","see");   
+    div.setAttribute("id","see"); 
     logup_btn2.insertBefore(div,logup_btn2.children[2]);
     see=document.getElementById("see");
     see.style.display="none";
     //眼睛部分
-    count=0;
-    see.addEventListener("touchstart", function () {
-        console.log(count);
-        input2.type="text";
-        count++;
-        if(count/2+1){
-            see.style.className  = "btn_notsee";
-            input2.type="pass";
-        }else if(count/2){
-            see.style.className  = "btn_see";
-            input2.type="text";
-        }
-    })
-
-    input2.onblur= function () {
+    function blur()  {
         if(this.value==''){
             this.value='Password';
             input2.type="text";
         }
         var btn_text2=document.getElementsByClassName("btn_text2")[0];
-        btn_text2.innerHTML='';
+        btn_text2.style.display = "none";
         see.style.display="none";
     }
+    input2.onblur = blur;
+
+    count=1;
+    see.addEventListener("mousedown", function () {
+        console.log(count);
+        if(count%2){
+            see.className  = "btn_notsee";
+            input2.type="text";
+        }else{
+            see.className  = "btn_see";
+            input2.type="password";
+        }
+        if(input2.value!=''){
+            count++;  //还未输入就按，第一次会失效
+        }
+        setTimeout(function(){
+            input2.focus();
+            // input2.onblur = blur;
+        },1)
+    })
+   
     var div = document.createElement("div");
     div.setAttribute("class","register");
     html.appendChild(div);
