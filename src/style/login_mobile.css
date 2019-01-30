@@ -20,18 +20,7 @@ input{
     text-align:center;
     line-height:4rem;
     color: #9599a2;
-    background-color: #fff;
-}
-.pagepic{
-    position:absolute;
-    width:8rem;
-    height:8rem;
-    background-image: url(./img/page1.png);
-    background-size:8rem;
-    background-repeat: no-repeat;
-    top:10%;
-    left:50%;
-    margin-left:-4rem;
+    /* background-color: #fff; */
 }
 .logup_btn1{
     position:absolute;
@@ -85,7 +74,7 @@ input{
     margin-left:-16.5rem;
     top:20rem;
 }
-.back_btn{
+.back_btn,.back_logup_btn{
     position:absolute;
     width:2.5rem;
     height:2.5rem;
@@ -95,7 +84,18 @@ input{
     top:2%;
     left:2%;
 }
-.register{
+.pagepic,.logup_pagepic{
+    position:absolute;
+    width:8rem;
+    height:8rem;
+    background-image: url(./img/page1.png);
+    background-size:8rem;
+    background-repeat: no-repeat;
+    top:10%;
+    left:50%;
+    margin-left:-4rem;
+}
+.register,.logup_register{
     position:absolute;
     width:22rem;
     height:5rem;
@@ -110,7 +110,7 @@ input{
     line-height:5rem;
     color: #f9f9fa;
 }
-.btn_text1,.btn_text2,.btn_text3{
+.btn_text1,.btn_text2,.btn_text3,.logup_text1,.logup_text2{
     position:absolute;
     height:4rem;
     background-color:#303741;
@@ -121,9 +121,9 @@ input{
     text-align:center;
     line-height:4rem;
     color: #9599a2;
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
 }
-#see{
+#see,#logup_see{
     position:absolute;
     width:2rem;
     height:2rem;
@@ -132,13 +132,13 @@ input{
     background-repeat: no-repeat;
     top:23%;
     right:5%;
-    background-color: blue;
+    /* background-color: blue; */
 }
-.btn_see{
+.btn_see {
     position:absolute;
     width:2rem;
     height:2rem;
-    background-image: url(./img/see.png);
+    background-image: url(./img/see.png) !important;
     background-size:2rem;
     background-repeat: no-repeat;
     top:23%;
@@ -148,7 +148,7 @@ input{
     position:absolute;
     width:2rem;
     height:2rem;
-    background-image: url(./img/not_see.png);
+    background-image: url(./img/not_see.png) !important;
     background-size:2rem;
     background-repeat: no-repeat;
     top:23%;
