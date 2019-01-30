@@ -4,8 +4,6 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var express = require('express');
 var svgCaptcha = require('svg-captcha');
-var crypto = require('crypto');
-
 
 var server = express(); //使用express框架
 var pool = sql.createPool({
@@ -43,64 +41,6 @@ server.all('*', function(req, res, next) {
 });
 //处理跨域
 
-server.post('/login', function(req, res) {
-	var obj = {};
-	var message = '';
-	req.on('data', function(data) {
-		message += data;
-	})
-	req.on('end', function() {
-		obj = querystring.parse(message);
-		if (rexXuehao(obj.yhm)) {
-			var sqlString = sql.select(['phoneNum', 'password'], 'registryinformation', "xuehao=" + sql.escape(obj.yhm) +
-				" and password=" + sql.escape(obj.password));
-			sql.sever(pool, sqlString, end); //学号登录
-		} else if (rexPhone(obj.yhm)) {
-			var sqlString = sql.select(['phoneNum', 'password'], 'registryinformation', "phoneNum=" + sql.escape(obj.yhm) +
-				" and password=" + sql.escape(obj.password));
-			sql.sever(pool, sqlString, end); //手机号登录
-		} else {
-			res.write(JSON.stringify({
-				msg: "用户名或密码错误！",
-				style: 0
-			}));
-			res.end();
-		}
-	})
-
-	function end(data) {
-		console.log(data);
-		if (data.length == 1) {
-			var cookieSend = "" + data[0].phoneNum + "~" + data[0].password + "~" + new Date().getTime(); //保存cookie验证，防止跨站session失效
-
-			var str = JSON.stringify(cookieSend); //明文
-			var secret = 'niyidingjiebuchulai'; //密钥--可以随便写
-			var cipher = crypto.createCipher('aes192', secret);
-			var enc = cipher.update(str, 'utf8', 'hex'); //编码方式从utf-8转为hex;
-			enc += cipher.final('hex'); //编码方式从转为hex;
-
-			res.cookie('pbl', enc, {
-				path: '/',
-				maxAge: 8 * 1000,
-				signed: true
-			});
-			res.write(JSON.stringify({
-				msg: "登录成功！",
-				url: "http://xxx.html",
-				style: 1
-			}));
-			res.end();
-
-		} else {
-			res.write(JSON.stringify({
-				msg: "用户名或密码错误！",
-				style: 0
-			}));
-			res.end();
-		}
-	}
-})
-//请求--登录
 
 server.use('/picyzm', function(req, res) {
 	canvas(req, res);
@@ -162,7 +102,7 @@ server.post('/phone', function(req, res) {
 	})
 
 	function end(data) {
-		if (data.length == 0) {
+		if (data.length == 1) {
 			req.session.yzm = "" + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() *
 				9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999);
 			req.session.picyzm = null; //成功后验证码失效
@@ -171,21 +111,21 @@ server.post('/phone', function(req, res) {
 				style: 1
 			}));
 			console.log("发送短信" + req.session.yzm);
-			//mailepass(obj.phone,req.session.yzm);//发送邮件--->替换短信
+			//mailepass(obj.phone,req.session.yzm);//发送邮件--->替换短信--->密码找回
 			res.end();
 		} else {
 			req.session.picyzm = null;
 			res.write(JSON.stringify({
-				msg: "手机号已经注册！",
+				msg: "此手机号没有注册！",
 				style: -2
 			}));
 			res.end();
 		}
 	}
 })
-//请求--手机号验证（发送短信）
+//请求--手机号验证（发送密码找回短信）
 
-server.post('/reg', function(req, res) {
+server.post('/passback', function(req, res) {
 	var obj = {};
 	var message = '';
 	req.on('data', function(data) {
@@ -206,16 +146,16 @@ server.post('/reg', function(req, res) {
 			}));
 			res.end();
 		} else {
-			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password'], [sql.escape(req.session.phone), sql.escape(obj.password)],
-				true);
-			sql.sever(pool, sqlString, end); //数据库存入手机号和密码
+			var sqlString = sql.update('registryinformation', ['password'], [sql.escape(obj.password)],
+				"phoneNum="+sql.escape(req.session.phone));
+			sql.sever(pool, sqlString, end); //数据库修改session对应的密码
 		}
 	})
 
 	function end(data) {
 		req.session.yzm = null; //成功后验证码失效
 		res.write(JSON.stringify({
-			msg: "注册成功！",
+			msg: "修改成功！",
 			style: 1
 		}));
 		res.end();
@@ -223,9 +163,9 @@ server.post('/reg', function(req, res) {
 })
 //请求--注册信息
 
-server.listen(8081);
 
 
+server.listen(8082);
 
 function rexPhone(text) {
 	var reg = /^1[0-9]{10}$/;
@@ -238,5 +178,3 @@ function rexXuehao(text) {
 	return reg.test(text);
 }
 //通用学号
-
-

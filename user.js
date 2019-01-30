@@ -1,3 +1,9 @@
+
+
+
+
+
+
 server.post('/computer', function(req, res) {
 	var obj = {};
 	var message = '';
@@ -33,3 +39,23 @@ server.post('/computer', function(req, res) {
 	}
 })
 //请求--计算机学院绑定账号
+
+
+
+server.use('*', function(req, res, next) {
+	var sqlString = sql.select(['style'], 'process');
+	sql.sever(pool, sqlString, end); //验证报名时间
+
+	function end(data) {
+		if (data[0].style == 0) {
+			next();
+		} else {
+			res.write(JSON.stringify({
+				msg: "报名已截止！",
+				style: -200
+			}));
+			res.end();
+		}
+	}
+})
+//验证报名时间 

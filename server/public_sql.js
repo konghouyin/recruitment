@@ -41,11 +41,6 @@ module.exports = {
 	//查询语句拼接
 
 	insert: function(table, type, value, ignore) {
-		for (var i = 0; i < value.length; i++) {
-			if (typeof(value[i]) == 'string') {
-				value[i] = "'" + value[i] + "'";
-			}
-		}
 
 		if (ignore == true) {
 			return "INSERT IGNORE INTO " + table + " (" + type.join(",") + ") VALUES (" + value.join(",") + ")";
@@ -56,11 +51,7 @@ module.exports = {
 	//插入语句拼接
 
 	update: function(table, type, value, where) {
-		for (var i = 0; i < value.length; i++) {
-			if (typeof(value[i]) == 'string') {
-				value[i] = "'" + value[i] + "'";
-			}
-		}
+
 		for (var i = 0; i < value.length; i++) {
 			type[i] = type[i] + "=" + value[i];
 		}
