@@ -246,7 +246,7 @@ sql.sever(pool,out1(),function(data){
 5. INSERT语句拼接
 
 ```js
-sql.insert(tablename,type,value);
+sql.insert(tablename,type,value,ignore);
 return sql.insert("registryinformation",["password","phoneNum"],["asd",13345]);
 ```
 
@@ -257,6 +257,7 @@ return sql.insert("registryinformation",["password","phoneNum"],["asd",13345]);
 - tablename：<String> 查询的表
 - type：<Array> 插入的字段
 - valuse：<Array> 插入的值
+- ignore：<Boole> 筛选防止多重添加（可选参数）
 
 **注意：** 插入字段与插入值的个数应该相同。
 
@@ -322,13 +323,13 @@ sql.del("registryinformation","name='樊宗渤'");
 ```json
 {
     msg："具体情况"，
-    style：0	//0验证码错误，-1验证码失效，1成功，-2此电话已注册
+    style：0	//1成功，0验证码错误，-1验证码失效，-2此电话已注册，-3其他异常（输入不是11位手机号）
 }
 ```
 
 3.注册验证
 
-- url：/login
+- url：/reg
 - 方法：post
 - 参数：password=（MD5加密）&yzm=4s5d
 - 返回
@@ -339,6 +340,30 @@ sql.del("registryinformation","name='樊宗渤'");
     style：0	//0验证码错误，-1验证码失效，1成功，
 }
 ```
+
+注册时数据库插入冲突：
+
+- 触发情况：在不同设备，使用同一手机号注册，下发两个session绑定同一手机号，有可能会触发数据库多次插入。
+- 解决方案：sql语句添加ignore来保证不会添加重复，防止数据库主键冲突。
+
+4.注册验证
+
+- url：/login
+- 方法：post
+- 参数：password=（MD5加密）&yhm=8位或11位
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    url："http",//跳转路径
+    style：0	//1成功，0用户名或错误，-1为未绑定身份，-2位选择组别
+}
+```
+
+
+
+
 
 ### 3.密码找回
 

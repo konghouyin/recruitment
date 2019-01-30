@@ -12,7 +12,7 @@ var pool = sql.createPool({
 	host: '132.232.169.227',
 	user: 'god',
 	port: 3306,
-	password: 'xxxxx',
+	password: 'godmanager',
 	database: 'recruitment'
 });
 //创建数据库连接池
@@ -66,6 +66,7 @@ function canvas(req, res) {
 }
 //绘制验证码，并发送图片
 
+
 server.post('/phone', function(req, res) {
 	var obj = {};
 	var message = '';
@@ -74,8 +75,13 @@ server.post('/phone', function(req, res) {
 	})
 	req.on('end', function() {
 		obj = querystring.parse(message);
-		console.log(obj);
-		if (req.session.picyzm == undefined) {
+		if (!rexPhone(obj.phone)) {
+			res.write(JSON.stringify({
+				msg: "其他异常！",
+				style: -3
+			}));
+			res.end();
+		} else if (req.session.picyzm == undefined) {
 			res.write(JSON.stringify({
 				msg: "图片验证码已失效，请重新验证！",
 				style: -1
@@ -98,11 +104,12 @@ server.post('/phone', function(req, res) {
 		if (data.length == 0) {
 			req.session.yzm = "" + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() *
 				9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999);
+			req.session.picyzm = null; //成功后验证码失效
 			res.write(JSON.stringify({
 				msg: "短信已发送！",
 				style: 1
 			}));
-			console.log("发送短信"+req.session.yzm);
+			console.log("发送短信" + req.session.yzm);
 			//mailepass(obj.phone,req.session.yzm);//发送邮件--->替换短信
 			res.end();
 		} else {
@@ -116,7 +123,7 @@ server.post('/phone', function(req, res) {
 })
 //请求--手机号验证（发送短信）
 
-server.post('/login', function(req, res) {
+server.post('/reg', function(req, res) {
 	var obj = {};
 	var message = '';
 	req.on('data', function(data) {
@@ -124,7 +131,6 @@ server.post('/login', function(req, res) {
 	})
 	req.on('end', function() {
 		obj = querystring.parse(message);
-		console.log(obj);
 		if (req.session.yzm == undefined) {
 			res.write(JSON.stringify({
 				msg: "验证码已失效，请重新验证！",
@@ -138,12 +144,14 @@ server.post('/login', function(req, res) {
 			}));
 			res.end();
 		} else {
-			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password'], [req.session.phone, obj.password]);
+			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password'], [req.session.phone, obj.password],
+				true);
 			sql.sever(pool, sqlString, end); //数据库存入手机号和密码
 		}
 	})
 
 	function end(data) {
+		req.session.yzm = null; //成功后验证码失效
 		res.write(JSON.stringify({
 			msg: "注册成功！",
 			style: 1
@@ -153,11 +161,89 @@ server.post('/login', function(req, res) {
 })
 //请求--注册信息
 
+server.post('/login', function(req, res) {
+	var obj = {};
+	var message = '';
+	req.on('data', function(data) {
+		message += data;
+	})
+	req.on('end', function() {
+		obj = querystring.parse(message);
+		if (rexXuehao(obj.yhm)) {
+			var sqlString = sql.select(['selfgroup', 'xuehao'], 'registryinformation', "xuehao=" + sql.escape(obj.yhm) +
+				" and password=" + sql.escape(obj.password));
+			sql.sever(pool, sqlString, end); //学号登录
+		} else if (rexPhone(obj.yhm)) {
+			var sqlString = sql.select(['selfgroup', 'xuehao'], 'registryinformation', "phoneNum=" + sql.escape(obj.yhm) +
+				" and password=" + sql.escape(obj.password));
+			sql.sever(pool, sqlString, end); //手机号登录
+		} else {
+			res.write(JSON.stringify({
+				msg: "用户名或密码错误！",
+				style: 0
+			}));
+			res.end();
+		}
+	})
+
+	function end(data) {
+		console.log(data);
+		if (data.length == 1) {
+			if (data[0].xuehao == null) {
+				res.write(JSON.stringify({
+					msg: "未绑定身份！",
+					style: -1
+				}));
+				res.end();
+			} else if (data[0].selfgroup == null) {
+				res.write(JSON.stringify({
+					msg: "未完成报名！",
+					style: -2
+				}));
+				res.end();
+			} else {
+				res.write(JSON.stringify({
+					msg: "登录成功！",
+					url: "http://xxx.html",
+					style: 1
+				}));
+				res.end();
+			}
+
+		} else {
+			res.write(JSON.stringify({
+				msg: "用户名或密码错误！",
+				style: 0
+			}));
+			res.end();
+		}
+	}
+})
 
 
+server.use('*', function(req, res, next) {
+	if (req.session.phone) {
+		res.write(JSON.stringify({
+			msg: "无session-id",
+			style: -200
+		}));
+	}
+})
 
-
+//phone接口添加防冲突测试
 
 
 
 server.listen(8081);
+
+
+
+function rexPhone(text) {
+	var reg = /^1[0-9]{10}$/;
+	return reg.test(text);
+}
+
+function rexXuehao(text) {
+	var reg = /^[0-9]{8}$/;
+	return reg.test(text);
+}

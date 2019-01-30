@@ -40,13 +40,18 @@ module.exports = {
 	},
 	//查询语句拼接
 
-	insert: function(table, type, value) {
+	insert: function(table, type, value, ignore) {
 		for (var i = 0; i < value.length; i++) {
 			if (typeof(value[i]) == 'string') {
 				value[i] = "'" + value[i] + "'";
 			}
 		}
+
+		if (ignore == true) {
+			return "INSERT IGNORE INTO " + table + " (" + type.join(",") + ") VALUES (" + value.join(",") + ")";
+		}
 		return "INSERT INTO " + table + " (" + type.join(",") + ") VALUES (" + value.join(",") + ")";
+
 	},
 	//插入语句拼接
 
@@ -73,7 +78,7 @@ module.exports = {
 		if (where) {
 			return "DELETE FROM  " + table + " WHERE " + where;
 		} else {
-			return "DELETE FROM  " + table ;
+			return "DELETE FROM  " + table;
 		}
 	}
 	//删除语句拼接
