@@ -315,7 +315,115 @@ sql.del("registryinformation","name='樊宗渤'");
 #### a.前端
 
 #### b.后端
-
+1.身份验证，下发session
+- url：/new
+- 方法：GET
+- 参数：无
+- 返回
+```js
+{
+    msg:"具体情况"，
+    style:1代表成功，0代表失败
+}
+```
+2.添加打分标准
+- url: /addrule
+- 方法：post
+- 参数：'{"C语言":50,"沟通能力":10....}'  (字符串)
+- 举个例子
+```js
+let a={xingming:1,xuehao:2};
+res.send(JSON.stringify(a));
+```
+- 返回
+```js
+{
+    msg:"具体情况"，
+    style:1代表成功，0代表失败
+}
+```
+3.修改打分标准
+- url: /moderule
+- 方法：post
+- 参数：'{"C语言":50,'沟通能力':10....}
+- 返回
+```js
+{
+    msg:"具体情况"，
+    style:1代表成功，0代表失败
+}
+```
+4.查询打分规则
+- url: /searchrule
+- 方法：get
+- 参数：无
+- 返回
+```js
+{
+    msg:"具体情况"，
+    style:1代表成功，0代表失败
+}
+```
+5.查看个人信息
+- url: /selfInfo
+- 方法：get
+- 参数：无
+- 返回
+```js
+{
+    style:1代表成功，0代表失败，
+    msg:"具体情况"，
+    selfInfo:[{"xingming":1,"xuehao":2,.....}]
+}
+```
+6.查看本组报名数据
+- url: /viewgroupreg
+- 方法：get
+- 参数：无
+- 返回
+```js
+{
+    selfInfo:[{xuehao:123,name:'嘻嘻嘻',xueyuan:'计算机学院'，....},{},{}...]
+    msg:"具体情况"，
+    style:1代表成功，0代表失败
+}
+```
+7.查询每面排名数据
+- url: /rank
+- 方法：get
+- 参数：number=1
+- 返回
+```js
+{
+    score:[{id:1,xuehao:41711,selfgruop:1,...},{},...]
+    info:[{xuehao:123,name:'嘻嘻嘻',xueyuan:'计算机学院'，....},{},{}...]
+    msg:"具体情况"，
+    style:1代表成功，0代表失败
+}
+```
+8.查询某人所有面试信息
+- url: /rankdetails
+- 方法：post
+- 参数：xuehao=4171xxx
+- 返回
+```js
+{
+    scoreInfo:[{id:1,xuehao:41711,selfgruop:1,...},{},...],//包括这人目前为止所有面试信息
+    msg:"具体情况"，
+    style:1代表成功，0代表失败
+}
+```
+9.打分
+- url: /mark
+- 方法：post
+- 参数：'{xuehao:123xxx,context:"xxxx",advince:"xxxx",history:"xxxx"}'
+- 返回
+```js
+{
+    msg:"具体情况"，//成功或失败原因
+    style:1代表成功，0代表失败
+}
+```
 ### 6.组员
 
 #### a.前端
