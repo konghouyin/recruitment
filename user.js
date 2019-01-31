@@ -1,9 +1,4 @@
 
-
-
-
-
-
 server.post('/computer', function(req, res) {
 	var obj = {};
 	var message = '';

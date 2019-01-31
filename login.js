@@ -5,6 +5,7 @@ var cookieSession = require('cookie-session');
 var express = require('express');
 var svgCaptcha = require('svg-captcha');
 var crypto = require('crypto');
+var shortMessage = require('./server/public_message.js');
 
 
 var server = express(); //使用express框架
@@ -155,7 +156,6 @@ server.post('/phone', function(req, res) {
 			}));
 			res.end();
 		} else {
-			req.session.phone = obj.phone;
 			var sqlString = sql.select(['phoneNum'], 'registryinformation', "phoneNum=" + sql.escape(obj.phone));
 			sql.sever(pool, sqlString, end); //数据库电话号码查重
 		}
@@ -166,15 +166,16 @@ server.post('/phone', function(req, res) {
 			req.session.yzm = "" + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() *
 				9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999);
 			req.session.picyzm = null; //成功后验证码失效
+			req.session.phone = obj.phone;//session保存电话号码
 			res.write(JSON.stringify({
 				msg: "短信已发送！",
 				style: 1
 			}));
 			console.log("发送短信" + req.session.yzm);
-			//mailepass(obj.phone,req.session.yzm);//发送邮件--->替换短信
+			//shortMessage.send([obj.phone],req.session.yzm);//发送短信---------------------------------------------------------------------------
 			res.end();
 		} else {
-			req.session.picyzm = null;
+			req.session.picyzm = null;//查重后验证码失效
 			res.write(JSON.stringify({
 				msg: "手机号已经注册！",
 				style: -2
