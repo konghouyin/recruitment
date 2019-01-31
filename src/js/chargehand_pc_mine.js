@@ -1,6 +1,5 @@
- 
- function opens(obj) {              //页面的切换
-   for (var i=1;i<=4; i++) {
+function opens(obj) {              //页面的切换
+   for (var i=1;i<=6; i++) {
     if (i===obj){
       document.getElementById("page-" + i).style.display = "block"; 
       document.getElementsByClassName("choose-1")[i-1].style.backgroundColor = "#00b7a9";

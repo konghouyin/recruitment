@@ -7,6 +7,7 @@
 <!--	<style type="text/css">-->
 	<link rel="stylesheet" type="text/css" href="./style/group_pc_left.css" />
 	<link rel="stylesheet" type="text/css" href="./style/group_pc_right.css" />
+	<link rel="stylesheet" type="text/css" href="./style/chargehand_pc_right.css" />
 
 </head>
 <body>
@@ -17,26 +18,28 @@
 		   <div class="top1"></div>
 		   <div class="list"><div>&#9668;</div><p>web</p></div>
 		   <p class="name">啊哈</p>
-		   <p class="state">组员</p>		  
+		   <p class="state">组长</p>		  
 		</div>
 		<ul>
 			<li onclick="opens(1)" class="choose-1"style="background-color:#00b7a9;color:white;"><img src="pic/group_pc_mine.png">个人主页<img src="pic/group_pc_right.png" class="right_arrow"></li>
 			<li onclick="opens(2)" class="choose-1"><img src="pic/group_pc_base.png">报名数据<img src="pic/group_pc_right.png" class="right_arrow"></li>
 			<li onclick="opens(3)" class="choose-1"><img src="pic/group_pc_sore.png">排名<img src="pic/group_pc_right.png" class="right_arrow"></li>
-			<li onclick="opens(4)" class="choose-1" ><img src="pic/group_pc_score.png">面试<img src="pic/group_pc_right.png" class="right_arrow"></li>			
+			<li onclick="opens(4)" class="choose-1" ><img src="pic/group_pc_score.png">面试<img src="pic/group_pc_right.png" class="right_arrow"></li>
+			<li onclick="opens(5)" class="choose-1" ><img src="pic/chargehand_pc_set.png">设置<img src="pic/group_pc_right.png" class="right_arrow"></li>
+			<li onclick="opens(6)" class="choose-1" ><img src="pic/chargehand_pc_shenhe.png">审核<img src="pic/group_pc_right.png" class="right_arrow"></li>			
 		</ul>
 	</div>
+	<div class="header">
+		<img src="pic/group_pc_horn.png">
+        <marquee  direction="right"  behavior="scroll"  scrollamount="5" width="900"  height="36"  hspace="300"   vspace="36">
 
-<div class="header">
-    <div>
-    	
+	         <p>西安邮电大学移动应用开发实验室纳新准备中 “★,°:.☆(￣▽￣)/$:.°★ 。”</p></font>
+        </marquee>
     </div>
-
-</div>
 <!--page-1----------------------------------------------------->
 
 
-<div id="page-1" style="display:block;">
+<div id="page-1" style="display:none;">
   <div class="interview_state">
     <p>面试流程</p>
   <div id="interviewstate_1"> 准备ing </div>
@@ -318,7 +321,7 @@
 </div>
 </div>
 <!--page-4---------------------------------------------------->
-<div id="page-4" style="display:none;">
+<div id="page-4" style="display:none">
 <div class="middle">
 		<div class="big-find">
 			<img src="pic/group_pc_find.svg" style="width:1.7rem;position:absolute;top: .5rem;left:.5rem; ">
@@ -327,8 +330,69 @@
 			<button type="submit" style="cursor: pointer;">搜索</button>
 	</div>
 </div> 
+<!--page-5---------------------------------------------------->
+<div id="page-5" style="display:block;">
 
+<div class="set_pre">
+	<br>
+	<p class="center_">打分标准</p>
+	<div class="grouphand_add"><p>新增</p></div>
+
+<table class="sore">
+    <tr style="background-color:rgb(50,50,50);text-align:center"> 
+    	<th>类别</th>
+	    <th>分值</th>
+	    <th>修改</th>
+    </tr>
+    <tr style="background-color:#f1f1ef;"> 
+     <td>c语言</td>
+     <td>40</td>
+     <td><div class="grouphand_remove_1"><p>修改</p></div></td>
+  </tr>
+    <tr> 
+      <td>学习态度</td>
+      <td>20</td> 
+      <td><div class="grouphand_remove_1"><p>修改</p></div></td>
+  </tr>
+   <tr style="background-color:#f1f1ef;"> 
+     <td></td>
+     <td></td>
+     <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td> 
+      <td></td>
+  </tr>
+   <tr style="background-color:#f1f1ef;"> 
+     <td></td>
+     <td></td>
+     <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td> 
+      <td></td>
+  </tr>
+</table>
+</div>
+<div class="push_tell">
+	<p>公告内容</p>
+<form action="" method="get">
+    <textarea rows="19" cols="60">
+     在w3school，你可以找到你所需要的所有的网站建设教程。
+    </textarea>
+  <input type="submit" value="Submit" />
+</form>
+	
+</div>
+
+</div>
+<!--page-6---------------------------------------------------->
+<div id="page-6" style="display:none;">
+</div>
+
+   <script type="text/javascript" src="js/chargehand_pc_mine.js"></script>
    <script type="text/javascript" src="js/public_pc_groupchargehand.js"></script>
-   <script type="text/javascript" src="js/group_pc_mine.js"></script>
 </body>
 </html>

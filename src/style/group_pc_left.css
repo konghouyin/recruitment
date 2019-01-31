@@ -1,5 +1,6 @@
 ﻿    html{
         font-size:10px;
+        min-width:1340px;
     }
     *{
     margin:0;
@@ -17,13 +18,25 @@
         height: 3rem;
         width:100%;
         background-color:white;
-    }   
+    }
+    .header img{
+    	width:2rem;
+    	position:absolute;
+    	left:24rem;
+    	top:0.5rem;
+    }
+    .header marquee{
+    	position:absolute;
+    	left:28rem;
+    }
+    .header p{
+    	line-height:3rem;
+    }
     .left{
         float: left;
         width: 18rem;
-        height:70rem;
+        height:74rem;
         background-color:#303c36;
-
     }
     .left ul img{
         margin-right:1rem;
@@ -97,7 +110,7 @@
         height:4rem;
         line-height: 4rem;
         font-size:1.5rem;
-        
+        transition:.15s;
         color:#959a9a;
         border-bottom: 0.2rem #363d3e solid;
     }
@@ -105,4 +118,5 @@
         cursor: pointer;
         background-color:#00b7a9;
         color:white;
+
     }

@@ -1,4 +1,33 @@
-  /*page-1--------------------------------------------------------------*/
+    /*page-1--------------------------------------------------------------*/
+    .interview_state div{
+        display: inline-block;
+        margin-left:2rem;
+        width:16rem;
+        height:10rem;
+        text-align:center;
+        background-color:white;
+        color:#adaaa4;
+        line-height:2.5rem;
+        font-size:1.5rem;
+        border-radius: .3rem;
+    }
+    .interview_state p{
+        color:#404544;
+        font-size:1.8rem;
+        margin:1.5rem 0 1.5rem 20rem;
+    }
+    #interviewstate_1{
+        background-color:#00bfa3;
+        color:white;
+    }
+    .headgroup_tell{
+        position:absolute;
+        top:20rem;
+        left:20rem;
+        width:70rem;
+        height:30rem;
+        background-color:white;
+    }
     /*page-2--------------------------------------------------------------*/
     #page-2{
         position: absolute;
@@ -61,10 +90,26 @@
         background-color:#ff9103;
     }
     #studentstate-3{
-        background-color:#00d037;
+        background-color:#f70004;
     }
     #studentstate-4{
-        background-color:#f70004;
+        background-color:#00d037;
+    }
+    #requrie_new img{
+        width:1.3rem;
+        position:absolute;
+        right:11rem;
+        top:.5rem;
+        cursor:pointer;
+        transition: .5s;
+    }
+    #requrie_new img:hover{
+        transform:rotate(360deg);
+    }
+    .page2find-1{
+       position:absolute;
+       top:0rem;
+       left:26rem;
     }
     /*page-3--------------------------------------------------------------*/
     .find-student form{
@@ -102,13 +147,122 @@
     .sore td{
         height:3.5rem;
     }
+    .student_sore_more1{   
+        background-color:#303c36;
+        transition:.5s;
+        opacity:.85;
+        filter: blur(2px);
+    }
+    .student_sore_more1,.student_sore_more{
+        width:50rem;
+        height:35rem;
+        color:white;
+        position:fixed;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        margin:1rem;
+    }
+    .student_sore_more div{
+        line-height:2rem;
+        width:45rem;
+        height:30rem;
+        margin:3rem 1rem 4rem 2rem;
+    }
+    .student_sore_more ul{
+        position:absolute; 
+        top:13rem;
+        left:46rem;
+    }
+    .more_colse{
+        width:2rem;
+        height:2rem;
+        background-color:red;
+        transform:rotate(45deg);
+        position:absolute;
+        opacity:.3;
+        line-height:2rem;
+        border-radius:50%;
+        font-size:1.7rem;
+        text-align:center;
+        top:1rem;
+        right:1rem;
+        cursor:pointer;
+        transition:.3s;
+    }
+    .more_colse:hover{
+        opacity:.7;
+    }
+    .more_right{
+        position:absolute;
+        left:20%;
+    }
+    .more_left{
+        position:absolute;
+        right:80%;
+    }
+    .student_sore_more li{
+        margin-bottom:.5rem;
+        cursor:pointer;
+        opacity:.8;
+        margin-right:1rem;
+        width:2.5rem;
+        height:2.5rem;
+        border-radius:50%;
+        background-color:#32443c;
+        text-align:center;
+        line-height:2.5rem;
+        transition:.3s;
+    }
+    .student_sore_more li:hover{
+        background-color:#00b7a9;
+        color:white;
+        opacity:.8;
+    }
     .student-more{
         color:#00b7a9;
         font-weight:900;
         font-size:2rem;
+        transition: .2s;
     }
     .student-more:hover{
+        font-size:2.5rem;
+        color:red;
         cursor:pointer;
+    }
+    .sore_find{
+        float: right;
+        margin-right:12rem;
+        margin-top:1rem;
+    }
+    .sore_find div{ 
+        color:#b4b0aa;
+        height:3rem;   
+        font-size:1.8rem;
+        line-height:3rem;
+        text-align:center;
+        display:inline-block;
+        cursor:pointer;
+        background-color:white;
+    }
+    .sore_find div:hover{
+        background-color:#00bfa3;
+        color:white;
+    }
+    #sore_find_left{
+        width:3rem;            
+    }
+    #sore_find_right{
+        width:3rem;
+    }
+    .sore_find .sore_find_middle{
+        background-color:#f1f1ef;
+        color:#00bfa3;
+    }
+    .student_face{
+        opacity:0;
+        transition:1s;
+        position:absolute;
     }
     /*--page-4-------------------------------------------------------------------*/
 
@@ -145,7 +299,6 @@
     right: 0;
     top: .8rem;
     background-color: white;
-    
     border:none;
     border-left:.1rem solid #ccd3d3;;
     outline:medium;
