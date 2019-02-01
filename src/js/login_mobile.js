@@ -89,6 +89,55 @@ function flogin() {
             var btn_text1=document.getElementsByClassName("btn_text1")[0];
             btn_text1.innerHTML='';
         }
+
+    var div = document.createElement("div");
+    div.setAttribute("class","btn_picnum");
+    login_btn1.insertBefore(div,login_btn1.children[2]);  
+    var btn_picnum=document.getElementsByClassName("btn_picnum")[0];
+    btn_picnum.innerHTML="获取验证码";
+    // btn_picnum.className = "newbtn_picnum"; 
+    // btn_picnum.style.display="none";
+    btn_picnum.style.display="block";  //需要山区
+    // input1.addEventListener("input", function(){
+    // if(input1.value.length==11){
+    //     console.log("asfawefgv");
+    //     btn_picnum.style.display="block";
+         
+    // }else{
+    //     btn_picnum.style.display="none";
+    // }
+// })
+    var div = document.createElement("div");  //背景遮罩
+    div.setAttribute("class","cloth");
+    html.appendChild(div); 
+    var cloth=document.getElementsByClassName("cloth")[0];
+    var div = document.createElement("div");  //图片验证码提示框
+    div.setAttribute("class","reminder_pic");
+    html.appendChild(div); 
+    var reminder_pic=document.getElementsByClassName("reminder_pic")[0];
+    reminder_pic.style.display="none";
+    cloth.style.display="none"
+
+    var div = document.createElement("div");  //提示框里的内容
+    div.setAttribute("class","picnum_text1");
+    reminder_pic.insertBefore(div,reminder_pic.children[0]);  
+    var picnum_text1=document.getElementsByClassName("picnum_text1")[0];
+    picnum_text1.innerHTML="输入图片验证码";
+    var div = document.createElement("div");  //提示框里的图片
+    div.setAttribute("class","picnum_pic");
+    reminder_pic.insertBefore(div,reminder_pic.children[1]);  
+    var picnum_pic=document.getElementsByClassName("picnum_pic")[0];
+   
+    picnum_text1.style.display="none";
+    picnum_pic.style.display="none";
+
+    btn_picnum.addEventListener("mousedown", function(){
+        // console.log("asfawefgv");
+        cloth.style.display="block"
+        reminder_pic.style.display="block";
+        
+    })
+
         
         var div = document.createElement("div");
         div.setAttribute("class","login_btn2");
@@ -187,6 +236,9 @@ function flogin() {
         div.setAttribute("class","register");
         html.appendChild(div);
         div.innerHTML="注册";
+        // register.addEventListener("click", function () {
+        //     /////////////////////666666666666666666
+        // })
 
         var a = document.createElement("a"); //a包div
         a.setAttribute("class","back_a_btn");
@@ -206,10 +258,10 @@ function flogin() {
             });
         })
 
-    }  
+    }
 }
 
-function flogup() {
+function flogup() {                       
     if(logup_count!=1)  //不是第一次点击了
     {
         btn_login.style.display="none";
