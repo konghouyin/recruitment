@@ -88,19 +88,19 @@ request(getcookie, function(error, response, body) {
 					if (error) throw new Error(error);
 					if (response.statusCode == 302 && response.headers.location == "/jwglxt/xtgl/index_initMenu.html") {
 						console.log("成功");
-						
-						
-						
+
+
+
 						var getStudentMessage = makeoptions(
 							'http://www.zfjw.xupt.edu.cn/jwglxt/xsxxxggl/xsgrxxwh_cxXsgrxx.html?gnmkdm=N100801&layout=default&su=' +
 							yhm, cookie, "GET");
 						request(getStudentMessage, function(error, response, body) {
 							//获取个人信息
-							
-							
-							
+
+
 							if (error) throw new Error(error);
-							console.log(body.toString());
+							var data = getIndex(body.toString()); //解析提取学生信息
+							console.log(data);
 							//-->执行成功回调
 						});
 					} else {
@@ -115,11 +115,30 @@ request(getcookie, function(error, response, body) {
 
 function getcsrftoken(html) {
 	var $ = cheerio.load(html); //传入文档启动解析
-	var chapters = $('#csrftoken'); //选定正在上映列表
+	var chapters = $('#csrftoken'); //选定标签
 	return chapters[0].attribs.value;
 }
 //解析页面,取得token
 
+function getIndex(html) {
+	var obj = {};
+	var $ = cheerio.load(html); //传入文档启动解析
+	var chapters = $('#col_xm p');
+	obj.name = chapters[0].children[0].data.replace(/\s/g,'');
+	chapters = $('#col_xh p');
+	obj.xuehao = chapters[0].children[0].data.replace(/\s/g,'');
+	chapters = $('#col_xbm p');
+	obj.xingbie = chapters[0].children[0].data.replace(/\s/g,'');
+	chapters = $('#col_jg_id p');
+	obj.xueyuan = chapters[0].children[0].data.replace(/\s/g,'');
+	chapters = $('#col_zyh_id p');
+	obj.zhuanye = chapters[0].children[0].data.replace(/\s/g,'').split('(')[0];
+	chapters = $('#col_bh_id p');
+	obj.banji = chapters[0].children[0].data.replace(/\s/g,'');
+
+	return obj;
+}
+//解析页面,取得个人信息
 
 function makemm(modulus, exponent, password) {
 	var rsaKey = new RSAKey();
