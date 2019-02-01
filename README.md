@@ -42,6 +42,9 @@
      - cookie-session
      - svg-captcha（图片验证码）
      - crypto（加密函数）
+     - cheerio（解析网页）
+     - request（发送网络请求）
+     - zlib（网络请求gzip解密）
 
 ### 3.项目目录
 
@@ -293,6 +296,30 @@ sql.del("registryinformation","name='樊宗渤'");
 
 **警告：** 此接口不使用where参数会导致删除数据表，请谨慎使用。
 
+##### 2）.引入自定义后端模块public_message.js
+
+与飞鸽传书短信平台，进行数据对接，进行短信推送服务。
+
+1.使用实例
+
+```js
+var shortMessage = require('./server/public_message');
+shortMessage.send(phone,style,message);
+shortMessage.send(['153...'],'85776','xxx||xxx');
+```
+
+**参数说明：** 
+
+- phone：<Array> 发送到的手机号
+
+- style：<String> 模版编号（飞鸽传书平台获取）
+
+- message：<String> 模版内插入的值（||进行分割） 
+
+     
+
+**注意：** 考虑到后台效率，短信功能没有添加回调。即只能触发短信任务，不知道短信是否发送成功。通过用户反馈，来判断发送是否成功前端注意60秒，做好前端节流。
+
 ### 2.注册登录
 
 #### a.前端
@@ -312,7 +339,7 @@ sql.del("registryinformation","name='樊宗渤'");
 ```json
 {
     pic："<svg>...</svg>"，
-    style：1	//1成功，-200报名时间已截止
+    style：1	//1成功，
 }
 ```
 
@@ -326,7 +353,7 @@ sql.del("registryinformation","name='樊宗渤'");
 ```json
 {
     msg："具体情况"，
-    style：0	//1成功，0验证码错误，-1验证码失效，-2此电话已注册，-3其他异常（输入不是11位手机号），-200报名时间已截止
+    style：0	//1成功，0验证码错误，-1验证码失效，-2此电话已注册，-3其他异常（输入不是11位手机号），
 }
 ```
 
@@ -340,7 +367,7 @@ sql.del("registryinformation","name='樊宗渤'");
 ```json
 {
     msg："具体情况"，
-    style：0	//1成功，0验证码错误，-1验证码失效，-200报名时间已截止
+    style：0	//1成功，0验证码错误，-1验证码失效，
 }
 ```
 
@@ -450,6 +477,7 @@ sql.del("registryinformation","name='樊宗渤'");
 - 跨后台登录，携带cookie。两后台验证加密秘钥
 - 数据库登录密码
 - 各后台session，cookie，秘钥数组，签名
+- 短信平台秘钥，配置ip
 
 
 
