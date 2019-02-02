@@ -235,7 +235,7 @@ input{
     position: absolute;
     width: 26rem;
     height: 17rem;
-    background-color: #A9A9A9;
+    background-color: #fff;
     left: 50%;
     margin-left: -13rem;
     margin-top: -8.5rem;
@@ -251,21 +251,98 @@ input{
     background-color:#303741;
     position:relative;
     font-size:62.5%;
-    opacity: 0.5;
+    opacity: 0.3;
     z-index: 1;
 }
-picnum_text1{
+.picnum_headline{
     position: absolute;
+    width:26rem;
     height: 4rem;
-    background-color: #fff;
     left: 50%;
     margin-left: -13rem;
-    margin-top: -8.5rem;
-    top: 10%;
-    font-size: 2rem;
-    font-weight: 90;
+    top: 0%;
+    text-align:center;
+    font-size: 1.7rem;
+    font-weight: 550;
+    line-height:4rem;
     z-index: 2;
 }
-/* .picnum_pic{
-
-} */
+.picnum_pic{
+    position: absolute;
+    width: 12rem;
+    height: 6rem;
+    left: 50%;
+    margin-left: -6rem;
+    top: 23%;
+    z-index: 2;
+    /* background-image: url(./img/page1.png); */
+    background-size:8rem;
+    background-repeat: no-repeat;
+    /* background-color:#386eb9; */
+}
+.picnum_reminder_text{
+    position: absolute;
+    width: 18rem;
+    height: 2rem;
+    left: 50%;
+    margin-left: -9rem;
+    top: 58%;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 90;
+    line-height: 2rem;
+    z-index: 2;
+    color:#9599a2da;
+    /* background-color: #000; */
+}
+.picnum_text1{
+    position: absolute;
+    width: 6rem;
+    height: 2.5rem;
+    left: 60%;
+    margin-left: -13rem;
+    top: 70%;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 90;
+    line-height: 2.5rem;
+    z-index: 2;
+    /* background-color: #27c957; */
+}
+.picnum_input1_div{
+    position: absolute;
+    width: 10rem;
+    height: 2.2rem;
+    left: 80%;
+    margin-left: -13rem;
+    top: 70%;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    line-height:1.8rem;
+    z-index: 2;
+    /* background-color: rgb(223, 59, 59); */
+}
+.picnum_input1{
+    width: 10rem !important;
+    height: 2.2rem !important;
+    font-size: 1.3rem !important;
+    font-weight:90;
+    text-align:center;
+    /* line-height:1.8rem !important; */
+    color: #000;
+}
+.confirm{
+    position: absolute;
+    width: 4rem;
+    height: 2.2rem;
+    left: 120%;
+    margin-left: -13rem;
+    top: 70%;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 90;
+    line-height: 2.2rem;
+    z-index: 2;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+}

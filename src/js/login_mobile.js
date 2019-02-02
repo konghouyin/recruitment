@@ -21,12 +21,13 @@ window.Router.init();
 
 //封装了一个简易的前端路由
 
+var script=document.getElementsByTagName("script")[1];  //引入ajax
+
 var html = document.querySelector('html');
 var btn_login=document.getElementsByClassName("login")[0];
 var btn_logup=document.getElementsByClassName("logup")[0];
 var login_count =1;  //页面切换的总计数器
 var logup_count =1;
-
 
 function flogin() {
     if(login_count!=1)  //不是第一次点击了
@@ -119,23 +120,74 @@ function flogin() {
     cloth.style.display="none"
 
     var div = document.createElement("div");  //提示框里的内容
-    div.setAttribute("class","picnum_text1");
+    div.setAttribute("class","picnum_headline");
     reminder_pic.insertBefore(div,reminder_pic.children[0]);  
-    var picnum_text1=document.getElementsByClassName("picnum_text1")[0];
-    picnum_text1.innerHTML="输入图片验证码";
+    var picnum_headline=document.getElementsByClassName("picnum_headline")[0];
+    picnum_headline.innerHTML="请输入图片中的验证码";
     var div = document.createElement("div");  //提示框里的图片
     div.setAttribute("class","picnum_pic");
-    reminder_pic.insertBefore(div,reminder_pic.children[1]);  
+    reminder_pic.insertBefore(div,reminder_pic.children[2]);  
     var picnum_pic=document.getElementsByClassName("picnum_pic")[0];
+    var div = document.createElement("div");  //验证码前
+    div.setAttribute("class","picnum_text1");
+    reminder_pic.insertBefore(div,reminder_pic.children[3]);  
+    var picnum_text1=document.getElementsByClassName("picnum_text1")[0];
+    picnum_text1.innerHTML="验证码:"
+
+    var div = document.createElement("div");  //div包input提示框
+    div.setAttribute("class","picnum_reminder_text"); 
+    reminder_pic.appendChild(div);
+    var picnum_reminder_text=document.getElementsByClassName("picnum_reminder_text")[0];
+    picnum_reminder_text.innerHTML="输入下图中的字符，不区分大小写";
+    var div = document.createElement("div");
+    div.setAttribute("class","picnum_input1_div"); 
+    reminder_pic.appendChild(div);
+    var picnum_input1_div=document.getElementsByClassName("picnum_input1_div")[0];
+    var input = document.createElement('input'); 
+    input.setAttribute("class","picnum_input1"); 
+    picnum_input1_div.appendChild(input);
+    var picnum_input1=document.getElementsByClassName("picnum_input1")[0];
+    picnum_input1.type="text";
+    picnum_input1.name="yanzm";
+    var div = document.createElement("div");  //验证码前
+    div.setAttribute("class","confirm");
+    reminder_pic.insertBefore(div,reminder_pic.children[4]);  
+    var confirm=document.getElementsByClassName("confirm")[0];
+    confirm.innerHTML="确定";    
    
-    picnum_text1.style.display="none";
-    picnum_pic.style.display="none";
+    // picnum_pic.style.display="none";
 
     btn_picnum.addEventListener("mousedown", function(){
         // console.log("asfawefgv");
         cloth.style.display="block"
         reminder_pic.style.display="block";
-        
+        /////
+        ajax  //调用ajax函数，传入一个对象
+        ({
+            url: "/picyzm",
+            type: 'get',  
+            data: null,
+            async: true,
+            success: function (responseText) {
+                response_reminder_pic=JSON.parse(responseText);
+                var svg = document.createElement("svg");  
+                svg.setAttribute("class","svg"); 
+                picnum_pic.appendChild(svg);                
+                // var a=new Image();
+                // a.src='response_reminder_pic.src';
+                // picnum_pic.appendChild(a)
+
+
+                picnum_pic.style.display="block";
+                console.log("aaa123");
+                //   此处执行请求成功后的代码
+            },
+            fail: function (err) {
+                console.log("aaa123456");
+                // 此处为执行是失败后的代码 
+            }
+        }); 
+        ////
     })
 
         
@@ -237,7 +289,7 @@ function flogin() {
         html.appendChild(div);
         div.innerHTML="注册";
         // register.addEventListener("click", function () {
-        //     /////////////////////666666666666666666
+        //     /////////////////////
         // })
 
         var a = document.createElement("a"); //a包div
