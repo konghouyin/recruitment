@@ -21,11 +21,6 @@ let decodeCookies = function(ss){
 	}
 	let timeNow = new Date();
 	if(timeNow-out[2]<5000){
-		if(obj.name.length==11){//根据登录账号长度区别是手机号还是学号，便于在数据库查找
-			obj.nametype = "phoneNum";
-		}else{
-			obj.nametype = "xuehao";
-		}
 		obj.style = 1;
 		return obj;
 	}else{
