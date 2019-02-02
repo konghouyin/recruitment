@@ -339,6 +339,43 @@ m.mailepass("Android组 提出公告申请，请及时审核！");
 
 **注意：** 不用传入邮箱地址，已经把管理员邮箱在模块内写好了。邮件功能没有添加回调。只发送指令即可。
 
+##### 4）.自定义后端模块public_validate.js
+
+提供跳转身份验证，并下发session，返回登录信息。
+
+- 使用实例
+
+```js
+var validate = require('./server/public_validate.js');
+server.get('/new',function(req,res){
+	validate.prove(pool,req,res);
+})
+```
+
+**参数说明：** 
+
+- pool：<Pool> 数据库连接池
+- req：<Object>请求
+- res：<Object>  响应
+
+**注意：** 使用时一定要在调用之前处理好cookie，session。使用这个模块，会自动向前端返回状态，即new接口的返回结果。
+
+```json
+失败返回：
+{
+    msg: "cookie超时！",//错误原因
+	style: -2,//0没有cookie，-1cookie解析错误，-2cookie超时，-3验证错误
+	url: "登陆页面url"
+}
+成功返回：
+{
+    style:1，
+    name:"xxx",
+    xuehao:"xxx",
+    selfgroup:3//1.Android,2.ios,3.web,4.后台,5.产品
+}
+```
+
 ### 2.注册登录
 
 #### a.前端
