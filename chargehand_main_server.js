@@ -1,6 +1,6 @@
 const express = require('express');
 var querystring = require('querystring');
-const decryption = require('./server/public_decryption.js');
+const decryption = require('./server/public_decryption_server.js');
 const sql = require('./server/public_sql.js');
 const operation = require('./server/public_operation.js')
 
@@ -25,7 +25,7 @@ let pool = sql.createPool({
 // 解密cookie 再次验证用户名密码 比对时间5s之内 身份保存012 组别等存到session 下发 
 // 若session存在，则进行逻辑代码 
 
-app.use('/new', function (req, res) {//身份验证下发session
+/* app.use('/new', function (req, res) {//身份验证下发session
   let result = {};
   let ss = req.signedCookies.pbl;
   result = decryption.decodeCookies(ss);
@@ -45,7 +45,7 @@ app.use('/new', function (req, res) {//身份验证下发session
     return sql.select(["*"], "registryinformation", where);
   }
 });
-
+/*
 app.use('*', function (req, res, next) {//查看session是否存在
   if (req.session) {
     next();//如果session存在，则可以进入
@@ -54,19 +54,19 @@ app.use('*', function (req, res, next) {//查看session是否存在
     res.end();
   }
 });
-
-app.post('/addrule', function (req, res) {//添加打分标准 post请求 参数 rule=C语言：50;沟通能力：10...
-  let message = '';
+ */
+app.post('/addrule', function (req, res) {//添加打分标准 post请求 
+  let message = "";
   req.on('data', function (data) {
     message += data;
-  });
-  req.end('end', function () {
-    sql.server(pool, sql.select(["style"], "process"), function (data) {
+  }); 
+  req.end('end', function () { 
+   sql.sever(pool, sql.select(["style"], "process"), function (data) {
       if (data[0].style == 0) {//一面前可以添加
         let selfgroup = req.session.selfgroup;
-        sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup" + selfgroup), function (data) {//判断打分标准是否存在
+        sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup=" + selfgroup), function (data) {//判断打分标准是否存在
           if (!data.length) {//无打分标准
-            sql.server(pool, sql.insert("scoringstandard", ["selfgroup", "obj"], [selfgroup, sql.escape(message)]), function (data) {
+           sql.sever(pool, sql.insert("scoringstandard", ["selfgroup", "obj"], [selfgroup, message]), function (data) {
               res.write(JSON.stringify({ "msg": "添加成功", "style": 1 }));
               res.end();
             });
@@ -88,14 +88,13 @@ app.post('/moderule', function (req, res) {//修改打分标准 一面前可修�
   req.on('data', function (data) {
     message += data;
   });
-  req.end('end', function () {
-    selfgroup = req.session.selfgroup;
-    sql.server(pool, sql.select(["style"], "process"), function (data) {
+  req.end('end', function () { 
+   sql.sever(pool, sql.select(["style"], "process"), function (data) {
       if (data[0].style == 0) {//面试开始前可修改
         let selfgroup = req.session.selfgroup;
-        sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup" + selfgroup), function (data) {//判断打分标准是否存在
+        sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup=" + selfgroup), function (data) {//判断打分标准是否存在
           if (data.length) {//已经添加过，则可修改
-            sql.server(pool, sql.update("scoringstandard", ["obj"], [sql.escape(message)], "selfgroup=" + selfgroup), function (data) {
+           sql.sever(pool, sql.update("scoringstandard", ["obj"], [message], "selfgroup=" + selfgroup), function (data) {
               res.write(JSON.stringify({ msg: "修改成功", style: 1 }));
               res.end();
             });
@@ -114,17 +113,18 @@ app.post('/moderule', function (req, res) {//修改打分标准 一面前可修�
 
 app.get('/searchrule', function (req, res) {//查询打分规则
   let result = req.session;
+ //let result={selfgroup:3};
   operation.searchMarkRules(res, pool, result);
 });
 
-app.get('/selfInfo', function (req, res) {//登陆者查看个人信息
+app.get('/selfInfo', function (req, res) {//登陆者查看个人信息 session
   let result = req.session;
   operation.serachSelfInfo(res, pool, result);
 });
 
 app.get('/viewgroupreg', function (req, res) {//查看报名数据
   let result = req.session;
-  operation.showInfoOfView(res, pool, result, number);
+  operation.showInfoOfView(res, pool, result);
 });
 
 app.get('/rank', function (req, res) {//查询每面排名数据

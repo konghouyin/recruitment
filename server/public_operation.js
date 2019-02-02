@@ -1,4 +1,4 @@
-const sql = require('./server/public_sql');
+const sql = require('./public_sql');
 //组长组员公共功能
 
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
         let info = {};
         sql.sever(pool, serachSelfInfoState(result), function (data) {
             if (data.length) {
-                info.selfInfo = data;
+                info.selfInfo = data[0];
                 info.style = 1;
                 info.msg = "查找成功";
             } else {
@@ -17,7 +17,7 @@ module.exports = {
             res.end();
         })
         function serachSelfInfoState(result) {
-            let where = result.nametype + "=" + sql.escape(result.name);
+            let where = "phoneNum=" + sql.escape(result.name);
             return sql.select(["*"], "registryinformation", where);
         }
     },
@@ -27,6 +27,7 @@ module.exports = {
             if (data.length) {
                 gruopViews.selfInfo = data;
                 gruopViews.style = 1;
+                gruopViews.msg="查找成功";
             } else {
                 gruopViews.style = 0;
                 gruopViews.msg = "暂无数据";
@@ -35,7 +36,7 @@ module.exports = {
             res.end();
         });
         function serachViewsState(result) {
-            let where = "selfgroup=" + result.selfgroup + "and level=" + "1";
+            let where = "selfgroup=" + result.selfgroup + " and level=1";
             return sql.select(["xuehao", "name", "xueyuan", "zhuanye", "banji", "phoneNum", "style"], "registryinformation", where);
         }
     },
@@ -91,8 +92,9 @@ module.exports = {
         let markRlues = {};
         sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup=" + result.selfgroup), function (data) {//打分规则
             if (data.length) {
-                markRlues.rules = data;
+                markRlues.rules = data[0].obj;
                 markRlues.style = 1;//查找成功
+                markRlues.msg="查找成功";
             } else {
                 markRlues.style = 0;
                 markRlues.msg = "暂无数据";
