@@ -28,6 +28,8 @@ let pool = sql.createPool({
 /* app.use('/new', function (req, res) {//身份验证下发session
   let result = {};
   let ss = req.signedCookies.pbl;
+	
+	
   result = decryption.decodeCookies(ss);
   if (result.style == 0) {//判断是否登陆异常
     res.write(JSON.stringify({ msg: "登录异常！", style: 0, url: "登陆页面url" }));
