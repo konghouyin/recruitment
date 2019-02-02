@@ -5,7 +5,7 @@ var cookieSession = require('cookie-session');
 var express = require('express');
 var svgCaptcha = require('svg-captcha');
 var crypto = require('crypto');
-var shortMessage = require('./server/public_message.js');
+
 
 
 var server = express(); //使用express框架
@@ -45,6 +45,7 @@ server.all('*', function(req, res, next) {
 //处理跨域
 
 server.post('/login', function(req, res) {
+	console.log("asd");
 	var obj = {};
 	var message = '';
 	req.on('data', function(data) {
@@ -82,12 +83,12 @@ server.post('/login', function(req, res) {
 
 			res.cookie('pbl', enc, {
 				path: '/',
-				maxAge: 8 * 1000,
+				maxAge: 5 * 1000,
 				signed: true
 			});
 			res.write(JSON.stringify({
 				msg: "登录成功！",
-				url: "http://xxx.html",
+				url: "http://127.0.0.1:8848/test/index.html",
 				style: 1
 			}));
 			res.end();
