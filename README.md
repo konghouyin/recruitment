@@ -42,6 +42,10 @@
      - cookie-session
      - svg-captcha（图片验证码）
      - crypto（加密函数）
+     - cheerio（解析网页）
+     - request（发送网络请求）
+     - zlib（网络请求gzip解密）
+     - nodemailer（邮件请求）
 
 ### 3.项目目录
 
@@ -125,14 +129,14 @@ master为主分支，需要时刻保持准确。个人完成一部分功能后�
 
 #### b.后端
 
-##### 1）.引入自定义后端模块public_sql.js
+##### 1）.自定义后端模块public_sql.js
 
 主要提供连接数据库，便捷调用服务，sql语句拼接（mysql模块的再次封装）。
 
 1. 创建mysql数据库连接池
 
 ```js
-var sql = require('./sever/public_sql');
+var sql = require('./server/public_sql');
 var pool  = sql.createPool({
   connectionLimit : 10,
   host            : '132.232.169.227',
@@ -246,7 +250,7 @@ sql.sever(pool,out1(),function(data){
 5. INSERT语句拼接
 
 ```js
-sql.insert(tablename,type,value);
+sql.insert(tablename,type,value,ignore);
 return sql.insert("registryinformation",["password","phoneNum"],["asd",13345]);
 ```
 
@@ -257,6 +261,7 @@ return sql.insert("registryinformation",["password","phoneNum"],["asd",13345]);
 - tablename：<String> 查询的表
 - type：<Array> 插入的字段
 - valuse：<Array> 插入的值
+- ignore：<Boole> 筛选防止多重添加（可选参数）
 
 **注意：** 插入字段与插入值的个数应该相同。
 
@@ -292,11 +297,157 @@ sql.del("registryinformation","name='樊宗渤'");
 
 **警告：** 此接口不使用where参数会导致删除数据表，请谨慎使用。
 
+##### 2）.自定义后端模块public_message.js
+
+与飞鸽传书短信平台，进行数据对接，进行短信推送服务。
+
+- 使用实例
+
+```js
+var shortMessage = require('./server/public_message');
+shortMessage.send(phone,style,message);
+shortMessage.send(['153...'],'85776','xxx||xxx');
+```
+
+**参数说明：** 
+
+- phone：<Array> 发送到的手机号
+
+- style：<String> 模版编号（飞鸽传书平台获取）
+
+- message：<String> 模版内插入的值（||进行分割） 
+
+     
+
+**注意：** 考虑到后台效率，短信功能没有添加回调。即只能触发短信任务，不知道短信是否发送成功。通过用户反馈，来判断发送是否成功前端注意60秒，做好前端节流。
+
+##### 3）.自定义后端模块public_mail.js
+
+提供邮箱发送邮件服务，在需要管理员审核时，给管理员发送一封邮件，通知管理员及时处理信息。
+
+- 使用实例
+
+```js
+var m = require('./server/public_mail.js');
+m.mailepass(message);
+m.mailepass("Android组 提出公告申请，请及时审核！");
+```
+
+**参数说明：** 
+
+- message：<String> 发送的内容   
+
+**注意：** 不用传入邮箱地址，已经把管理员邮箱在模块内写好了。邮件功能没有添加回调。只发送指令即可。
+
+##### 4）.自定义后端模块public_validate.js
+
+提供跳转身份验证，并下发session，返回登录信息。
+
+- 使用实例
+
+```js
+var validate = require('./server/public_validate.js');
+server.get('/new',function(req,res){
+	validate.prove(pool,req,res);
+})
+```
+
+**参数说明：** 
+
+- pool：<Pool> 数据库连接池
+- req：<Object>请求
+- res：<Object>  响应
+
+**注意：** 使用时一定要在调用之前处理好cookie，session。使用这个模块，会自动向前端返回状态，即new接口的返回结果。
+
+```json
+失败返回：
+{
+    msg: "cookie超时！",//错误原因
+	style: -2,//0没有cookie，-1cookie解析错误，-2cookie超时，-3验证错误
+	url: "登陆页面url"
+}
+成功返回：
+{
+    style:1，
+    name:"xxx",
+    xuehao:"xxx",
+    selfgroup:3//1.Android,2.ios,3.web,4.后台,5.产品
+}
+```
+
 ### 2.注册登录
 
 #### a.前端
 
 #### b.后端
+
+##### 1.申请图片验证图像
+
+- url：/picyzm
+
+- 方法：GET
+
+- 参数：无
+
+- 返回
+
+```json
+{
+    pic："<svg>...</svg>"，
+    style：1	//1成功，
+}
+```
+
+##### 2.验证图片验证码，并发送短信
+
+- url：/phone
+- 方法：post
+- 参数：phone=153····&picyzm=4s5d
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    style：0	//1成功，0验证码错误，-1验证码失效，-2此电话已注册，-3其他异常（输入不是11位手机号），
+}
+```
+
+##### 3.注册验证
+
+- url：/reg
+- 方法：post
+- 参数：password=（MD5加密）&yzm=4s5d
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    style：0	//1成功，0验证码错误，-1验证码失效，
+}
+```
+
+注册时数据库插入冲突：
+
+- 触发情况：在不同设备，使用同一手机号注册，下发两个session绑定同一手机号，有可能会触发数据库多次插入。
+- 解决方案：sql语句添加ignore来保证不会添加重复，防止数据库主键冲突。
+
+##### 4.登录验证
+
+- url：/login
+- 方法：post
+- 参数：password=（MD5加密）&yhm=8位或11位
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    url："http",//跳转路径
+    style：0	//1成功，0用户名或错误
+}
+```
+
+登录部分考虑到用户体验和开发周期，没有设计图片验证码，但考虑到接口安全，未来可以在这个地方继续升级完善。（连续三次输错密码，需要图片验证码）
 
 ### 3.密码找回
 
@@ -304,11 +455,67 @@ sql.del("registryinformation","name='樊宗渤'");
 
 #### b.后端
 
+##### 1.申请图片验证图像
+
+- url：/picyzm
+- 方法：GET
+- 参数：无
+- 返回
+
+```json
+{
+    pic："<svg>...</svg>"，
+    style：1	//1成功
+}
+```
+
+##### 2.验证图片验证码，并发送短信
+
+- url：/phone
+- 方法：post
+- 参数：phone=153····&picyzm=4s5d
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    style：0	//1成功，0验证码错误，-1验证码失效，-2此手机号没有注册，-3其他异常（输入不是11位手机号），
+}
+```
+
+##### 3.密码找回
+
+- url：/passback
+- 方法：post
+- 参数：password=（MD5加密）&yhm=8位或11位
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    style：0	//1成功，0验证码错误，-1验证码失效
+}
+```
+
 ### 4.面试者
 
 #### a.前端
 
-#### b.后端
+#### b.后端 
+
+##### 1）接口
+
+##### 2）教务系统验证
+
+user_teachSystem.js为教务系统验证文件，验证输入学号，密码是否正确，并可以从个人页面爬取个人信息。此模块用于身份验证绑定。
+
+西安邮电大学新教务系统代理登录请求交互步骤
+
+-  请求session-id，之后的所有请求必须要添加此session-id，否则会被返回至主页面。
+- 解析html从中提取csrftoken
+- 请求加密公钥，将用于用户RSA加密。
+- 验证身份，发送csrftoken，学号，加密后的用户密码
+- 请求并解析个人数据
 
 ### 5.组长
 
@@ -443,6 +650,14 @@ res.send(JSON.stringify(a));
 #### b.后端
 
 ## 五、重要问题记录
+
+### 1.上线需要调整参数
+
+- 跨域参数Allow-origin
+- 跨后台登录，携带cookie。两后台验证加密秘钥
+- 数据库登录密码
+- 各后台session，cookie，秘钥数组，签名
+- 短信平台秘钥，配置ip
 
 
 
