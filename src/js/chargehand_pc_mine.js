@@ -20,4 +20,15 @@ function opens(obj) {              //页面的切换
 //---page-3-------------------------------------------------------------
 
 //---page-4-------------------------------------------------------------
+//---page-5-------------------------------------------------------------
+var grouphand_add=document.getElementsByClassName("grouphand_add")[0];
+var grouphand_tell=document.getElementsByClassName("grouphand_tell")[0];
+
+grouphand_add.addEventListener('mousemove',function(){    //添加提交框的提示信息
+			         grouphand_tell.style.display="block"; 
+			       },false);
+grouphand_add.addEventListener('mouseout',function(){
+			         grouphand_tell.style.display="none"; 
+			       },false);
+//---page-6-------------------------------------------------------------
  

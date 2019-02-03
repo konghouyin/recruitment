@@ -268,7 +268,7 @@
 
  .middle{
     position:absolute;
-    top:4rem;
+    top:4.5rem;
     left:50%;
     transform:translate(-20%);
     width: 30rem;
@@ -277,6 +277,39 @@
     padding: .8rem;
     opacity: .85;
     z-index: -1; 
+    z-index:2;
+}
+.page_4back{
+	position:absolute;
+	height:74rem;
+	top:0rem;
+	z-index:-2;
+	left:1.5rem;
+}
+.page4_ul{
+	margin:1rem;
+}
+.page4_{
+	width:3rem;
+	height:3rem;
+	line-height:3rem;
+	text-align:center;
+	background-color:black;
+	float: left;
+	margin:.3rem;
+	color:white;
+	opacity:.5;
+	cursor:pointer;
+	box-shadow:3px 3px 5px #444;
+	transition:.5s;
+}
+.page4_:hover{
+	background-color:#00b7a9;
+	opacity:.7;
+	color:white;
+}
+.page4_all{
+	transition:.5s;
 }
 .middle input{
     width: 20rem;
@@ -304,4 +337,124 @@
     outline:medium;
     font-size: 1.6rem;
     color: black;
+}
+.interview_div,.interview_div_{
+	width:70rem;
+	height:40rem;
+	margin-top:7rem;
+	margin-left:27rem;
+	
+}
+.page4_tell{
+	width:13rem;
+	height:7rem;
+	position:absolute;
+	background-color:#004b9f;
+	border-radius:50%;
+	padding:1rem;
+	left:65rem;
+	top:-6.5rem;
+	opacity:.55;
+	color:white;
+	display:none;
+}
+.page4_tell_{
+	position:absolute;
+	left:3rem;
+	top:7.9rem;
+	color:#004b9f;
+	transform:rotate(-70deg);
+}
+.interview_div_{
+	overflow:hidden;
+}
+.interview_div_ img{
+	height:74rem;
+	margin-left:-25.5rem;
+	margin-top:-8.5rem;
+	z-index:-1;
+	filter: blur(10px);
+}
+
+.interview_div{
+	background-color: rgba(0,0,0,0.15);
+	position:absolute;
+	top:3rem;
+
+}
+.page4_star{
+	font-size:3rem;
+	color:#004b9f;
+	font-weight:900;
+	text-align:center;
+	line-height:3rem;
+	width:3rem;
+	height:3rem;
+	border-radius:50%;
+	cursor:pointer;
+	position:absolute;
+	transition:.5s;
+	opacity:.3;
+	right:2rem;
+	top:2rem;
+}
+.page4_star:hover{
+	background-color:transparent;
+	opacity:.7;
+}
+.page_4_left{
+	width:35rem;
+	margin-top:6rem;
+	margin-left:3rem;
+	position:absolute;
+	z-index:9;
+}
+.page_4_left p{
+	position:relative;
+	left:-26rem;
+	top:2rem;
+	color:black;
+	font-weight:900;
+	font-size:1.5rem;
+	text-align:right;
+}
+.page_4_left input{
+	position:relative;
+	left:30%;
+	width:3rem;
+	height:2rem;
+	border-radius:2rem;
+	color:white;
+	font-weight:900;
+	font-size:1.5rem;
+	text-align:center;
+	background-color:transparent;
+
+}
+.page_4_right{
+	width:40rem;
+	position:absolute;
+	right:4rem;
+	font-weight:900;
+	margin-top:6rem;
+}
+.page_4_right p{
+	font-size:1.6rem;
+	position:absolute;
+	left:3rem;
+}
+.page_4_right textarea{
+	position:relative;
+	font-weight:500;
+	font-size:1.5rem;
+	left:10rem;
+	background-color:transparent;
+}
+.page_4_add{
+	position:relative;
+	left:49rem;
+	top:33rem;
+	width:4rem;
+	height:2rem;
+	background-color:transparent;
 }

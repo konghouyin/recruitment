@@ -138,7 +138,7 @@
 	    <th>学号</th>
         <th>姓名</th>
         <th>性别</th>
-        <th>学院/专业/班级</th>
+        <th>学院/专业/班级</th>·<1></1>
         <th>分数</th>
         <th>详细</th>
     </tr>
@@ -321,68 +321,122 @@
 </div>
 </div>
 <!--page-4---------------------------------------------------->
-<div id="page-4" style="display:none">
+<div id="page-4" style="display:none;">
+	<img src="pic/group_pc_backscore.jpg" class="page_4back">
 <div class="middle">
 		<div class="big-find">
 			<img src="pic/group_pc_find.svg" style="width:1.7rem;position:absolute;top: .5rem;left:.5rem; ">
 			<input type="put" name="put" value="请输入学号" style="color:#999;" id="find">
 		</div>
 			<button type="submit" style="cursor: pointer;">搜索</button>
-	</div>
+</div>
+<div class="page4_all" style="opacity:1;">
+<div class="interview_div_"><img src="pic/group_pc_backscore.jpg" class="pic_mao"></div>
+<div class="interview_div">
+<ul class="page4_ul">
+	<li class="page4_">one</li>
+	<li class="page4_">two</li>
+	<li class="page4_">three</li>
+</ul>
+
+<p class="page4_star">✿</p>
+<div class="page4_tell"><p class="page4_tell_">&#9668;</p><p><br>&nbsp;&nbsp;亲，这个是关闭按钮，如果您已经评分还未提交，请一定要先提交信息~</p></div>
+<div class="page_4_left">  <!--请求打分标准-->
+<p>c语言</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+<p>学习态度</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+<p>算法能力</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+
+</div>
+
+<div class="page_4_right">  
+<form action="" method="get">
+	<br>
+	<p>打分内容</p>
+    <textarea rows="7" cols="40">
+     
+    </textarea>
+    <br><br><br>
+    <p>面试建议</p>
+    <textarea rows="7" cols="40">
+     
+    </textarea>
+    
+</form>
+</div>
+<input class="page_4_add" type="submit" value="submit" />
+</div>
+</div>
 </div> 
 <!--page-5---------------------------------------------------->
 <div id="page-5" style="display:block;">
-
-<div class="set_pre">
-	<br>
+<img src="pic/group_pc_backtell.jpg" class="page_5back">
+<div class="set_pre_"></div>
+<div class="set_pre"><br>
 	<p class="center_">打分标准</p>
-	<div class="grouphand_add"><p>新增</p></div>
+	<div class="grouphand_add"><p>提交</p></div>
+	
+	<div class="grouphand_tell"><p class="grouphand_tell_">&#9668;</p><p>&nbsp;&nbsp;亲，如果你对下面的信息做了修改，记得按这个键将向后台提交呦~</p></div>
 
 <table class="sore">
     <tr style="background-color:rgb(50,50,50);text-align:center"> 
     	<th>类别</th>
 	    <th>分值</th>
-	    <th>修改</th>
     </tr>
     <tr style="background-color:#f1f1ef;"> 
-     <td>c语言</td>
-     <td>40</td>
-     <td><div class="grouphand_remove_1"><p>修改</p></div></td>
+     <td><input type="text" name="sta" value="c语言"/></td>
+     <td><input type="text" name="num" value="40"/></td>
+    <!--<td><div class="grouphand_remove_1" ><p>修改</p></div></td>-->
   </tr>
     <tr> 
-      <td>学习态度</td>
-      <td>20</td> 
-      <td><div class="grouphand_remove_1"><p>修改</p></div></td>
+      <td><input type="text" name="sta" value="学习态度"/></td>
+      <td><input type="text" name="num" value="20"/></td> 
   </tr>
    <tr style="background-color:#f1f1ef;"> 
-     <td></td>
-     <td></td>
-     <td></td>
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>  
   </tr>
     <tr> 
-      <td></td>
-      <td></td> 
-      <td></td>
+      <td><input type="text" name="sta" value=""/></td>
+      <td><input type="text" name="num" value=""/></td>
   </tr>
    <tr style="background-color:#f1f1ef;"> 
-     <td></td>
-     <td></td>
-     <td></td>
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>
   </tr>
     <tr> 
-      <td></td>
-      <td></td> 
-      <td></td>
+      <td><input type="text" name="sta" value=""/></td>
+      <td><input type="text" name="num" value=""/></td> 
+  </tr>
+  <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>  
+  </tr>
+    <tr> 
+      <td><input type="text" name="sta" value=""/></td>
+      <td><input type="text" name="num" value=""/></td>
+  </tr>
+   <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>
+  </tr>
+    <tr> 
+      <td><input type="text" name="sta" value=""/></td>
+      <td><input type="text" name="num" value=""/></td> 
+  </tr>
+  <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>
   </tr>
 </table>
 </div>
+<div class="push_tell_"></div>
 <div class="push_tell">
-	<p>公告内容</p>
+	<br><p>公告内容</p><br>
 <form action="" method="get">
     <textarea rows="19" cols="60">
-     在w3school，你可以找到你所需要的所有的网站建设教程。
+     
     </textarea>
-  <input type="submit" value="Submit" />
+  <input type="submit" value="submit" />
 </form>
 	
 </div>

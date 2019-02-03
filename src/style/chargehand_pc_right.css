@@ -1,63 +1,101 @@
 /*--page-5-------------------------------------------------------------------*/
-.set_pre{
+.set_pre,.set_pre_{
 	width:40rem;
 	height:50rem;
-	margin-left:20rem;
-	margin-top:3rem;
-	background-color:white;
+	
+	left:20.5rem;
+	top:6rem;
+	position:absolute;
 }
-.push_tell{
+.set_pre_,.push_tell_{
+	background-color: rgba(255,255,255,0.4);
+}
+.page5_back_left{
+	height:74rem;
+	position:absolute;
+	left:-10;
+}
+.push_tell,.push_tell_{
 	width:45rem;
 	height:30rem;
-	margin-left:62rem;
-	margin-top:-40rem;
-	background-color:white;
-	
+	position:absolute;
+	left:65rem;
+	top:20rem;
 }
+
 .set_pre .sore{
 	margin-left:2rem;
 	margin-top:1rem;
 }
-.center_{
+.center_,.push_tell p{
 	font-size:1.6rem;
 	text-align:center;
+	font-weight:900;
 }
-.grouphand_add,.grouphand_remove_1{
+.grouphand_add{
 	width:3.1rem;
 	height:2rem;
 	border-radius:0.2rem;
 	cursor:pointer;
 	float:left;
-	margin-left:.5rem;
-	margin-bottom:.5rem;
+	margin-left:-20rem;
+	margin-top:-6rem;
 	line-height:2rem;
 	color:grey;
-	border:.2rem solid white;
+	border:.2rem solid transparent;
+	box-shadow:3px 3px 5px #444;
 	text-align:center;
 	transition:.15s;
 	opacity:.8;
+	background-color:#f7abb3;
+	position:absolute;
+	top:7rem;
+	left:23rem;
 }
-.grouphand_remove_1{
-	position:relative;
-	left:4.5rem;
-	background-color:#f9db95;
-}
-.grouphand_remove_1:hover{
-	border:.2rem solid #f9db95;
-	opacity:1;
+.set_pre input{
+	border:none;
+	background-color:transparent;
+	font-weight:900;
+	text-align:center;
 }
 .grouphand_add:hover{
 	border:.2rem solid #f7abb3;
 	opacity:1;
 }
-.grouphand_add{
-	background-color:#f7abb3;
-	position:absolute;
-	top:7rem;
-	left:22rem;
-}
 .grouphand_add p{
 	font-size:1rem;
 }
+.grouphand_tell_{
+	color:pink;
+	position:absolute;
 
+	left:-90rem;
+	top:0rem;
+}
+.grouphand_tell{
+	width:11rem;
+	height:5.5rem;
+	background-color:pink;
+	opacity:.85;
+	color:grey;
+	position:absolute;
+	border-radius:.5rem;
+	padding:.7rem;
+	display:none;
+	left:27rem;
+	top:3rem;
+}
+.push_tell form{
+	margin-left:3rem;
+}
+.page_5back{
+	position:absolute;
+	height:74rem;
+	top:0rem;
+	z-index:-2;
+	left:-5.9rem;
+}
+.push_tell textarea{
+	background-color:transparent;
+}
 /*--page-6-------------------------------------------------------------------*/
