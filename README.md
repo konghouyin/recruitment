@@ -522,7 +522,174 @@ user_teachSystem.js为教务系统验证文件，验证输入学号，密码是�
 #### a.前端
 
 #### b.后端
+1.身份验证，下发session
+- url：/new
+- 方法：GET
+- 参数：无
+- 返回
+```js
+{
+    "msg":"具体情况"，
+    "style":1代表成功，0代表无cookie,-1代表cookie解析错误，-2代表cookie超时，
+    "url":登录页面
+}
+```
+2.添加打分标准
+- url: /addrule
+- 方法：post
+- 参数：'{"C语言":50,"沟通能力":10....}'  (字符串)
+- 举个例子
+```
+let a={xingming:1,xuehao:2};
+res.send(JSON.stringify(a));
+```
+- 返回
+```js
+{
+    "msg":"具体情况"，
+    "style":1代表成功，0代表失败
+}
+```
+3.修改打分标准
+- url: /moderule
+- 方法：post
+- 参数：'{"C语言":50,'沟通能力':10....}
+- 返回
+```js
+{
+    "msg":"具体情况"，
+    "style":1代表成功，0代表失败
+}
+```
+4.查询打分规则
+- url: /searchrule
+- 方法：get
+- 参数：无
+- 返回
+```js
+{
+   "rules":"{\"C语言\":50,\"沟通能力\":20}",
+   "style":1,
+    "msg":具体情况
+}
 
+```
+注：前端记得对返回的打分规则进行转义
+
+5.登录用户查看个人信息
+- url: /selfInfo
+- 方法：get
+- 参数：无
+- 返回
+```js
+{
+    "style":1代表成功，0代表失败，
+    "msg":"具体情况"，
+    "selfInfo":[{"xingming":1,"xuehao":2,.....}]
+}
+```
+6.查看本组报名数据
+- url: /viewgroupreg
+- 方法：get
+- 参数：无
+- 返回
+```js
+{
+    "selfInfo":[{"xuehao":123,"name":'嘻嘻嘻',"xueyuan":'计算机学院'，....},{},{}...]
+    "msg":"具体情况"，
+    "style":1代表成功，0代表失败
+}
+```
+7.查询每面排名数据
+- url: /rank
+- 方法：get
+- 参数：number=1
+- 返回
+```js
+{
+    score:[{id:1,xuehao:41711,selfgruop:1,...},{},...]
+    info:[{xuehao:123,name:'嘻嘻嘻',xueyuan:'计算机学院'，....},{},{}...]
+    msg:"具体情况"，
+    style:1代表成功，0代表失败
+}
+```
+8.查询某人所有面试信息
+- url: /rankdetails
+- 方法：get
+- 参数：xuehao=4171xxx
+- 返回
+```js
+{
+    "scoreInfo":"scoreInfo":[{"id":2,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"C语言\":45,\"沟通能力\":20,...}","advice":"继续努力","history":"xxxx"},{"id":4,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"C语言\":45,\"沟通能力\":19,...}","advice":"继续努力","history":"xxxx"},{"id":7,"xuehao":4171196,"selfgroup":3,"type":2,"time":"2019-02-02T16:48:05.000Z","person":"wanjianxin","obj":"{\"第一题\":10,\"第二题\":10}","history":"xxxx"}],,//包括这人目前为止所有面试信息,其中一面有几个人给面试者打分就有几条一面成绩信息，二面面试信息只有一条
+    "msg":"具体情况"，
+    "style":1代表成功，0代表失败
+}
+```
+9.一面打分
+- url: /mark
+- 方法：post
+- 参数：{present:1,xuehao:123xxx,obj:"打分内容",advice:"xxxx",history:"xxxx"}(转字符串)
+- 返回
+```js
+{
+    "msg":"具体情况"，//成功或失败原因
+    "style":1代表成功，0代表失败
+}
+```
+10.二面打分
+- url: /secondmark
+- 方法：post
+- 参数：{present:2,xuehao:123xxx,obj:"打分内容",history:"面试记录"}(转字符串)
+- 返回
+```js
+{
+    "msg":"具体情况"，//成功或失败原因
+    "style":1代表成功，0代表失败
+}
+```
+11.添加公告
+- url: 
+- 
+12.查询公告
+- url: /shownotice
+- 方法：get
+- 参数：无
+- 返回
+```js
+{
+    "text":"{
+        \"title\":\"通知\"，
+        \"context\":\"hhhh\"
+    }",
+    "style":1或0
+    "msg":"具体情况"
+}
+```
+13.输入学号查看个人信息
+- url: /searchinfobynum
+- 方法：get
+- 参数：xuehao=4171196
+- 返回
+```js
+{
+    "info":{"xuehao":4171196,"name":"张银鸽","xueyuan":"计算机学院","zhuanye":"计算机科学与技术","banji":"计科1706","xingbie":"女","password":"1256","phoneNum":"183","selfgroup":3,"level":2,"style":0,"pass":1,"time":"2019-01-30T08:39:00.000Z"
+    },
+    "style":1成功，0失败
+    "msg":"具体情况"
+}
+```
+14.查找二面上次打分时间
+- url: /findSecondTime
+- 方法：get
+- 参数：xuehao=4171196
+- 返回
+```js
+{
+    "style":1成功，0失败,
+    "msg":"具体状态",
+    "lastTime":"2019-02-02T16:48:05.000Z"
+}
+```
 ### 6.组员
 
 #### a.前端
