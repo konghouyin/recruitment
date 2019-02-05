@@ -35,6 +35,7 @@ function prove(pool,req, res) {
 		var sqlString = sql.select(['*'],'registryinformation',where);
 		sql.sever(pool,sqlString, function(data) {
 			if (data.length == 1) {
+				req.session.phone = data[0].phoneNum;
 				req.session.selfgroup = data[0].selfgroup;
 				req.session.xuehao = data[0].xuehao;
 				req.session.name = data[0].name;

@@ -86,6 +86,7 @@ server.post('/login', function(req, res) {
 				maxAge: 5 * 1000,
 				signed: true
 			});
+			//data根据情况判断是否跳转补全页面----------------------------------------------------------------？？？
 			res.write(JSON.stringify({
 				msg: "登录成功！",
 				url: "http://127.0.0.1:8848/test/index.html",
@@ -208,7 +209,7 @@ server.post('/reg', function(req, res) {
 			}));
 			res.end();
 		} else {
-			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password'], [sql.escape(req.session.phone), sql.escape(obj.password)],
+			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password','time'], [sql.escape(req.session.phone), sql.escape(obj.password),'NOW()'],
 				true);
 			sql.sever(pool, sqlString, end); //数据库存入手机号和密码
 		}
@@ -240,5 +241,3 @@ function rexXuehao(text) {
 	return reg.test(text);
 }
 //通用学号
-
-
