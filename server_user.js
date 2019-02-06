@@ -43,7 +43,7 @@ server.all('*', function(req, res, next) {
 
 
 server.get('/new',function(req,res){
-	validate.prove(pool,req,res);
+	validate.prove(pool,req,res,1);
 })
 
 server.listen(8082);
