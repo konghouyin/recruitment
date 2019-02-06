@@ -555,7 +555,7 @@ server.get('/new',function(req,res){
 
 - url：/teach
 - 方法：post
-- 参数：yhm=04xxxxxx&password=xxx
+- 参数：yhm=xxxxxxxx&password=xxx
 - 返回
 
 ```json
@@ -574,6 +574,21 @@ user_teachSystem.js为教务系统验证文件，验证输入学号，密码是�
 - 请求加密公钥，将用于用户RSA加密。
 - 验证身份，发送csrftoken，学号，加密后的用户密码
 - 请求并解析个人数据
+
+##### 3.分组报名
+
+- url：/signin
+- 方法：post
+- 参数：selfgroup=1（1Android，2ios，3web，4后台，5产品）
+- 返回
+```json
+{
+    msg："具体情况"，
+    style：0	//1成功，0报名已截止，-1已经分组，-2还未完成身份信息填写，-3数据库异常
+    url："http://xxx.com"//报名成功后跳转页面
+}
+```
+
 
 ## 五、重要问题记录
 

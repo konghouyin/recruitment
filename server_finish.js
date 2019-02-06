@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var validate = require('./server/public_validate.js');
 var express = require('express');
+var crypto = require('crypto');
 
 
 var server = express(); //使用express框架
@@ -192,13 +193,116 @@ server.use('*', function(req, res, next) {
 		} else {
 			res.write(JSON.stringify({
 				msg: "报名已截止！",
-				style: -200
+				style: 0
 			}));
 			res.end();
 		}
 	}
 })
 //验证报名时间 
+
+server.post('/signin', function(req, res) {
+	var obj = {};
+	var message = '';
+	req.on('data', function(data) {
+		message += data;
+	})
+	req.on('end', function() {
+		obj = querystring.parse(message);
+		var findfirst = sql.select(['selfgroup', 'xuehao'], 'registryinformation', 'phoneNum=' + sql.escape(
+			req.session.phone));
+		sql.sever(pool, findfirst, function(data) {
+			if (data.length != 1) {
+				res.write(JSON.stringify({
+					msg: "查询数据异常，数据库中电话不匹配",
+					style: -3
+				}));
+				res.end();
+			} else if (data[0].xuehao == null) {
+				res.write(JSON.stringify({
+					msg: "还未完成身份信息",
+					style: -2
+				}));
+				res.end();
+			} else if (data[0].selfgroup != null) {
+				var sqlString = sql.select(['phoneNum', 'password'], 'registryinformation', 'phoneNum=' + sql.escape(
+					req.session.phone));
+				sql.sever(pool, sqlString, end1);
+			} else {
+				var sqlupdate = sql.update('registryinformation', ['selfgroup'], [sql.escape(obj.selfgroup)], 'phoneNum=' +
+					sql.escape(
+						req.session.phone));
+				sql.sever(pool, sqlupdate, function(){
+					var sqlString = sql.select(['phoneNum', 'password'], 'registryinformation', 'phoneNum=' + sql.escape(
+						req.session.phone));
+					sql.sever(pool, sqlString, end2);
+				});
+			}
+		})
+	})
+
+	function end1(data) {
+		if (data.length == 1) {
+			var cookieSend = "" + data[0].phoneNum + "~" + data[0].password + "~" + new Date().getTime(); //保存cookie验证，防止跨站session失效
+
+			var str = JSON.stringify(cookieSend); //明文
+			var secret = 'niyidingjiebuchulai'; //密钥--可以随便写
+			var cipher = crypto.createCipher('aes192', secret);
+			var enc = cipher.update(str, 'utf8', 'hex'); //编码方式从utf-8转为hex;
+			enc += cipher.final('hex'); //编码方式从转为hex;
+
+			res.cookie('pbl', enc, {
+				path: '/',
+				maxAge: 5 * 1000,
+				signed: true
+			});
+			res.write(JSON.stringify({
+				msg: "组别已设置，请勿重复选择！",
+				url: "http://127.0.0.1:8848/test/index.html", //跳转个人主页
+				style: -1
+			}));
+			res.end();
+
+		} else {
+			res.write(JSON.stringify({
+				msg: "查询数据异常，数据库中电话不匹配！",
+				style: -3
+			}));
+			res.end();
+		}
+	}
+
+	function end2(data) {
+		if (data.length == 1) {
+			var cookieSend = "" + data[0].phoneNum + "~" + data[0].password + "~" + new Date().getTime(); //保存cookie验证，防止跨站session失效
+
+			var str = JSON.stringify(cookieSend); //明文
+			var secret = 'niyidingjiebuchulai'; //密钥--可以随便写
+			var cipher = crypto.createCipher('aes192', secret);
+			var enc = cipher.update(str, 'utf8', 'hex'); //编码方式从utf-8转为hex;
+			enc += cipher.final('hex'); //编码方式从转为hex;
+
+			res.cookie('pbl', enc, {
+				path: '/',
+				maxAge: 5 * 1000,
+				signed: true
+			});
+			res.write(JSON.stringify({
+				msg: "报名成功！",
+				url: "http://127.0.0.1:8848/test/index.html", //跳转个人主页
+				style: 1
+			}));
+			res.end();
+
+		} else {
+			res.write(JSON.stringify({
+				msg: "查询数据异常，数据库中电话不匹配！",
+				style: -3
+			}));
+			res.end();
+		}
+	}
+})
 
 server.listen(8083);
 
