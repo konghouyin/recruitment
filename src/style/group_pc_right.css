@@ -1,0 +1,460 @@
+    /*page-1--------------------------------------------------------------*/
+    .interview_state div{
+        display: inline-block;
+        margin-left:2rem;
+        width:16rem;
+        height:10rem;
+        text-align:center;
+        background-color:white;
+        color:#adaaa4;
+        line-height:2.5rem;
+        font-size:1.5rem;
+        border-radius: .3rem;
+    }
+    .interview_state p{
+        color:#404544;
+        font-size:1.8rem;
+        margin:1.5rem 0 1.5rem 20rem;
+    }
+    #interviewstate_1{
+        background-color:#00bfa3;
+        color:white;
+    }
+    .headgroup_tell{
+        position:absolute;
+        top:20rem;
+        left:20rem;
+        width:70rem;
+        height:30rem;
+        background-color:white;
+    }
+    /*page-2--------------------------------------------------------------*/
+    #page-2{
+        position: absolute;
+        left:20rem;
+        top: 5rem;
+        width:100rem;
+    }
+    table,th,td {
+        border:rgb(220,220,220) solid 0.1rem;
+        padding-left:0.05rem
+    }
+    .sore {
+        border-collapse:collapse;
+        font-size:0.08em; 
+        border:0.5rem;
+        width:90%;
+        height:1.3em;
+        text-align: center;
+    }
+    .sore th{
+        color:white;
+        height:3.5rem;
+    }
+    .sore td{
+        height:3.5rem;
+    }
+    #student-more{
+        color:#00b7a9;
+        font-weight:900;
+        font-size:2rem;
+    }
+    .student-more:hover{
+        cursor:pointer;
+    }
+    .student-state{
+        display:inline-block;
+        padding:.3rem .7rem .3rem .7rem;
+        color:white;
+        border-radius: 1.2rem;
+        background-color:#7b5cac;
+        box-shadow: 1px 1px 2px #888888;
+    }
+    .studentstates div{
+        display:inline-block;
+        display:inline-block;
+        padding:.3rem .7rem .3rem .7rem;
+        color:white;
+        border-radius: 1.2rem;
+        margin-bottom:.5rem;
+        cursor:pointer;
+    }
+    .studentstates div:active{
+        box-shadow: 4px 12px 15px 0 rgba(0,0,0,0.24), 4px 17px 17px 0 rgba(0,0,0,0.19);
+        box-sizing: border-box;
+    }
+    #studentstate-1{
+        background-color:#7b5cac;
+    }
+    #studentstate-2{
+        background-color:#ff9103;
+    }
+    #studentstate-3{
+        background-color:#f70004;
+    }
+    #studentstate-4{
+        background-color:#00d037;
+    }
+    #requrie_new img{
+        width:1.3rem;
+        position:absolute;
+        right:11rem;
+        top:.5rem;
+        cursor:pointer;
+        transition: .5s;
+    }
+    #requrie_new img:hover{
+        transform:rotate(360deg);
+    }
+    .page2find-1{
+       position:absolute;
+       top:0rem;
+       left:26rem;
+    }
+    /*page-3--------------------------------------------------------------*/
+    .find-student form{
+        font-size: 1.5rem;
+        margin-bottom:0.5rem; 
+    }
+    .find-student select{
+        width: 6rem;
+        height:2rem;
+        font-size: 1.5rem;
+
+    }
+    #page-3{
+        position: absolute;
+        left:20rem;
+        top: 5rem;
+        width:100rem;
+    }
+    table,th,td {
+        border:rgb(220,220,220) solid 0.1rem;
+        padding-left:0.05rem
+    }
+    .sore {
+        border-collapse:collapse;
+        font-size:0.08em; 
+        border:0.5rem;
+        width:90%;
+        height:1.3em;
+        text-align: center;
+    }
+    .sore th{
+        color:white;
+        height:3.5rem;
+    }
+    .sore td{
+        height:3.5rem;
+    }
+    .student_sore_more1{   
+        background-color:#303c36;
+        transition:.5s;
+        opacity:.85;
+        filter: blur(2px);
+    }
+    .student_sore_more1,.student_sore_more{
+        width:50rem;
+        height:35rem;
+        color:white;
+        position:fixed;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        margin:1rem;
+    }
+    .student_sore_more div{
+        line-height:2rem;
+        width:45rem;
+        height:30rem;
+        margin:3rem 1rem 4rem 2rem;
+    }
+    .student_sore_more ul{
+        position:absolute; 
+        top:13rem;
+        left:46rem;
+    }
+    .more_colse{
+        width:2rem;
+        height:2rem;
+        background-color:red;
+        transform:rotate(45deg);
+        position:absolute;
+        opacity:.3;
+        line-height:2rem;
+        border-radius:50%;
+        font-size:1.7rem;
+        text-align:center;
+        top:1rem;
+        right:1rem;
+        cursor:pointer;
+        transition:.3s;
+    }
+    .more_colse:hover{
+        opacity:.7;
+    }
+    .more_right{
+        position:absolute;
+        left:20%;
+    }
+    .more_left{
+        position:absolute;
+        right:80%;
+    }
+    .student_sore_more li{
+        margin-bottom:.5rem;
+        cursor:pointer;
+        opacity:.8;
+        margin-right:1rem;
+        width:2.5rem;
+        height:2.5rem;
+        border-radius:50%;
+        background-color:#32443c;
+        text-align:center;
+        line-height:2.5rem;
+        transition:.3s;
+    }
+    .student_sore_more li:hover{
+        background-color:#00b7a9;
+        color:white;
+        opacity:.8;
+    }
+    .student-more{
+        color:#00b7a9;
+        font-weight:900;
+        font-size:2rem;
+        transition: .2s;
+    }
+    .student-more:hover{
+        font-size:2.5rem;
+        color:red;
+        cursor:pointer;
+    }
+    .sore_find{
+        float: right;
+        margin-right:12rem;
+        margin-top:1rem;
+    }
+    .sore_find div{ 
+        color:#b4b0aa;
+        height:3rem;   
+        font-size:1.8rem;
+        line-height:3rem;
+        text-align:center;
+        display:inline-block;
+        cursor:pointer;
+        background-color:white;
+    }
+    .sore_find div:hover{
+        background-color:#00bfa3;
+        color:white;
+    }
+    #sore_find_left{
+        width:3rem;            
+    }
+    #sore_find_right{
+        width:3rem;
+    }
+    .sore_find .sore_find_middle{
+        background-color:#f1f1ef;
+        color:#00bfa3;
+    }
+    .student_face{
+        opacity:0;
+        transition:1s;
+        position:absolute;
+    }
+    /*--page-4-------------------------------------------------------------------*/
+
+ .middle{
+    position:absolute;
+    top:4.5rem;
+    left:50%;
+    transform:translate(-20%);
+    width: 30rem;
+    height: 2.5rem;
+    background-color: white;
+    padding: .8rem;
+    opacity: .85;
+    z-index: -1; 
+    z-index:2;
+}
+.page_4back{
+	position:absolute;
+	height:74rem;
+	top:0rem;
+	z-index:-2;
+	left:1.5rem;
+}
+.page4_ul{
+	margin:1rem;
+}
+.page4_{
+	width:3rem;
+	height:3rem;
+	line-height:3rem;
+	text-align:center;
+	background-color:black;
+	float: left;
+	margin:.3rem;
+	color:white;
+	opacity:.5;
+	cursor:pointer;
+	box-shadow:3px 3px 5px #444;
+	transition:.5s;
+}
+.page4_:hover{
+	background-color:#00b7a9;
+	opacity:.7;
+	color:white;
+}
+.page4_all{
+	transition:.5s;
+}
+.middle input{
+    width: 20rem;
+    height: 2.5rem;
+    color: black;
+    position:absolute; 
+    left: 3rem;
+    top: 0rem;
+    border:none;
+    font-size: 1.6rem;
+    outline:medium; 
+}
+.big-find{
+    position: relative;
+}
+.middle button{
+    width: 7rem;
+    height: 2.5rem;
+    position: absolute;
+    right: 0;
+    top: .8rem;
+    background-color: white;
+    border:none;
+    border-left:.1rem solid #ccd3d3;;
+    outline:medium;
+    font-size: 1.6rem;
+    color: black;
+}
+.interview_div,.interview_div_{
+	width:70rem;
+	height:40rem;
+	margin-top:7rem;
+	margin-left:27rem;
+	
+}
+.page4_tell{
+	width:13rem;
+	height:7rem;
+	position:absolute;
+	background-color:#004b9f;
+	border-radius:50%;
+	padding:1rem;
+	left:65rem;
+	top:-6.5rem;
+	opacity:.55;
+	color:white;
+	display:none;
+}
+.page4_tell_{
+	position:absolute;
+	left:3rem;
+	top:7.9rem;
+	color:#004b9f;
+	transform:rotate(-70deg);
+}
+.interview_div_{
+	overflow:hidden;
+}
+.interview_div_ img{
+	height:74rem;
+	margin-left:-25.5rem;
+	margin-top:-8.5rem;
+	z-index:-1;
+	filter: blur(10px);
+}
+
+.interview_div{
+	background-color: rgba(0,0,0,0.15);
+	position:absolute;
+	top:3rem;
+
+}
+.page4_star{
+	font-size:3rem;
+	color:#004b9f;
+	font-weight:900;
+	text-align:center;
+	line-height:3rem;
+	width:3rem;
+	height:3rem;
+	border-radius:50%;
+	cursor:pointer;
+	position:absolute;
+	transition:.5s;
+	opacity:.3;
+	right:2rem;
+	top:2rem;
+}
+.page4_star:hover{
+	background-color:transparent;
+	opacity:.7;
+}
+.page_4_left{
+	width:35rem;
+	margin-top:6rem;
+	margin-left:3rem;
+	position:absolute;
+	z-index:9;
+}
+.page_4_left p{
+	position:relative;
+	left:-26rem;
+	top:2rem;
+	color:black;
+	font-weight:900;
+	font-size:1.5rem;
+	text-align:right;
+}
+.page_4_left input{
+	position:relative;
+	left:30%;
+	width:3rem;
+	height:2rem;
+	border-radius:2rem;
+	color:white;
+	font-weight:900;
+	font-size:1.5rem;
+	text-align:center;
+	background-color:transparent;
+
+}
+.page_4_right{
+	width:40rem;
+	position:absolute;
+	right:4rem;
+	font-weight:900;
+	margin-top:6rem;
+}
+.page_4_right p{
+	font-size:1.6rem;
+	position:absolute;
+	left:3rem;
+}
+.page_4_right textarea{
+	position:relative;
+	font-weight:500;
+	font-size:1.5rem;
+	left:10rem;
+	background-color:transparent;
+}
+.page_4_add{
+	position:relative;
+	left:49rem;
+	top:33rem;
+	width:4rem;
+	height:2rem;
+	background-color:transparent;
+}

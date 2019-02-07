@@ -1,0 +1,122 @@
+﻿    html{
+        font-size:10px;
+        min-width:1340px;
+    }
+    *{
+    margin:0;
+    padding:0;
+    list-style: none;
+    text-decoration: none;
+    font-size:1.3rem;
+    }
+    
+    body{
+        background-color: #f1f1ef;
+    }
+    .header{
+        margin: none;
+        height: 3rem;
+        width:100%;
+        background-color:white;
+    }
+    .header img{
+    	width:2rem;
+    	position:absolute;
+    	left:24rem;
+    	top:0.5rem;
+    }
+    .header marquee{
+    	position:absolute;
+    	left:28rem;
+    }
+    .header p{
+    	line-height:3rem;
+    }
+    .left{
+        float: left;
+        width: 18rem;
+        height:74rem;
+        background-color:#303c36;
+    }
+    .left ul img{
+        margin-right:1rem;
+        margin-left:1.5rem;
+        width:1.5rem;
+    }
+    .left ul .right_arrow{
+        float:right;
+        display:inline-block;
+        margin-top:1.6rem;
+        width:.9rem;
+    }
+    .top{
+        height: 17rem;
+        border-bottom: 0.2rem #363d3e solid;
+    }
+    .top1{
+        height: 8rem;
+        background-color: #32443c;
+    }
+    .list{
+        position: absolute;
+        width:6.5rem;
+        height: 2.5rem;
+        background-color: #004b9f;
+        text-align: center;
+        border-radius:0.4rem;
+        line-height: 2.5rem;
+        font-size: 1.4rem;
+        color:white;
+        left:11rem;
+        top:8.5rem;
+    }
+    .list div{
+        position: absolute;
+        left: -0.8rem;
+        color:#004b9f;
+    }
+    .list p{
+        display:inline-block;
+        margin: 0;
+    }
+    .name{
+        margin: 4rem 0 0 0;
+        color:white;
+        font-size: 1.7rem;
+    }
+    .state{
+        margin: 0;
+        color:#959a9a;
+        font-size: 1.2rem;
+    }
+    .yuan{
+        position: absolute;
+        width:6rem;
+        height: 6rem;
+        border-radius: 50%;
+        border: 0.2rem white solid;
+        overflow:hidden;
+        top:4.5rem;
+        left:6rem;
+    }
+    .yuan img{
+         width:6rem;
+    }
+    .left p{
+        text-align:center;
+    }
+    .left li{
+        width: 100%;
+        height:4rem;
+        line-height: 4rem;
+        font-size:1.5rem;
+        transition:.15s;
+        color:#959a9a;
+        border-bottom: 0.2rem #363d3e solid;
+    }
+    .left li:hover{
+        cursor: pointer;
+        background-color:#00b7a9;
+        color:white;
+
+    }

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>group-index</title>
+
+<!--	<style type="text/css">-->
+	<link rel="stylesheet" type="text/css" href="./style/group_pc_left.css" />
+	<link rel="stylesheet" type="text/css" href="./style/group_pc_right.css" />
+	<link rel="stylesheet" type="text/css" href="./style/chargehand_pc_right.css" />
+
+</head>
+<body>
+	<script type="text/javascript" src="pic/bundle.js"></script>
+	<div class="left">
+		<div class="top">
+		 <div class="yuan"><img src="pic/group_pc_minpic.jpg"></div>
+		   <div class="top1"></div>
+		   <div class="list"><div>&#9668;</div><p>web</p></div>
+		   <p class="name">啊哈</p>
+		   <p class="state">组长</p>		  
+		</div>
+		<ul>
+			<li onclick="opens(1)" class="choose-1"style="background-color:#00b7a9;color:white;"><img src="pic/group_pc_mine.png">个人主页<img src="pic/group_pc_right.png" class="right_arrow"></li>
+			<li onclick="opens(2)" class="choose-1"><img src="pic/group_pc_base.png">报名数据<img src="pic/group_pc_right.png" class="right_arrow"></li>
+			<li onclick="opens(3)" class="choose-1"><img src="pic/group_pc_sore.png">排名<img src="pic/group_pc_right.png" class="right_arrow"></li>
+			<li onclick="opens(4)" class="choose-1" ><img src="pic/group_pc_score.png">面试<img src="pic/group_pc_right.png" class="right_arrow"></li>
+			<li onclick="opens(5)" class="choose-1" ><img src="pic/chargehand_pc_set.png">设置<img src="pic/group_pc_right.png" class="right_arrow"></li>
+			<li onclick="opens(6)" class="choose-1" ><img src="pic/chargehand_pc_shenhe.png">审核<img src="pic/group_pc_right.png" class="right_arrow"></li>			
+		</ul>
+	</div>
+	<div class="header">
+		<img src="pic/group_pc_horn.png">
+        <marquee  direction="right"  behavior="scroll"  scrollamount="5" width="900"  height="36"  hspace="300"   vspace="36">
+
+	         <p>西安邮电大学移动应用开发实验室纳新准备中 “★,°:.☆(￣▽￣)/$:.°★ 。”</p></font>
+        </marquee>
+    </div>
+<!--page-1----------------------------------------------------->
+
+
+<div id="page-1" style="display:none;">
+  <div class="interview_state">
+    <p>面试流程</p>
+  <div id="interviewstate_1"> 准备ing </div>
+  <div id="interviewstate_2"> 一面 </div>
+  <div id="interviewstate_3"> 二面</div>
+  <div id="interviewstate_4"> 三面 </div>
+  <div id="interviewstate_5"> 纳新结束 </div>
+  </div>
+
+  <div class="headgroup_tell"> 
+    <p>公告</p>
+  </div>
+</div>
+<!--page-2----------------------------------------------------->
+<div id="page-2" style="display:none;">
+
+<form action="" method="get" class="page2find"> 
+ <div class="studentstates">
+<label><input name="studentstate" type="radio" value="" /><div id="studentstate-1">面试中</div> </label> 
+<label><input name="studentstate" type="radio" value="" /><div id="studentstate-2">打分中</div> </label> 
+<label><input name="studentstate" type="radio" value="" /><div id="studentstate-3">未通过</div> </label> 
+<label><input name="studentstate" type="radio" value="" /><div id="studentstate-4">已通过</div></label> 
+</div>
+<div class="page2find-1">
+<label >请选择：</label> 
+          <select name=""> 
+          <option value="1">面试前</option> 
+          <option value="2">一面</option> 
+          <option value="3">二面</option>
+          <option value="4">三面</option>  
+</select> 
+</div>
+</form> 
+<br>
+<div id="requrie_new"><img src="pic/group_pc_new1.png"></div>
+   <div class="student-message">
+   </div>
+  <table class="sore">
+    <tr style="background-color:rgb(50,50,50);text-align:center"> 
+    	
+	    <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>学院/专业/班级</th>
+        <th>手机</th>
+        <th>邮箱</th>
+        <th>状态</th>
+    </tr>
+    <tr> 
+     <td>04181112</td>
+     <td>小明</td>
+     <td>男</td>
+     <td>计算机/计算机科学与技术/1803</td>
+     <td>1234567890</td>
+     <td>1234567890@qq.com</td>
+     <td ><p class="student-state" style="color:;">已报名</p></td>
+  </tr>
+    <tr style="background:white;">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+</table>
+</div>
+<!--page-3----------------------------------------------------->
+<div id="page-3" style="display:none;">
+   <div class="find-student">
+   	   <form action="" method="get"> 
+          <label>选择类：</label> 
+          <select name=""> 
+          <option value="1">综合</option> 
+          <option value="2">一面</option> 
+          <option value="3">二面</option>
+          <option value="4">三面</option>  
+          </select> 
+       </form>
+   </div>
+   <div id="requrie_new"><img src="pic/group_pc_new1.png"></div>
+   <div class="student-message">
+  <table class="sore">
+    <tr style="background-color:rgb(50,50,50);text-align:center"> 
+    	<th>名次</th>
+	    <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>学院/专业/班级</th>·<1></1>
+        <th>分数</th>
+        <th>详细</th>
+    </tr>
+    <tr> 
+     <td>1</td>
+     <td>04181112</td>
+     <td>小明</td>
+     <td>男</td>
+     <td>计算机/计算机科学与技术/1803</td>
+     <td>60</td>
+     <td class="student-more" name="04181112">+</td>
+  </tr>
+    <tr style="background-color:white;"> 
+      <td>2</td>
+      <td>04182121</td>
+      <td>小红</td>
+      <td>女</td>
+      <td>电子/电子信息工程/1804</td>
+      <td>50</td>
+      <td class="student-more" name="04182121">+</td>  
+  </tr>
+   <tr> 
+      <td>3</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr style="background-color:white;"> 
+      <td>4</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr> 
+      <td>5</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr style="background-color:white;"> 
+      <td>6</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr> 
+      <td>7</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr style="background-color:white;"> 
+      <td>8</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr> 
+      <td>9</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr style="background-color:white;"> 
+      <td>10</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr> 
+      <td>11</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+  <tr style="background-color:white;"> 
+      <td>12</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr> 
+      <td>13</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr style="background-color:white;"> 
+      <td>14</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+   <tr> 
+      <td>15</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>  
+  </tr>
+</table>
+
+<div class="sore_find">   <!--上下页翻转按钮-->
+  <div id="sore_find_left"><span><</span></div> 
+  <div id="sore_find_right"><span>></span></div> 
+  <div class="sore_find_middle"><p>(共<span>4</span>页)</p></div>
+</div>
+</div>
+
+<div id="student_sore_block" style="display:none;">
+  <div class="student_sore_more1"></div>  <!--毛玻璃用的底板-->
+  <div class="student_sore_more">
+     
+     <div class="student_face" style="opacity:1;">
+      <p class="more_left">一面</p> <p class="more_right">90</p><br>
+      <p class="more_left">打分内容：</p> <p class="more_right">这个学生思维很清晰</p><br>
+      <p class="more_left">建议：</p> <p class="more_right">应多加练习练习算法题</p><br>
+      <p class="more_left">打分者：</p> <p class="more_right">啊哈</p><br>
+     </div>
+     <div class="student_face">
+      <p class="more_left">二面</p> <p class="more_right">80</p><br>
+      <p class="more_left">打分内容：</p> <p class="more_right">非常好</p><br>
+      <p class="more_left">建议：</p> <p class="more_right">你再说神秘哦</p><br>
+      <p class="more_left">打分者：</p> <p class="more_right">啊哈</p><br>
+     </div>
+     <div class="student_face">
+      <p class="more_left">三面</p> <p class="more_right">60</p><br>
+      <p class="more_left">打分内容：</p> <p class="more_right">加油</p><br>
+      <p class="more_left">建议：</p> <p class="more_right">继续努力</p><br>
+      <p class="more_left">打分者：</p> <p class="more_right">啊哈</p><br>
+     </div>
+   
+     <div>
+     <ul>
+      <li class="student_face_li">1</li>
+      <li class="student_face_li">2</li>
+      <li class="student_face_li">3</li>
+     </ul>
+     <p class="more_colse">+</p>
+  </div>
+</div>
+
+</div>
+</div>
+<!--page-4---------------------------------------------------->
+<div id="page-4" style="display:none;">
+	<img src="pic/group_pc_backscore.jpg" class="page_4back">
+<div class="middle">
+		<div class="big-find">
+			<img src="pic/group_pc_find.svg" style="width:1.7rem;position:absolute;top: .5rem;left:.5rem; ">
+			<input type="put" name="put" value="请输入学号" style="color:#999;" id="find">
+		</div>
+			<button type="submit" style="cursor: pointer;">搜索</button>
+</div>
+<div class="page4_all" style="opacity:1;">
+<div class="interview_div_"><img src="pic/group_pc_backscore.jpg" class="pic_mao"></div>
+<div class="interview_div">
+<ul class="page4_ul">
+	<li class="page4_">one</li>
+	<li class="page4_">two</li>
+	<li class="page4_">three</li>
+</ul>
+
+<p class="page4_star">✿</p>
+<div class="page4_tell"><p class="page4_tell_">&#9668;</p><p><br>&nbsp;&nbsp;亲，这个是关闭按钮，如果您已经评分还未提交，请一定要先提交信息~</p></div>
+<div class="page_4_left">  <!--请求打分标准-->
+<p>c语言</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+<p>学习态度</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+<p>算法能力</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+
+</div>
+
+<div class="page_4_right">  
+<form action="" method="get">
+	<br>
+	<p>打分内容</p>
+    <textarea rows="7" cols="40">
+     
+    </textarea>
+    <br><br><br>
+    <p>面试建议</p>
+    <textarea rows="7" cols="40">
+     
+    </textarea>
+    
+</form>
+</div>
+<input class="page_4_add" type="submit" value="submit" />
+</div>
+</div>
+</div> 
+<!--page-5---------------------------------------------------->
+<div id="page-5" style="display:block;">
+<img src="pic/group_pc_backtell.jpg" class="page_5back">
+<div class="set_pre_"></div>
+<div class="set_pre"><br>
+	<p class="center_">打分标准</p>
+	<div class="grouphand_add"><p>提交</p></div>
+	
+	<div class="grouphand_tell"><p class="grouphand_tell_">&#9668;</p><p>&nbsp;&nbsp;亲，如果你对下面的信息做了修改，记得按这个键将向后台提交呦~</p></div>
+
+<table class="sore">
+    <tr style="background-color:rgb(50,50,50);text-align:center"> 
+    	<th>类别</th>
+	    <th>分值</th>
+    </tr>
+    <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value="c语言"/></td>
+     <td><input type="text" name="num" value="40"/></td>
+    <!--<td><div class="grouphand_remove_1" ><p>修改</p></div></td>-->
+  </tr>
+    <tr> 
+      <td><input type="text" name="sta" value="学习态度"/></td>
+      <td><input type="text" name="num" value="20"/></td> 
+  </tr>
+   <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>  
+  </tr>
+    <tr> 
+      <td><input type="text" name="sta" value=""/></td>
+      <td><input type="text" name="num" value=""/></td>
+  </tr>
+   <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>
+  </tr>
+    <tr> 
+      <td><input type="text" name="sta" value=""/></td>
+      <td><input type="text" name="num" value=""/></td> 
+  </tr>
+  <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>  
+  </tr>
+    <tr> 
+      <td><input type="text" name="sta" value=""/></td>
+      <td><input type="text" name="num" value=""/></td>
+  </tr>
+   <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>
+  </tr>
+    <tr> 
+      <td><input type="text" name="sta" value=""/></td>
+      <td><input type="text" name="num" value=""/></td> 
+  </tr>
+  <tr style="background-color:#f1f1ef;"> 
+     <td><input type="text" name="sta" value=""/></td>
+     <td><input type="text" name="num" value=""/></td>
+  </tr>
+</table>
+</div>
+<div class="push_tell_"></div>
+<div class="push_tell">
+	<br><p>公告内容</p><br>
+<form action="" method="get">
+    <textarea rows="19" cols="60">
+     
+    </textarea>
+  <input type="submit" value="submit" />
+</form>
+	
+</div>
+
+</div>
+<!--page-6---------------------------------------------------->
+<div id="page-6" style="display:none;">
+</div>
+
+   <script type="text/javascript" src="js/chargehand_pc_mine.js"></script>
+   <script type="text/javascript" src="js/public_pc_groupchargehand.js"></script>
+</body>
+</html>
