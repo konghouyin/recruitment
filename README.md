@@ -538,7 +538,7 @@ server.get('/new',function(req,res){
 
 ##### 1.计算机学院完善个人信息
 
-- url：/computer
+- url：/person/computer
 - 方法：post
 - 参数：xuehao=04xxxxxx&name=xxx
 - 返回
@@ -546,25 +546,27 @@ server.get('/new',function(req,res){
 ```json
 {
     msg："具体情况"，
-    style：0	//1成功，0没有查到此学号，-1姓名与学号不匹配，-2已经绑定学号，-3数据库异常
+    style：0	//1成功，0没有查到此学号，-1姓名与学号不匹配，-2账号已经绑定学号，-3数据库异常，-5此学号已绑定
 }
 ```
 
-
+验证逻辑：session---> 学号合法性---> 学号唯一性--->当前账号是否已有绑定---> 输入信息正确性---> 存入
 
 ##### 2.教务系统验证补全个人信息
 
-- url：/teach
+- url：/person/teach
 - 方法：post
-- 参数：yhm=xxxxxxxx&password=xxx
+- 参数：xuehao=xxxxxxxx&password=xxx
 - 返回
 
 ```json
 {
     msg："具体情况"，
-    style：0	//1成功，0用户名或密码有误，-2已经绑定学号，-3数据库异常，-4教务代理请求异常
+    style：0	//1成功，0用户名或密码有误，-2已经绑定学号，-3数据库异常，-4教务代理请求异常，-5此学号已绑定
 }
 ```
+
+验证逻辑：session---> 学号合法性---> 学号唯一性--->当前账号是否已有绑定---> 教务密码正确性---> 存入
 
 user_teachSystem.js为教务系统验证文件，验证输入学号，密码是否正确，并可以从个人页面爬取个人信息。此模块用于身份验证绑定。
 

@@ -8,7 +8,9 @@ var express = require('express');
 var crypto = require('crypto');
 
 
+var router=express.Router();//路由
 var server = express(); //使用express框架
+
 var pool = sql.createPool({
 	host: '132.232.169.227',
 	user: 'god',
@@ -61,37 +63,18 @@ server.get('/new', function(req, res) {
 // 	}
 // })
 
-server.post('/computer', function(req, res) {
+server.use('/person', router);
+router.all('*', function(req, res, next) {
 	var obj = {};
 	var message = '';
 	req.on('data', function(data) {
 		message += data;
 	})
 	req.on('end', function() {
-		obj = querystring.parse(message);
-		if (rexJSJXuehao(obj.xuehao)) {
-			var findfirst = sql.select(['xuehao'], 'registryinformation', 'phoneNum=' + sql.escape(
-				req.session.phone));
-			sql.sever(pool, findfirst, function(data) {
-				if (data.length != 1) {
-					res.write(JSON.stringify({
-						msg: "查询数据异常，数据库中电话不匹配",
-						style: -3
-					}));
-					res.end();
-				} else if (data[0].xuehao != null) {
-					res.write(JSON.stringify({
-						msg: "已经绑定学号",
-						style: -2
-					}));
-					res.end();
-				} else {
-					var sqlString = sql.select(['zhuanye', 'banji', 'xingming', 'xingbie', 'xuehao'], 'studentinformation',
-						'xuehao=' + sql.escape(
-							obj.xuehao));
-					sql.sever(pool, sqlString, end); //学号登录	
-				}
-			});
+		req.obj = querystring.parse(message);
+		if (rexJSJXuehao(req.obj.xuehao)) {
+			var sqlString = sql.select(['xuehao'], 'registryinformation', 'xuehao=' + sql.escape(req.obj.xuehao));
+			sql.sever(pool, sqlString, end); //验证学号唯一性
 		} else {
 			res.write(JSON.stringify({
 				msg: "没有查询到这个学号",
@@ -99,12 +82,51 @@ server.post('/computer', function(req, res) {
 			}));
 			res.end();
 		}
+
+		function end(data) {
+			if (data.length == 0) {
+				next();
+			} else {
+				res.write(JSON.stringify({
+					msg: "此学号已经绑定",
+					style: -5
+				}));
+				res.end();
+			}
+		}
 	})
+})
+//验证学号是否占用
+
+router.post('/computer', function(req, res) {
+	var findfirst = sql.select(['xuehao'], 'registryinformation', 'phoneNum=' + sql.escape(
+		req.session.phone));
+	sql.sever(pool, findfirst, function(data) {
+		if (data.length != 1) {
+			res.write(JSON.stringify({
+				msg: "查询数据异常，数据库中电话不匹配",
+				style: -3
+			}));
+			res.end();
+		} else if (data[0].xuehao != null) {
+			res.write(JSON.stringify({
+				msg: "账号已经绑定学号",
+				style: -2
+			}));
+			res.end();
+		} else {
+			var sqlString = sql.select(['zhuanye', 'banji', 'xingming', 'xingbie', 'xuehao'], 'studentinformation',
+				'xuehao=' + sql.escape(
+					req.obj.xuehao));
+			sql.sever(pool, sqlString, end); //学号登录	
+		}
+	});
 
 	function end(data) {
 		if (data.length == 1) {
-			if (data[0].xingming == obj.name) {
-				var sqlString = sql.update('registryinformation', ['zhuanye', 'banji', 'name', 'xingbie', 'xuehao', 'xueyuan'], [
+			if (data[0].xingming == req.obj.name) {
+				var sqlString = sql.update('registryinformation', ['zhuanye', 'banji', 'name', 'xingbie', 'xuehao', 'xueyuan'],
+					[
 						sql.escape(data[0].zhuanye), sql.escape(data[0].banji), sql.escape(data[0].xingming), sql.escape(data[0].xingbie),
 						sql.escape(data[0].xuehao), "'计算机学院'"
 					], 'phoneNum=' +
@@ -135,50 +157,44 @@ server.post('/computer', function(req, res) {
 })
 //请求--计算机学院绑定账号
 
-server.post('/teach', function(req, res) {
-	var obj = {};
-	var message = '';
-	req.on('data', function(data) {
-		message += data;
-	})
-	req.on('end', function() {
-		obj = querystring.parse(message);
-		var findfirst = sql.select(['xuehao'], 'registryinformation', 'phoneNum=' + sql.escape(
-			req.session.phone));
-		sql.sever(pool, findfirst, function(data) {
-			if (data.length != 1) {
-				res.write(JSON.stringify({
-					msg: "查询数据异常，数据库中电话不匹配",
-					style: -3
-				}));
-				res.end();
-			} else if (data[0].xuehao != null) {
-				res.write(JSON.stringify({
-					msg: "已经绑定学号",
-					style: -2
-				}));
-				res.end();
-			} else {
-				teach.prove(obj.yhm, obj.password, req, res, end);
-			}
-		})
+router.post('/teach', function(req, res) {
 
-		function end(data) {
-			var sqlString = sql.update('registryinformation', ['zhuanye', 'banji', 'name', 'xingbie', 'xuehao', 'xueyuan'],
-				[
-					sql.escape(data.zhuanye), sql.escape(data.banji), sql.escape(data.name), sql.escape(data.xingbie),
-					sql.escape(data.xuehao), sql.escape(data.xueyuan)
-				], 'phoneNum=' +
-				sql.escape(req.session.phone));
-			sql.sever(pool, sqlString, function() {
-				res.write(JSON.stringify({
-					msg: "身份绑定成功",
-					style: 1
-				}));
-				res.end();
-			});
+	var findfirst = sql.select(['xuehao'], 'registryinformation', 'phoneNum=' + sql.escape(
+		req.session.phone));
+	sql.sever(pool, findfirst, function(data) {
+		if (data.length != 1) {
+			res.write(JSON.stringify({
+				msg: "查询数据异常，数据库中电话不匹配",
+				style: -3
+			}));
+			res.end();
+		} else if (data[0].xuehao != null) {
+			res.write(JSON.stringify({
+				msg: "已经绑定学号",
+				style: -2
+			}));
+			res.end();
+		} else {
+			teach.prove(req.obj.xuehao, req.obj.password, req, res, end);
 		}
 	})
+
+	function end(data) {
+		var sqlString = sql.update('registryinformation', ['zhuanye', 'banji', 'name', 'xingbie', 'xuehao', 'xueyuan'],
+			[
+				sql.escape(data.zhuanye), sql.escape(data.banji), sql.escape(data.name), sql.escape(data.xingbie),
+				sql.escape(data.xuehao), sql.escape(data.xueyuan)
+			], 'phoneNum=' +
+			sql.escape(req.session.phone));
+		sql.sever(pool, sqlString, function() {
+			res.write(JSON.stringify({
+				msg: "身份绑定成功",
+				style: 1
+			}));
+			res.end();
+		});
+	}
+
 })
 //请求--教务系统绑定账号
 
@@ -232,7 +248,7 @@ server.post('/signin', function(req, res) {
 				var sqlupdate = sql.update('registryinformation', ['selfgroup'], [sql.escape(obj.selfgroup)], 'phoneNum=' +
 					sql.escape(
 						req.session.phone));
-				sql.sever(pool, sqlupdate, function(){
+				sql.sever(pool, sqlupdate, function() {
 					var sqlString = sql.select(['phoneNum', 'password'], 'registryinformation', 'phoneNum=' + sql.escape(
 						req.session.phone));
 					sql.sever(pool, sqlString, end2);
