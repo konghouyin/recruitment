@@ -53,13 +53,7 @@
 <!--page-2----------------------------------------------------->
 <div id="page-2" style="display:none;">
 
-<form action="" method="get" class="page2find"> 
- <div class="studentstates">
-<label><input name="studentstate" type="radio" value="" /><div id="studentstate-1">面试中</div> </label> 
-<label><input name="studentstate" type="radio" value="" /><div id="studentstate-2">打分中</div> </label> 
-<label><input name="studentstate" type="radio" value="" /><div id="studentstate-3">未通过</div> </label> 
-<label><input name="studentstate" type="radio" value="" /><div id="studentstate-4">已通过</div></label> 
-</div>
+ <form action="" method="get" class="page2find">
 <div class="page2find-1">
 <label >请选择：</label> 
           <select name=""> 
@@ -70,6 +64,13 @@
 </select> 
 </div>
 </form> 
+ <div class="studentstates">
+<div id="studentstate-1">面试中</div>  
+<div id="studentstate-2">打分中</div>  
+<div id="studentstate-3">未通过</div>  
+<div id="studentstate-4">已通过</div> 
+</div>
+
 <br>
 <div id="requrie_new"><img src="pic/group_pc_new1.png"></div>
    <div class="student-message">
@@ -112,6 +113,114 @@
       <td></td>
       <td></td>
   </tr>
+   <tr style="background:white;">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+   <tr style="background:white;">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+   <tr style="background:white;">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+   <tr style="background:white;">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+   <tr style="background:white;">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+   <tr style="background:white;">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+    <tr> 
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
 </table>
 </div>
 <!--page-3----------------------------------------------------->
@@ -135,7 +244,7 @@
 	    <th>学号</th>
         <th>姓名</th>
         <th>性别</th>
-        <th>学院/专业/班级</th>
+        <th>学院/专业/班级</th>·<1></1>
         <th>分数</th>
         <th>详细</th>
     </tr>
@@ -319,13 +428,50 @@
 </div>
 <!--page-4---------------------------------------------------->
 <div id="page-4" style="display:none;">
+	<img src="pic/group_pc_backscore.jpg" class="page_4back">
 <div class="middle">
 		<div class="big-find">
 			<img src="pic/group_pc_find.svg" style="width:1.7rem;position:absolute;top: .5rem;left:.5rem; ">
 			<input type="put" name="put" value="请输入学号" style="color:#999;" id="find">
 		</div>
 			<button type="submit" style="cursor: pointer;">搜索</button>
-	</div>
+</div>
+<div class="page4_all" style="display:block">
+<div class="interview_div_"><img src="pic/group_pc_backscore.jpg" class="pic_mao"></div>
+<div class="interview_div">
+<ul class="page4_ul">
+	<li class="page4_">one</li>
+	<li class="page4_">two</li>
+	<li class="page4_">three</li>
+</ul>
+
+<p class="page4_star">✿</p>
+<div class="page4_tell"><p class="page4_tell_">&#9668;</p><p><br>&nbsp;&nbsp;亲，这个是关闭按钮，如果您已经评分还未提交，请一定要先提交信息~</p></div>
+<div class="page_4_left">  <!--请求打分标准-->
+<p>c语言</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+<p>学习态度</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+<p>算法能力</p><input type="text" name="num" value="" maxlength="3" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+
+</div>
+
+<div class="page_4_right">  
+<form action="" method="get">
+	<br>
+	<p>打分内容</p>
+    <textarea rows="7" cols="40">
+     
+    </textarea>
+    <br><br><br>
+    <p>面试建议</p>
+    <textarea rows="7" cols="40">
+     
+    </textarea>
+    
+</form>
+</div>
+<input class="page_4_add" type="submit" value="submit" />
+</div>
+</div>
 </div> 
 
    <script type="text/javascript" src="js/public_pc_groupchargehand.js"></script>

@@ -81,3 +81,13 @@
 			       },false);
 		}(i));      
 	}
+
+var xhr = new XMLHttpRequest();  //请求打分规则数据
+xhr.open( 'GET', '/searchrule' , true );
+xhr.onreadystatechange = function () {
+  if (xhr.readyState !== 4 || xhr.status !== 200) {
+    return;
+  }
+  console.log(xhr.responseText);
+};
+xhr.send();

@@ -72,17 +72,14 @@
     }
     .studentstates div{
         display:inline-block;
-        display:inline-block;
-        padding:.3rem .7rem .3rem .7rem;
+        padding:.3rem 1rem .3rem .7rem;
+        box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.24), 4px 4px 4px 0 rgba(0,0,0,0.19);
         color:white;
         border-radius: 1.2rem;
-        margin-bottom:.5rem;
-        cursor:pointer;
+        margin-bottom:2rem;
+        opacity:.7;
     }
-    .studentstates div:active{
-        box-shadow: 4px 12px 15px 0 rgba(0,0,0,0.24), 4px 17px 17px 0 rgba(0,0,0,0.19);
-        box-sizing: border-box;
-    }
+  
     #studentstate-1{
         background-color:#7b5cac;
     }
@@ -108,8 +105,8 @@
     }
     .page2find-1{
        position:absolute;
-       top:0rem;
-       left:26rem;
+       top:3rem;
+       left:0rem;
     }
     /*page-3--------------------------------------------------------------*/
     .find-student form{
@@ -343,7 +340,7 @@
 	height:40rem;
 	margin-top:7rem;
 	margin-left:27rem;
-	
+	overflow:hidden;
 }
 .page4_tell{
 	width:13rem;
