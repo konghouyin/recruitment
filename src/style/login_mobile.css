@@ -231,7 +231,16 @@ input{
     opacity: 1;
     transition:opacity 10s;
 }
-.reminder_pic {
+.cloth,.logup_cloth{
+    width: 100%;
+    height:100%;
+    background-color:#303741;
+    position:relative;
+    font-size:62.5%;
+    opacity: 0.3;
+    z-index: 1;
+}
+.reminder_pic,.phone_num,.finish,.logup_finish{
     position: absolute;
     width: 26rem;
     height: 17rem;
@@ -245,16 +254,7 @@ input{
     border-radius: 1rem;
     z-index: 2;
 }
-.cloth{
-    width: 100%;
-    height:100%;
-    background-color:#303741;
-    position:relative;
-    font-size:62.5%;
-    opacity: 0.3;
-    z-index: 1;
-}
-.picnum_headline{
+.picnum_headline,.phone_headline{
     position: absolute;
     width:26rem;
     height: 4rem;
@@ -269,16 +269,27 @@ input{
 }
 .picnum_pic{
     position: absolute;
-    width: 12rem;
-    height: 6rem;
-    left: 50%;
-    margin-left: -6rem;
-    top: 23%;
+    width: 10rem;
+    height: 5rem;
+    left: 35%;
+    margin-left: -5rem;
+    top: 21%;
     z-index: 2;
-    /* background-image: url(./img/page1.png); */
-    background-size:8rem;
+    background-size: 5rem;
     background-repeat: no-repeat;
-    /* background-color:#386eb9; */
+    background-color: #386eb9;
+}
+.picnum_pic_change{
+    position: absolute;
+    width: 7rem;
+    height: 2rem;
+    left: 55%;
+    top: 38.5%;
+    line-height: 3rem;
+    font-size: 1rem;
+    color: #000;
+    /* background-color: #9db938; */
+    z-index: 2;
 }
 .picnum_reminder_text{
     position: absolute;
@@ -286,63 +297,159 @@ input{
     height: 2rem;
     left: 50%;
     margin-left: -9rem;
-    top: 58%;
+    top: 50%;
     text-align: center;
     font-size: 1.1rem;
     font-weight: 90;
     line-height: 2rem;
     z-index: 2;
-    color:#9599a2da;
+    color:#ACACAC;
     /* background-color: #000; */
+}
+.phone_text{
+    position: absolute;
+    width: 18rem;
+    height: 2rem;
+    left: 50%;
+    margin-left: -9rem;
+    top: 34%;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 90;
+    line-height: 2rem;
+    z-index: 2;
+    color: #ACACAC;
 }
 .picnum_text1{
     position: absolute;
     width: 6rem;
-    height: 2.5rem;
-    left: 60%;
-    margin-left: -13rem;
-    top: 70%;
+    height: 2.4rem;
+    left: 20%;
+    top: 62%;
     text-align: center;
     font-size: 1.3rem;
     font-weight: 90;
-    line-height: 2.5rem;
+    line-height: 2.4rem;
     z-index: 2;
     /* background-color: #27c957; */
 }
 .picnum_input1_div{
     position: absolute;
-    width: 10rem;
-    height: 2.2rem;
-    left: 80%;
-    margin-left: -13rem;
-    top: 70%;
+    width: 9rem;
+    height: 2rem;
+    left: 40%;
+    top: 62%;
     border: 1px solid #000;
-    border-radius: 0.5rem;
-    line-height:1.8rem;
+    border-radius: 0.2rem;
+    line-height: 1.8rem;
     z-index: 2;
     /* background-color: rgb(223, 59, 59); */
 }
 .picnum_input1{
-    width: 10rem !important;
-    height: 2.2rem !important;
+    width: 9rem !important;
+    height: 2rem !important;
     font-size: 1.3rem !important;
     font-weight:90;
     text-align:center;
-    /* line-height:1.8rem !important; */
     color: #000;
 }
-.confirm{
+.unconfirm,.phone_unconfirm,.finish_unconfirm,.logup_finish_unconfirm{
     position: absolute;
-    width: 4rem;
-    height: 2.2rem;
-    left: 120%;
-    margin-left: -13rem;
-    top: 70%;
+    width: 49.5%;
+    height: 3.5rem;
+    left: 0%;
+    bottom: 0%;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 550;
+    line-height: 3.5rem;
+    z-index: 2;
+    border: 1px solid #EDEDED;
+    border-radius: 0 0 0 1rem;
+    color:#000;
+}
+.confirm,.phone_confirm,.finish_confirm,.logup_finish_confirm{
+    position: absolute;
+    width: 49.5%;
+    height: 3.5rem;
+    right: 0%;
+    bottom: 0%;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 550;
+    line-height: 3.5rem;
+    z-index: 2;
+    border: 1px solid #EDEDED;
+    border-left:0px;
+    border-radius: 0 0 1rem 0;
+    color:#576A95;
+}
+.phone_giveinfor{
+    position: absolute;
+    width: 8rem;
+    height: 1.5rem;
+    left: 34%;
+    top: 74%;
+    position: absolute;
     text-align: center;
     font-size: 1.3rem;
-    font-weight: 90;
-    line-height: 2.2rem;
+    line-height: 1.5rem;
     z-index: 2;
-    border: 1px solid #000;
-    border-radius: 0.5rem;
+    color: #000;
+    border-style:solid;
+    border-color: rgb(148, 169, 196);
+    border-width: 1px 1px 1px 1px;
+    border-radius: 2px;
+    background-color: rgb(234, 240, 247);
+}
+.phone_giveinfor::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: -29%;
+    left:20%;
+    transform:rotate(45deg);
+    width: 0.6rem;
+    height: 0.6rem;
+    text-align: center;
+    z-index: 1.5;
+    border-style:solid;
+    border-color: rgb(148, 169, 196);
+    border-width: 1px 0 0 1px;
+    color: #000;
+    background-color: rgb(234, 240, 247);
+}
+.finish_pic,.logup_finish_pic{
+    position: absolute;
+    top: 30%;
+    left:10%;
+    width: 3rem;
+    height: 3rem;
+    z-index: 2;
+    background-image: url(./img/ok1.png);
+    background-size: 3rem;
+    background-repeat: no-repeat;
+}
+.notfinish_pic,.logup_notfinish_pic{
+    position: absolute;
+    top: 30%;
+    left:10%;
+    width: 3rem;
+    height: 3rem;
+    z-index: 2;
+    background-image: url(./img/warn.png);
+    background-size: 3rem;
+    background-repeat: no-repeat;
+}
+.finish_text,.logup_finish_text{
+    position: absolute;
+    top: 30%;
+    left:23%;
+    /* width: 3rem; */
+    height: 3rem;
+    text-align: center;
+    z-index: 2;
+    color:#576A95;
+    line-height: 3rem;
+    background-color: rebeccapurple;
 }

@@ -21,7 +21,8 @@ window.Router.init();
 
 //封装了一个简易的前端路由
 
-var script=document.getElementsByTagName("script")[1];  //引入ajax
+// var script=document.getElementsByTagName("script")[1];  //引入ajax
+// var md5=document.getElementsByTagName("script")[2];  //引入md5加密
 
 var html = document.querySelector('html');
 var btn_login=document.getElementsByClassName("login")[0];
@@ -64,6 +65,7 @@ function flogin() {
         div.setAttribute("class","login_btn1"); 
         html.appendChild(div);
         var input1 = document.createElement('input'); 
+        input1.setAttribute("class","input1"); 
         input1.type="text";
         input1.name="user";
         input1.value="Mobile phone";
@@ -96,18 +98,49 @@ function flogin() {
     login_btn1.insertBefore(div,login_btn1.children[2]);  
     var btn_picnum=document.getElementsByClassName("btn_picnum")[0];
     btn_picnum.innerHTML="获取验证码";
-    // btn_picnum.className = "newbtn_picnum"; 
-    // btn_picnum.style.display="none";
-    btn_picnum.style.display="block";  //需要山区
-    // input1.addEventListener("input", function(){
-    // if(input1.value.length==11){
-    //     console.log("asfawefgv");
-    //     btn_picnum.style.display="block";
-         
-    // }else{
-    //     btn_picnum.style.display="none";
-    // }
-// })
+    btn_picnum.className = "newbtn_picnum"; 
+    btn_picnum.style.display="none";
+    input1.addEventListener("input", function(){
+    if(input1.value.length==11){
+        btn_picnum.style.display="block";
+    }else{
+        btn_picnum.style.display="none";
+    }
+})
+
+//5分钟后重新获取
+//样式
+var flag = 1;
+btn_picnum.addEventListener("mousedown", function () {
+    clearInterval(timer);
+    var time = 61;
+    if (flag) {
+        flag = 0;
+        var timer = setInterval(function(){
+            time--;
+            if(time<=61&&time>0){
+                btn_picnum.innerText = time + '秒后重试';
+                this.setAttribute("disabled","true" );
+            }
+            if (time === 0) {
+                clearInterval(timer);
+                btn_picnum.innerText = '重新获取';
+                flag = 1;
+            }
+        }, 1000);
+    }
+    //功能
+    if(btn_picnum.innerText == '获取验证码'||btn_picnum.innerText == '重新获取'){
+        this.onmousedown=obtain_yzm;
+        cloth.style.display="block"
+        reminder_pic.style.display="block";
+    }else{
+        this.onmousedown=null;
+        cloth.style.display="none"
+        reminder_pic.style.display="none";
+    }
+});
+//5分钟后重新获取结束
     var div = document.createElement("div");  //背景遮罩
     div.setAttribute("class","cloth");
     html.appendChild(div); 
@@ -121,16 +154,21 @@ function flogin() {
 
     var div = document.createElement("div");  //提示框里的内容
     div.setAttribute("class","picnum_headline");
-    reminder_pic.insertBefore(div,reminder_pic.children[0]);  
+    reminder_pic.appendChild(div); 
     var picnum_headline=document.getElementsByClassName("picnum_headline")[0];
     picnum_headline.innerHTML="请输入图片中的验证码";
     var div = document.createElement("div");  //提示框里的图片
     div.setAttribute("class","picnum_pic");
-    reminder_pic.insertBefore(div,reminder_pic.children[2]);  
+    reminder_pic.appendChild(div); 
+    var div = document.createElement("div");  //看不清，换一张
+    div.setAttribute("class","picnum_pic_change");
+    reminder_pic.appendChild(div); 
+    var picnum_pic_change=document.getElementsByClassName("picnum_pic_change")[0];
+    picnum_pic_change.innerHTML="看不清，换一张";
     var picnum_pic=document.getElementsByClassName("picnum_pic")[0];
     var div = document.createElement("div");  //验证码前
     div.setAttribute("class","picnum_text1");
-    reminder_pic.insertBefore(div,reminder_pic.children[3]);  
+    reminder_pic.appendChild(div); 
     var picnum_text1=document.getElementsByClassName("picnum_text1")[0];
     picnum_text1.innerHTML="验证码:"
 
@@ -138,7 +176,7 @@ function flogin() {
     div.setAttribute("class","picnum_reminder_text"); 
     reminder_pic.appendChild(div);
     var picnum_reminder_text=document.getElementsByClassName("picnum_reminder_text")[0];
-    picnum_reminder_text.innerHTML="输入下图中的字符，不区分大小写";
+    picnum_reminder_text.innerHTML="不区分大小写，请在一分钟之内完成验证";
     var div = document.createElement("div");
     div.setAttribute("class","picnum_input1_div"); 
     reminder_pic.appendChild(div);
@@ -150,47 +188,135 @@ function flogin() {
     picnum_input1.type="text";
     picnum_input1.name="yanzm";
     var div = document.createElement("div");  //验证码前
+    div.setAttribute("class","unconfirm");
+    reminder_pic.appendChild(div);  
+    var unconfirm=document.getElementsByClassName("unconfirm")[0];
+    unconfirm.innerHTML="取消";    
+    var div = document.createElement("div");
     div.setAttribute("class","confirm");
-    reminder_pic.insertBefore(div,reminder_pic.children[4]);  
+    reminder_pic.appendChild(div);  
     var confirm=document.getElementsByClassName("confirm")[0];
     confirm.innerHTML="确定";    
    
     // picnum_pic.style.display="none";
 
-    btn_picnum.addEventListener("mousedown", function(){
-        // console.log("asfawefgv");
-        cloth.style.display="block"
-        reminder_pic.style.display="block";
-        /////
-        ajax  //调用ajax函数，传入一个对象
-        ({
+    btn_picnum.addEventListener("mousedown",obtain_yzm );
+    function obtain_yzm()//图片验证码完成，未测试
+    {
+        obj_pic={       //定义图片验证码的对象
             url: "/picyzm",
             type: 'get',  
             data: null,
             async: true,
             success: function (responseText) {
                 response_reminder_pic=JSON.parse(responseText);
-                var svg = document.createElement("svg");  
-                svg.setAttribute("class","svg"); 
-                picnum_pic.appendChild(svg);                
-                // var a=new Image();
-                // a.src='response_reminder_pic.src';
-                // picnum_pic.appendChild(a)
-
+                var svg = document.getElementsByTagName("svg")[0]; 
+                var img_yzm = svg.innerHTML;     //获取svg标签里的innerHTML       
+                var a=new Image();
+                a.src=img_yzm;
+                picnum_pic.appendChild(a)
 
                 picnum_pic.style.display="block";
-                console.log("aaa123");
-                //   此处执行请求成功后的代码
             },
             fail: function (err) {
-                console.log("aaa123456");
-                // 此处为执行是失败后的代码 
+                // console.log("aaa123456");
             }
-        }); 
-        ////
+        }
+        ajax(obj_pic);   //调用ajax函数，传入一个对象
+    }
+
+    picnum_pic_change.addEventListener("mousedown", function(){
+        ajax(obj_pic);
+    })    
+    //请求到了图片
+
+    
+    unconfirm.addEventListener("mousedown", function()  //取消键
+    {
+        cloth.style.display="none"
+        reminder_pic.style.display="none";
     })
 
-        
+    //图片验证码的核对，短信验证码的准备
+    var div = document.createElement("div");  //短信验证码提示框
+    div.setAttribute("class","phone_num");
+    html.appendChild(div); 
+    var phone_num=document.getElementsByClassName("phone_num")[0];
+
+    var div = document.createElement("div");  //标题
+    div.setAttribute("class","phone_headline");
+    phone_num.appendChild(div);
+    var phone_headline=document.getElementsByClassName("phone_headline")[0];
+    phone_headline.innerHTML="确认手机号码";
+
+    var input1=document.getElementsByClassName("input1")[0];//获取手机号填写框的input   
+    var div = document.createElement("div");  //提示文字
+    div.setAttribute("class","phone_text");
+    phone_num.appendChild(div);
+    var phone_text=document.getElementsByClassName("phone_text")[0];
+    phone_text.innerHTML="我们将发送验证码短信到下面的号码："+input1.value;
+
+    var div = document.createElement("div"); //取消
+    div.setAttribute("class","phone_unconfirm");
+    phone_num.appendChild(div); 
+    var phone_unconfirm=document.getElementsByClassName("phone_unconfirm")[0];
+    phone_unconfirm.innerHTML="取消";    
+    var div = document.createElement("div");  //确定
+    div.setAttribute("class","phone_confirm");
+    phone_num.appendChild(div); 
+    var phone_confirm=document.getElementsByClassName("phone_confirm")[0]; 
+    phone_confirm.innerHTML="确定";
+    var phone_num=document.getElementsByClassName("phone_num")[0];
+    phone_num.style.display="none"; 
+
+    var div = document.createElement("div");  //输入提示框
+    div.setAttribute("class","phone_giveinfor");
+    reminder_pic.appendChild(div);
+    var phone_giveinfor=document.getElementsByClassName("phone_giveinfor")[0]; 
+    phone_giveinfor.style.display="none";
+
+    confirm.addEventListener("mousedown", function()  //图片验证码的确定键，验证码对了，就开始短信验证码
+    {
+        ajax  //调用ajax函数，传入一个对象
+        ({
+            url: "/phone",
+            type: 'post',  
+            data: {phone:'input1.value',picyzm:'picnum_input1.value'}, //只有11位的时候验证码才会出来，所以不用再判断了
+            async: true,
+            success: function (responseText) {
+                var response_reminder_text=JSON.parse(responseText);
+                if(response_reminder_text.style==0||response_reminder_text.style==-2){
+                    phone_giveinfor.style.display="block";
+                    phone_giveinfor.innerHTML=response_reminder_text.msg;
+                }else if(response_reminder_text.style==1){
+                    phone_giveinfor.style.display="none";
+                    reminder_pic.style.display="none";
+                    phone_num.style.display="block";
+                }else if(response_reminder_text.style==-1){
+                    picnum_input1.value='';
+                    //验证码失效，换一张验证码
+                    obtain_yzm;
+                }
+            },
+            fail: function (err) {
+                picnum_input1.value='';  //让用户重新输入
+            }
+        }); 
+    }) 
+
+    phone_unconfirm.addEventListener("mousedown", function()  //短信验证码取消键
+    {
+        cloth.style.display="none"
+        phone_num.style.display="none";
+    })
+    phone_confirm.addEventListener("mousedown", function()  //短信验证码确定键
+    {
+        cloth.style.display="none"
+        phone_num.style.display="none";
+    })
+
+
+//input2
         var div = document.createElement("div");
         div.setAttribute("class","login_btn2");
         html.appendChild(div);
@@ -284,13 +410,69 @@ function flogin() {
             btn_text3.innerHTML='';
         }
 
+        var div = document.createElement("div");  //注册成功与否提示框
+        div.setAttribute("class","finish");
+        html.appendChild(div); 
+        var finish=document.getElementsByClassName("finish")[0];
+        finish.style.display="none";
+        var div = document.createElement("div");  //图标
+        div.setAttribute("class","finish_pic");
+        finish.appendChild(div); 
+        var div = document.createElement("div");  //提示文字
+        div.setAttribute("class","finish_text");
+        finish.appendChild(div); 
+
+        var finish_pic=document.getElementsByClassName("finish_pic")[0];
+        var finish_text=document.getElementsByClassName("finish_text")[0];
+
+        var div = document.createElement("div"); //取消
+        div.setAttribute("class","finish_unconfirm");
+        finish.appendChild(div); 
+        var finish_unconfirm=document.getElementsByClassName("finish_unconfirm")[0];
+        finish_unconfirm.innerHTML="取消";    
+        var div = document.createElement("div");  //确定
+        div.setAttribute("class","finish_confirm");
+        finish.appendChild(div); 
+        var finish_confirm=document.getElementsByClassName("finish_confirm")[0];
+        finish_confirm.innerHTML="确定";
+
         var div = document.createElement("div");
         div.setAttribute("class","register");
         html.appendChild(div);
         div.innerHTML="注册";
-        // register.addEventListener("click", function () {
-        //     /////////////////////
-        // })
+        var register=document.getElementsByClassName("register")[0];
+        register.addEventListener("click", function () {
+            console.log('hgiughil');
+            finish.style.display="block";
+            ajax  //调用ajax函数，传入一个对象
+            ({
+                url: "/login",
+                type: 'post',  
+                data: {password:'hex_md5(input2.value)',yzm:'picnum_input1.value'}, //只有11位的时候验证码才会出来，所以不用再判断了
+                async: true,
+                success: function (responseText) {
+                    var response=JSON.parse(responseText);
+                    if(response==0||response==-1){
+                        finish_pic.style.className="notfinish_pic";
+                        finish_text.innerHTML=response.msg;
+                    }else if(response==1){
+                        finish_pic.style.className="finish_pic";
+                        finish_text.innerHTML=response.msg+'，'+'请返回首页进行登录';
+                    }
+                },
+                fail: function (err) {
+                    // console.log("aaa123456");
+                }
+            }); 
+        })
+        finish_confirm.addEventListener("mousedown", function()//不论确定还是取消都是回到前一页
+        {
+            finish.style.display="none"
+        })
+        finish_unconfirm.addEventListener("mousedown", function()  
+        {
+            finish.style.display="none"
+        })
 
         var a = document.createElement("a"); //a包div
         a.setAttribute("class","back_a_btn");
@@ -346,11 +528,13 @@ function flogup() {
         div.setAttribute("class","logup_btn1"); 
         html.appendChild(div);
         var input1 = document.createElement('input'); 
+        input1.setAttribute("class","logup_input1"); 
         input1.type="text";
         input1.name="user";
         input1.value="Mobile Phone/Student ID";
         var logup_btn1=document.getElementsByClassName("logup_btn1")[0];
         logup_btn1.insertBefore(input1,logup_btn1.children[0]); 
+        var logup_btn1=document.getElementsByClassName("logup_btn1")[0];
         
         var div = document.createElement("div");
         div.setAttribute("class","logup_text1");
@@ -436,11 +620,76 @@ function flogup() {
             },1)
         })
 
+        
+        var div = document.createElement("div");  //背景遮罩
+        div.setAttribute("class","logup_cloth");
+        html.appendChild(div); 
+        var logup_cloth=document.getElementsByClassName("logup_cloth")[0];
+        logup_cloth.style.display="none";
+
+        var div = document.createElement("div");  //登录成功与否提示框
+        div.setAttribute("class","logup_finish");
+        html.appendChild(div); 
+        var logup_finish=document.getElementsByClassName("logup_finish")[0];
+        logup_finish.style.display="none";
+        var div = document.createElement("div");  //图标
+        div.setAttribute("class","logup_finish_pic");
+        logup_finish.appendChild(div); 
+        var div = document.createElement("div");  //提示文字
+        div.setAttribute("class","logup_finish_text");
+        logup_finish.appendChild(div); 
+
+        var logup_finish_pic=document.getElementsByClassName("logup_finish_pic")[0];
+        var logup_notfinish_text=document.getElementsByClassName("logup_finish_text")[0];
+
+        var div = document.createElement("div"); //取消
+        div.setAttribute("class","logup_finish_unconfirm");
+        logup_finish.appendChild(div); 
+        var logup_finish_unconfirm=document.getElementsByClassName("logup_finish_unconfirm")[0];
+        logup_finish_unconfirm.innerHTML="取消";    
+        var div = document.createElement("div");  //确定
+        div.setAttribute("class","logup_finish_confirm");
+        logup_finish.appendChild(div); 
+        var logup_finish_confirm=document.getElementsByClassName("logup_finish_confirm")[0];
+        logup_finish_confirm.innerHTML="确定";
+
+
         var div = document.createElement("div");
         div.setAttribute("class","logup_register");
         html.appendChild(div);
         div.innerHTML="登录";
-
+        var logup_register=document.getElementsByClassName("logup_register")[0];
+        logup_register.addEventListener("click", function () {
+            logup_cloth.style.display="block";
+            logup_finish.style.display="block";
+            ajax  //调用ajax函数，传入一个对象
+            ({
+                url: "/login",
+                type: 'post',  
+                data: {password:'hex_md5(input2.value)',yhm:'logup_btn1.value'}, //只有11位的时候验证码才会出来，所以不用再判断了
+                async: true,
+                success: function (responseText) {
+                    var logup_response=JSON.parse(responseText);
+                    if(logup_response==0){
+                        logup_finish_pic.style.className="logup_notfinish_pic";
+                        logup_finish_text.innerHTML=logup_response.msg;
+                    }else if(logup_response==1){
+                        logup_finish_pic.style.className="logup_finish_pic";
+                        logup_finish_text.innerHTML=logup_response.msg;
+                    }
+                },
+                fail: function (err) {
+                }
+            }); 
+        })
+        logup_finish_confirm.addEventListener("mousedown", function()//不论确定还是取消都是回到前一页
+        {
+            logup_finish.style.display="none"
+        })
+        logup_finish_unconfirm.addEventListener("mousedown", function()  
+        {
+            logup_finish.style.display="none"
+        })
         var a = document.createElement("a");  //a包图片
         a.setAttribute("class","back_a_logup_btn");
         a.href="#/main";
