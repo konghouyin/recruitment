@@ -1,0 +1,180 @@
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+    text-decoration: none;
+}
+html{
+    width: 100%;
+    height:100%;
+    background-color:#232a34;
+    position:relative;
+    font-size:62.5%;
+}
+input{
+    background:none;
+    outline:none;
+    border:0px;
+    font-weight:90;
+    text-align:center;
+}
+.headbox{
+    position:relative;
+    width: 100%;
+    height:5rem;
+    /* background-color: #303741; */
+    border-bottom-color:#7c7d80;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+.back_btn{
+    position: absolute;
+    top: 50%;
+    left:5%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top:-1.25rem;
+    background-image: url(../img/back.png);
+    background-size: 2.5rem;
+    background-repeat: no-repeat;
+}
+.head_text{
+    position: absolute;
+    left:50%;
+    width:10rem;
+    margin-left:-5rem;
+    height: 5rem;
+    text-align: center;
+    line-height:5rem;
+    font-size:1.8rem;
+    color:#fff;
+}
+.bodybox{
+    width: 85%;
+    height:18rem;
+    margin:3rem auto;
+    /* background-color: #303741; */
+}
+.btn1,.btn2,.btn3{
+    position:relative;
+    width: 100%;
+    height:5rem;
+    border-bottom-color:#7c7d80;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+.btn2_pic{
+    position: absolute;
+    top: 50%;
+    left:8%;
+    width: 2.3rem;
+    height: 2.3rem;
+    margin-top:-1.15rem;
+    background-image: url(../img/pass_btn2.png);
+    background-size: 2.3rem;
+    background-repeat: no-repeat;
+}
+.btn1_pic{
+    position: absolute;
+    top: 50%;
+    left:7.5%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top:-1.25rem;
+    background-size: 2.5rem;
+    background-repeat: no-repeat;                                                                                             
+    background-image: url(../img/pass_btn1.png);
+}
+.btn3_pic{
+    width: 2.1rem;
+    height: 2.1rem;
+    position: absolute;
+    top: 50%;
+    left:8.35%;
+    margin-top:-1.05rem;
+    background-image: url(../img/pass_btn3.png);
+    background-size: 2.1rem;
+    background-repeat: no-repeat;
+}
+.btn1_pic::after,.btn2_pic::after,.btn3_pic::after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left:16%;
+    width:4.6rem;
+    height:2.3rem;
+    margin-top:-1.15rem;
+    border-right-color:#7c7d80;
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+.btn1_text,.btn2_text{
+    position: absolute;
+    top: 50%;
+    left:26.5%;
+    width:10rem;
+    height:5rem;
+    margin-top:-2.5rem;
+    font-size:1.8rem;
+    line-height:5rem;
+    color:#7c7d80;
+}
+.btn3_text{
+    position: absolute;
+    top: 50%;
+    left:24.5%;
+    width:10rem;
+    height:5rem;
+    margin-top:-2.5rem;
+    font-size:1.8rem;
+    line-height:5rem;
+    color:#7c7d80;
+}
+.btn1_dlt{
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    top: 50%;
+    right:0%;
+    margin-top:-0.7rem;
+    background-image: url(../img/dlt.png);
+    background-size: 1.6rem;
+    background-repeat: no-repeat;
+}
+.btn2_yzm{
+    position: absolute;
+    top: 50%;
+    right:0%;
+    width:8rem;
+    height:2.5rem;
+    margin-top:-1.25rem;
+    font-size:1.5rem;
+    text-align: center;
+    line-height:2.5rem;
+    color:#7c7d80;
+    border:1px solid #c4c4c7;
+    border-radius: 6px;
+}
+.btn3_eye{
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    top: 50%;
+    right:0%;
+    margin-top:-0.7rem;
+    background-image: url(../img/see.png);
+    background-size: 1.6rem;
+    background-repeat: no-repeat;
+}
+.confirm{
+    width: 100%;
+    height:4rem;
+    margin:5rem auto;
+    background-color: #303741;
+    border-radius: 6px;
+    color:#7c7d80;
+    font-size:1.8rem;
+    text-align: center;
+    line-height:4rem;
+}
