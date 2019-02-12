@@ -35,7 +35,6 @@ app.use(cookieSession({
 	name: 'sess', //session名称
 	keys: arr, //手动设置session密钥.这个秘钥必须是字符串数组
 	maxAge: 20 * 60 * 1000 //手动设置session过期时间，单位为毫秒
-
 }));
 //设置session
 
@@ -53,10 +52,6 @@ app.use('*', function (req, res, next) {//查看session是否存在
   }
 }); */
 
-app.post('/releaserule', function (req, res) {//添加打分标准 post请求 
-  operation.releaseRules(req,res,pool);
-})
-
 app.get('/searchrule', function (req, res) {//查询打分规则
   operation.searchMarkRules(req,res, pool);
 });
@@ -67,12 +62,12 @@ app.get('/selfInfo', function (req, res) {//登陆者查看个人信息
 
 app.get('/searchinfobynum',function(req,res){//通过学号查找个人信息
     operation.searchInfoBynum(req,res, pool);
-})
+});
 app.get('/viewgroupreg', function (req, res) {//查看报名数据
   operation.showInfoOfView(req,res, pool);
 });
 
-app.post('/firstmark', function (req, res) {//一面打分 前端参数为json字符串 时间问题
+app.post('/firstmark', function (req, res) {//一面打分
     operation.firstmark(req,res,pool,markText);
 })
 app.post('/secondmark',function(req,res){//二面打分
@@ -91,22 +86,9 @@ app.get('/searchState',function(req,res){//查找当前面试进度，即第几�
 app.get('/findSecond',function(req,res){//查找二面上次提交时间及打分记录
     operation.findSecond(req,res,pool);
 });
-app.post('/releasenotice', function (req, res) {//添加公告 添加至公告队列 发送邮件等待管理员审核
-    operation.releaseNotice(req,res,pool)
-})
 
-app.get('/shownoticeque', function (req, res) {//查看公告队列
-  operation.showNoticeQue(req,res,pool);
-});
 app.get('/shownotice', function (req, res) {//查看公告
   operation.showNotice(req,res,pool);
 });
 
-app.post('/selectviews',function(req,res){//通过人员选择
-  operation.selectViews(req,res,pool);
-})
-
-app.get('/searchperson',function(req,res){//查找本组审核人员队列
-  operation.searchPersQ(req,res,pool);
-})
-app.listen(8080);
+app.listen(8081);

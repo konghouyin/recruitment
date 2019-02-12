@@ -1,5 +1,4 @@
 const sql = require('./public_sql');
-const mysql = require('mysql')
 const mail = require('./public_mail.js')
 var querystring = require('querystring');
 //组长组员公共功能
@@ -46,7 +45,6 @@ module.exports = {
                     }));
                     res.end();
                 }
-
             })
         })
     },
@@ -112,6 +110,7 @@ module.exports = {
         });
         req.on('end', function () {
             let xuehao = querystring.parse(message).xuehao;
+            let selfgroup=req.session.selfgroup;
             sql.sever(pool, detailsState(selfgroup, xuehao), function (data) {
                 let info = {};
                 if (data.length) {
@@ -131,22 +130,75 @@ module.exports = {
             return sql.select(["*"], "scoringrecord", where);
         }
     },
-    searchMarkRules: function (req, res, pool) {//查找打分规则*
-        let markRlues = {};
-        sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup=" + req.session.selfgroup), function (data) {//打分规则
-            if (data.length) {
-                markRlues.rules = data[0].obj;
-                markRlues.style = 1;//查找成功
-                markRlues.msg = "查找成功";
-            } else {
-                markRlues.style = 0;
-                markRlues.msg = "暂无数据";
-            }
-            res.write(JSON.stringify(markRlues));
-            res.end();
+    releaseRules: function (req, res, pool) {//发布打分规则*
+        let message = "";
+        req.on('data', function (data) {
+            message += data;
+        })
+        req.on('end', function () {
+            let selfgroup = req.session.selfgroup;
+            sql.sever(pool, sql.select(["style"], "process"), function (data) {
+                if (data[0].style == 0) {
+                    sql.sever(pool, sql.del("scoringstandard", "selfgroup=" + selfgroup), function () {
+                        sql.sever(pool, sql.insert("scoringstandard", ["selfgroup", "obj"], [selfgroup, sql.escape(message)]), function () {
+                            res.write(JSON.stringify({
+                                style: 1,
+                                msg: "打分规则添加成功"
+                            }));
+                            res.end();
+                        });
+                    });
+                } else {
+                    res.write(JSON.stringify({
+                        style: 0,
+                        msg: "一面已开始，不能对打分规则进行调整"
+                    }));
+                    res.end();
+                }
+
+            });
         })
     },
-    firstmark: function (req, res, pool) {//一面打分 从一面未面试找*
+    searchMarkRules: function (req, res, pool) {//查找打分规则*
+        let markRlues = {};
+        let message = "";
+        req.on('data', function (data) {
+            message += data;
+        })
+        req.on('end', function () {
+            message = querystring.parse(message);
+            if (message.number == 1) {
+                sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup=" + req.session.selfgroup), function (data) {//打分规则
+                    if (data.length) {
+                        markRlues.rules = data[0].obj;
+                        markRlues.style = 1;//查找成功
+                        markRlues.msg = "查找成功";
+                    } else {
+                        markRlues.style = 0;
+                        markRlues.msg = "暂无数据";
+                    }
+                    res.write(JSON.stringify(markRlues));
+                    res.end();
+                });
+            } else if (message.number == 2) {
+                sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup=6"), function (data) {//打分规则
+                    if (data.length) {
+                        markRlues.rules = data[0].obj;
+                        markRlues.style = 1;//查找成功
+                        markRlues.msg = "查找成功";
+                    } else {
+                        markRlues.style = 0;
+                        markRlues.msg = "暂无数据";
+                    }
+                    res.write(JSON.stringify(markRlues));
+                    res.end();
+                })
+            }
+
+        })
+
+    },
+    firstmark: function (req, res, pool) {//一面打分 从状态为一面中找*
         let markText = {};
         let message = "";
         req.on('data', function (data) {
@@ -204,7 +256,7 @@ module.exports = {
             return sql.select(["*"], "registryinformation", where);
         }
     },
-    secondmark: function (req, res, pool) {//二面打分 从二面未面试的人中找*
+    secondmark: function (req, res, pool) {//二面打分 从状态为二面的人中找*
         let markText = {};
         let message = "";
         req.on('data', function (data) {
@@ -294,20 +346,20 @@ module.exports = {
             }
         });
     },
-    findSecondTime: function (req, res, pool) {//查找二面上次打分时间和打分数据*
+    findSecond: function (req, res, pool) {//查找二面上次打分时间和打分数据*
         let message = ""
         req.on('data', function (data) {
             message += data;
         });
         req.on('end', function () {
             let xuehao = querystring.parse(message).xuehao;
-            sql.sever(pool, sql.select(["time","obj"], "scoringrecord", "xuehao=" + sql.escape(xuehao) + " and type=2"), function (data) {
+            sql.sever(pool, sql.select(["time", "obj"], "scoringrecord", "xuehao=" + sql.escape(xuehao) + " and type=2"), function (data) {
                 if (data.length) {
                     res.write(JSON.stringify({
                         style: 1,
                         msg: "查找成功",
                         lastTime: data[0].time,
-                        lastobj:data[0].obj
+                        lastobj: data[0].obj
                     }));
                     res.end();
                 } else {
@@ -321,24 +373,45 @@ module.exports = {
         })
 
     },
-    addNotice: function (req, res, pool) {//添加公告至公告队列，并用邮件通知管理员审核*
+    releaseNotice: function (req, res, pool) {//发布公告至公告队列，并用邮件通知管理员审核*
         let message = "";
         req.on('data', function (data) {
             message += data;
         })
         req.on('end', function () {
-            let text = JSON.stringify(message);
-            sql.sever(pool, sql.insert("noticequeue", ["type", "obj", "time"], [req.session.selfgroup, sql.escape(text), "NOW()"]), function () {
-                let allGroup = ['Android', 'ios', 'Web', '后台','产品'];
-                let group = allGroup[req.session.selfgroup - 1];
-                let mailmsg = "您好，" + group + "组新公告已提交，请您尽快审核！";
-                mail.mailepass(mailmsg);
+            let selfgroup = req.session.selfgroup;
+            sql.sever(pool, sql.del("noticequeue", "type=" + selfgroup), function () {
+                sql.sever(pool, sql.insert("noticequeue", ["type", "obj", "time"], [selfgroup, sql.escape(message), "NOW()"]), function () {
+                    let allGroup = ['Android', 'ios', 'Web', '后台', '产品'];
+                    let group = allGroup[selfgroup - 1];
+                    let mailmsg = "您好，" + group + "组新公告已提交，请您尽快审核！";
+                    mail.mailepass(mailmsg);
+                    res.write(JSON.stringify({
+                        style: 1,
+                        msg: "公告已添加至公告队列，等待管理员审核"
+                    }));
+                    res.end();
+                });
+            });
+        })
+    },
+    showNoticeQue: function (req, res, pool) {//查询本组公告队列公告*
+        let group = req.session.selfgroup;
+        sql.sever(pool, sql.select(["obj"], "notice", "type=3"), function (data) {
+            if (data.length) {
                 res.write(JSON.stringify({
+                    text: data[0].obj,
                     style: 1,
-                    msg: "公告已添加至公告队列，等待管理员审核"
+                    msg: "查找成功"
                 }));
                 res.end();
-            });
+            } else {
+                res.write(JSON.stringify({
+                    style: 0,
+                    msg: "暂无本组公告"
+                }));
+                res.end();
+            }
         })
     },
     showNotice: function (req, res, pool) {//查询本组公告*
@@ -358,26 +431,73 @@ module.exports = {
                 }));
                 res.end();
             }
+        })
+    },
+    selectViews: function (req, res, pool) {//通过人员选择 //判断state
+        let message = "";
+        req.on('data', function (data) {
+            message += data;
+        });
+        req.on('end', function () {
+            let views = JSON.parse(message);
+            let selfgroup = req.session.selfgroup;
+            sql.sever(pool, sql.select(["style"], "process"), function (data) {
+                let state = data[0].style;
+                if (state == views.state) {
+                    //拼接查询sql
+                    let sqlString = 'SELECT xuehao,name,selfgroup FROM registryinformation WHERE pass=' + state + ' AND (xuehao=' + sql.escape(views.xuehao[0]);
+                    for (let i = 1; i < views.xuehao.length; i++) {
+                        sqlString += ' OR xuehao=' + sql.escape(views.xuehao[i]);
+                    }
+                    sqlString = sqlString + ')';
+                    sql.sever(pool, sqlString, function (data) {
+                        //拼接插入sql语句
+                        let istSqlStr = 'INSERT IGNORE INTO personnelqueue (xuehao,name,selfgroup,time) VALUES (' + data[0].xuehao + ',' + sql.escape(data[0].name) + ',' + data[0].selfgroup + ',NOW())';
+                        for (let j = 1; j < data.length; j++) {
+                            istSqlStr += ',(' + data[j].xuehao + ',' + sql.escape(data[j].name) + ',' + data[j].selfgroup + ',' + 'NOW())';
+                        }
+                        sql.sever(pool, istSqlStr, function () {
+                            let allGroup = ['Android', 'ios', 'Web', '后台', '产品'];
+                            let group = allGroup[selfgroup - 1];
+                            let mailmsg = "您好，" + group + "组通过人员表已提交，请您尽快审核！";
+                            mail.mailepass(mailmsg);
+                            res.write(JSON.stringify({
+                                style: 1,
+                                msg: "已将名单提交，待管理员审核！"
+                            }));
+                            res.end();
+                        })
+                    })
+                } else {
+                    res.write(JSON.stringify({
+                        style: 0,
+                        msg: "所提交的状态与当前面试状态不符"
+                    }));
+                    res.end();
+                }
 
+            });
         })
 
+    },
+    searchPersQ: function (req, res, pool) {//查找本组审核人员队列
+        let selfgroup = req.session.selfgroup;
+        sql.sever(pool, sql.select(["*"], "personnelqueue", ["selfgroup=" + selfgroup]), function (data) {
+            if (data.length) {
+                res.write(JSON.stringify({
+                    style: 1,
+                    person: data,
+                    msg: "查询成功"
+                }));
+                res.end();
+            } else {
+                res.write(JSON.stringify({
+                    style: 0,
+                    msg: "暂无数据"
+                }));
+                res.end();
+            }
+        })
     }
-    /* selectViews: function (res, req, pool) {//通过人员选择
-        message = {
-            xuehao: [4171196,4171195],
-            present: 1
-        }
-        message=JSON.stringify(message);
-        //let message = "";
-         req.on('data', function (data) {
-            message += data;
-        }); 
-        req.on('end', function () {
-            views=JSON.parse(message);
-            selfgroup=3;
-            level=3;
-            sql.sever(pool,sql.select(""))
-       })
-    } */
 }
 
