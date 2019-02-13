@@ -1,5 +1,5 @@
 var sql = require('./server/public_sql');
-var teach = require('./server/user_teachSystem.js');
+var teach = require('./server/finish_teachSystem.js');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');

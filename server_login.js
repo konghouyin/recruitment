@@ -36,7 +36,7 @@ server.use(cookieSession({
 
 
 server.all('*', function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", 'http://127.0.0.1:8848'); //需要显示设置来源
+	res.header("Access-Control-Allow-Origin", 'http://localhost:8888'); //需要显示设置来源
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 	res.header("Access-Control-Allow-Credentials", true); //带cookies7     res.header("Content-Type", "application/json;charset=utf-8");
@@ -198,13 +198,13 @@ server.post('/reg', function(req, res) {
 		obj = querystring.parse(message);
 		if (req.session.yzm == undefined) {
 			res.write(JSON.stringify({
-				msg: "验证码已失效，请重新验证！",
+				msg: "短信验证码已失效<br>请重新验证。",
 				style: -1
 			}));
 			res.end();
 		} else if (obj.yzm != req.session.yzm) {
 			res.write(JSON.stringify({
-				msg: "验证码错误，请再次验证！",
+				msg: "验证码错误，请再次验证。",
 				style: 0
 			}));
 			res.end();
@@ -218,7 +218,7 @@ server.post('/reg', function(req, res) {
 	function end(data) {
 		req.session.yzm = null; //成功后验证码失效
 		res.write(JSON.stringify({
-			msg: "注册成功！",
+			msg: "注册成功。",
 			style: 1
 		}));
 		res.end();
@@ -226,7 +226,7 @@ server.post('/reg', function(req, res) {
 })
 //请求--注册信息
 
-server.listen(8081);
+server.listen(8082);
 
 
 
