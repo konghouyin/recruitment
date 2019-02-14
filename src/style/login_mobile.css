@@ -78,7 +78,7 @@ input{
     position:absolute;
     width:2.5rem;
     height:2.5rem;
-    background-image: url(./img/back.png);
+    background-image: url(../img/back.png);
     background-size:2.5rem;
     background-repeat: no-repeat;
     top:2%;
@@ -88,7 +88,7 @@ input{
     position:absolute;
     width:8rem;
     height:8rem;
-    background-image: url(./img/page1.png);
+    background-image: url(../img/page1.png);
     background-size:8rem;
     background-repeat: no-repeat;
     top:10%;
@@ -127,7 +127,7 @@ input{
     position:absolute;
     width:2rem;
     height:2rem;
-    background-image: url(./img/see.png);
+    background-image: url(../img/see.png);
     background-size:2rem;
     background-repeat: no-repeat;
     top:23%;
@@ -138,7 +138,7 @@ input{
     position:absolute;
     width:2rem;
     height:2rem;
-    background-image: url(./img/see.png) !important;
+    background-image: url(../img/see.png) !important;
     background-size:2rem;
     background-repeat: no-repeat;
     top:23%;
@@ -148,7 +148,7 @@ input{
     position:absolute;
     width:2rem;
     height:2rem;
-    background-image: url(./img/not_see.png) !important;
+    background-image: url(../img/not_see.png) !important;
     background-size:2rem;
     background-repeat: no-repeat;
     top:23%;
@@ -386,7 +386,6 @@ input{
 }
 .phone_giveinfor{
     position: absolute;
-    width: 8rem;
     height: 1.5rem;
     left: 34%;
     top: 74%;
@@ -426,7 +425,7 @@ input{
     width: 3rem;
     height: 3rem;
     z-index: 2;
-    background-image: url(./img/ok1.png);
+    background-image: url(../img/ok1.png);
     background-size: 3rem;
     background-repeat: no-repeat;
 }
@@ -437,19 +436,64 @@ input{
     width: 3rem;
     height: 3rem;
     z-index: 2;
-    background-image: url(./img/warn.png);
+    background-image: url(../img/warn.png);
     background-size: 3rem;
     background-repeat: no-repeat;
 }
-.finish_text,.logup_finish_text{
+.logup_finish_text{
     position: absolute;
-    top: 30%;
-    left:23%;
-    /* width: 3rem; */
+    top: 31%;
+    left: 26%;
+    width: 16rem;
     height: 3rem;
     text-align: center;
+    font-size: 2rem;
     z-index: 2;
-    color:#576A95;
+    color: #576A95;
     line-height: 3rem;
-    background-color: rebeccapurple;
+}
+.finish_text{
+    position: absolute;
+    top: 25%;
+    left: 27%;
+    width: 16rem;
+    height: 3rem;
+    text-align: center;
+    font-size:2rem;
+    z-index: 2;
+    color: #576A95;
+    line-height: 3rem;
+}
+.fgt{
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-image: url(../img/fgt.png);
+    background-size: 2.5rem;
+    background-repeat: no-repeat;
+}
+.fgt_text{
+    position: absolute;
+    top: 70.5%;
+    left: 28%;
+    height: 2rem;
+    font-size: 1.3rem;
+    line-height: 2rem;
+    color: #d2daee;
+}
+.phone_noenf{
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    width: 15rem;
+    height: 4rem;
+    margin-left: -7.5rem;
+    margin-top: -1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+    background-color: rgb(0,0,0,0.3);
 }

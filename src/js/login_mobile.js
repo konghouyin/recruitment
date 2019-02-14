@@ -1,3 +1,7 @@
+import css from './login_mobile.css';
+var ajax=require("./Ajax.js").ajax;
+var hex_md5 = require("./md5.js").md5;
+
 function Router() {
     this.routes = {};
     this.currentUrl = '';
@@ -16,8 +20,8 @@ Router.prototype.init = function()
     window.addEventListener('load', this.refresh.bind(this), false);
     window.addEventListener('hashchange', this.refresh.bind(this), false);
 }
-window.Router = new Router();
-window.Router.init();
+window.Rout = new Router();
+window.Rout.init();
 
 //封装了一个简易的前端路由
 
@@ -29,6 +33,7 @@ var btn_login=document.getElementsByClassName("login")[0];
 var btn_logup=document.getElementsByClassName("logup")[0];
 var login_count =1;  //页面切换的总计数器
 var logup_count =1;
+var mark;
 
 function flogin() {
     if(login_count!=1)  //不是第一次点击了
@@ -84,14 +89,16 @@ function flogin() {
             }
             btn_text1.style.display="block";
             btn_text1.innerHTML='手机号';
+            btn_picnum.style.display="block";
         }
-        input1.onblur= function () {
-            if(this.value==''){
-                this.value='Mobile phone';
-            }
-            var btn_text1=document.getElementsByClassName("btn_text1")[0];
-            btn_text1.innerHTML='';
-        }
+        // input1.onblur= function () {
+        //     if(this.value==''){
+        //         this.value='Mobile phone';
+        //     }
+        //     var btn_text1=document.getElementsByClassName("btn_text1")[0];
+        //     btn_text1.innerHTML='';
+        //     btn_picnum.style.display="none";
+        // }
 
     var div = document.createElement("div");
     div.setAttribute("class","btn_picnum");
@@ -100,47 +107,88 @@ function flogin() {
     btn_picnum.innerHTML="获取验证码";
     btn_picnum.className = "newbtn_picnum"; 
     btn_picnum.style.display="none";
-    input1.addEventListener("input", function(){
-    if(input1.value.length==11){
-        btn_picnum.style.display="block";
-    }else{
+    // input1.addEventListener("input", function(){
+    //     if(input1.value.length==11){
+    //         btn_picnum.style.display="block";
+    //     }else{
+    //         btn_picnum.style.display="none";
+    //     }
+    // })
+    btn_text1.style.display = "none";
+    btn_picnum.style.display="none";
+    function input1_blur()  {
+        if(this.value==''){
+            this.value='Mobile phone';
+        }
+        var btn_text1=document.getElementsByClassName("btn_text1")[0];
+        btn_text1.style.display = "none";
         btn_picnum.style.display="none";
     }
-})
+    input1.onblur = input1_blur;
+    btn_picnum.addEventListener("mousedown", function () {
+        input1.onblur = null;
+        setTimeout(function(){
+            input1.focus();
+            input1.onblur = input1_blur;
+        },1)
+    })
 
-//5分钟后重新获取
+
+//1分钟后重新获取
 //样式
-var flag = 1;
-btn_picnum.addEventListener("mousedown", function () {
-    clearInterval(timer);
-    var time = 61;
-    if (flag) {
-        flag = 0;
-        var timer = setInterval(function(){
-            time--;
-            if(time<=61&&time>0){
-                btn_picnum.innerText = time + '秒后重试';
-                this.setAttribute("disabled","true" );
-            }
-            if (time === 0) {
-                clearInterval(timer);
-                btn_picnum.innerText = '重新获取';
-                flag = 1;
-            }
-        }, 1000);
-    }
+// var flag = 1;
+// phone_confirm.addEventListener("mousedown", function () {
+//     clearInterval(timer);
+//     var time = 61;
+//     if (flag) {
+//         flag = 0;
+//         var timer = setInterval(function(){
+//             time--;
+//             if(time<=61&&time>0){
+//                 btn_picnum.innerText = time + '秒后重试';
+//             }
+//             if (time === 0) {
+//                 clearInterval(timer);
+//                 btn_picnum.innerText = '重新获取';
+//                 flag = 1;
+//             }
+//         }, 1000);
+//     }
+// });    
     //功能
-    if(btn_picnum.innerText == '获取验证码'||btn_picnum.innerText == '重新获取'){
-        this.onmousedown=obtain_yzm;
-        cloth.style.display="block"
-        reminder_pic.style.display="block";
-    }else{
-        this.onmousedown=null;
-        cloth.style.display="none"
-        reminder_pic.style.display="none";
-    }
-});
-//5分钟后重新获取结束
+    // if(btn_picnum.innerText == '获取验证码'||btn_picnum.innerText == '重新获取'){
+    //     this.onmousedown=obtain_yzm;
+    //     cloth.style.display="block"
+    //     reminder_pic.style.display="block";
+    // }else{
+    //     this.onmousedown=null;
+    //     cloth.style.display="none"
+    //     reminder_pic.style.display="none";
+    // }
+
+//验证码按钮提示文字的显示
+    var div = document.createElement("div"); 
+    div.setAttribute("class","phone_noenf");//手机号码不等于11位
+    html.appendChild(div); 
+    var phone_noenf=document.getElementsByClassName("phone_noenf")[0];
+    phone_noenf.innerHTML="请输入11位手机号";
+    phone_noenf.style.display="none";
+
+    var pic_num_count=1;
+    btn_picnum.addEventListener("mousedown",function(){
+       if(pic_num_count != 1){
+           return;
+       }
+       if(input1.value.length!=11){
+        phone_noenf.style.display="block";
+        setTimeout(function(){
+           phone_noenf.style.display="none";
+        },2500);
+            return;
+       }
+       obtain_yzm();
+    })
+
     var div = document.createElement("div");  //背景遮罩
     div.setAttribute("class","cloth");
     html.appendChild(div); 
@@ -199,24 +247,29 @@ btn_picnum.addEventListener("mousedown", function () {
     confirm.innerHTML="确定";    
    
     // picnum_pic.style.display="none";
-
-    btn_picnum.addEventListener("mousedown",obtain_yzm );
-    function obtain_yzm()//图片验证码完成，未测试
+    var pic_num_conut_flag=0;
+    // if(pic_num_conut==1||pic_num_conut_flag==1)//第一次按下图片验证码按钮、重新获取按钮
+    // {
+    //     btn_picnum.addEventListener("mousedown",obtain_yzm );
+    // }
+    
+    function obtain_yzm()//图片验证码完成，已测试
     {
-        obj_pic={       //定义图片验证码的对象
-            url: "/picyzm",
+        var obj_pic={       //定义图片验证码的对象
+            url: "http://192.168.137.1:8082/picyzm",
             type: 'get',  
             data: null,
             async: true,
             success: function (responseText) {
-                response_reminder_pic=JSON.parse(responseText);
-                var svg = document.getElementsByTagName("svg")[0]; 
-                var img_yzm = svg.innerHTML;     //获取svg标签里的innerHTML       
-                var a=new Image();
-                a.src=img_yzm;
-                picnum_pic.appendChild(a)
-
+                var response_reminder_pic=JSON.parse(responseText);
+                var picnum_pic = document.getElementsByClassName("picnum_pic")[0];
+                var svg=response_reminder_pic.pic;
+                      
+                // var a=new Image();
+                // a.src=img_yzm;
+                picnum_pic.innerHTML=svg;
                 picnum_pic.style.display="block";
+                reminder_pic.style.display="block";
             },
             fail: function (err) {
                 // console.log("aaa123456");
@@ -226,6 +279,7 @@ btn_picnum.addEventListener("mousedown", function () {
     }
 
     picnum_pic_change.addEventListener("mousedown", function(){
+        phone_giveinfor.style.display="none";
         ajax(obj_pic);
     })    
     //请求到了图片
@@ -235,6 +289,7 @@ btn_picnum.addEventListener("mousedown", function () {
     {
         cloth.style.display="none"
         reminder_pic.style.display="none";
+        phone_giveinfor.style.display="none";
     })
 
     //图片验证码的核对，短信验证码的准备
@@ -269,6 +324,33 @@ btn_picnum.addEventListener("mousedown", function () {
     var phone_num=document.getElementsByClassName("phone_num")[0];
     phone_num.style.display="none"; 
 
+
+var flag = 1;
+phone_confirm.addEventListener("mousedown", function () {
+    pic_num_count=0;
+    setTimeout(function(){
+        pic_num_count=1;
+    },60000);
+    clearInterval(timer);
+    var time = 61;
+    if (flag) {
+        flag = 0;
+        var timer = setInterval(function(){
+            time--;
+            if(time<=61&&time>0){
+                btn_picnum.innerText = time + '秒后重试';
+            }
+            if (time === 0) {
+                clearInterval(timer);
+                btn_picnum.innerText = '重新获取';
+                flag = 1;
+                pic_num_conut_flag=1;
+            }
+        }, 1000);
+    }
+});    
+
+
     var div = document.createElement("div");  //输入提示框
     div.setAttribute("class","phone_giveinfor");
     reminder_pic.appendChild(div);
@@ -279,9 +361,9 @@ btn_picnum.addEventListener("mousedown", function () {
     {
         ajax  //调用ajax函数，传入一个对象
         ({
-            url: "/phone",
+            url: "http://192.168.137.1:8082/phone",
             type: 'post',  
-            data: {phone:'input1.value',picyzm:'picnum_input1.value'}, //只有11位的时候验证码才会出来，所以不用再判断了
+            data: {phone:input1.value,picyzm:picnum_input1.value}, //只有11位的时候验证码才会出来，所以不用再判断了
             async: true,
             success: function (responseText) {
                 var response_reminder_text=JSON.parse(responseText);
@@ -291,6 +373,7 @@ btn_picnum.addEventListener("mousedown", function () {
                 }else if(response_reminder_text.style==1){
                     phone_giveinfor.style.display="none";
                     reminder_pic.style.display="none";
+                    phone_text.innerHTML="我们将发送验证码短信到下面的号码："+input1.value;
                     phone_num.style.display="block";
                 }else if(response_reminder_text.style==-1){
                     picnum_input1.value='';
@@ -309,8 +392,10 @@ btn_picnum.addEventListener("mousedown", function () {
         cloth.style.display="none"
         phone_num.style.display="none";
     })
+    var phone_confirm_count=0;
     phone_confirm.addEventListener("mousedown", function()  //短信验证码确定键
     {
+        phone_confirm_count=1;
         cloth.style.display="none"
         phone_num.style.display="none";
     })
@@ -347,7 +432,7 @@ btn_picnum.addEventListener("mousedown", function () {
         var div = document.createElement("div");//眼睛
         div.setAttribute("id","see"); 
         login_btn2.insertBefore(div,login_btn2.children[2]);
-        see=document.getElementById("see");
+        var see=document.getElementById("see");
         see.style.display="none";
         //眼睛部分
         function blur()  {
@@ -361,18 +446,18 @@ btn_picnum.addEventListener("mousedown", function () {
         }
         input2.onblur = blur; //回调函数执行
 
-        count=1;
+        var set_count=1;
         see.addEventListener("mousedown", function () {
-            console.log(count);
+            console.log(set_count);
             input2.onblur = null;
-            if(count%2){
+            if(set_count%2){
                 see.className  = "btn_notsee";
                 input2.type="text";
             }else{
                 see.className  = "btn_see";
                 input2.type="password";
             }
-            count++; 
+            set_count++; 
 
             setTimeout(function(){
                 input2.focus();
@@ -384,11 +469,13 @@ btn_picnum.addEventListener("mousedown", function () {
         div.setAttribute("class","login_btn3");
         html.appendChild(div);
         var input3 = document.createElement('input'); 
+        input3.setAttribute("class","btn_input3");
         input3.type="text";
         input3.name="code";
         input3.value="Identifying code";
         var login_btn3=document.getElementsByClassName("login_btn3")[0];
         login_btn3.insertBefore(input3,login_btn3.children[0]); 
+        var btn_input3=document.getElementsByClassName("btn_input3")[0];
 
         var div = document.createElement("div");
         div.setAttribute("class","btn_text3");
@@ -442,28 +529,28 @@ btn_picnum.addEventListener("mousedown", function () {
         div.innerHTML="注册";
         var register=document.getElementsByClassName("register")[0];
         register.addEventListener("click", function () {
-            console.log('hgiughil');
-            finish.style.display="block";
-            ajax  //调用ajax函数，传入一个对象
-            ({
-                url: "/login",
-                type: 'post',  
-                data: {password:'hex_md5(input2.value)',yzm:'picnum_input1.value'}, //只有11位的时候验证码才会出来，所以不用再判断了
-                async: true,
-                success: function (responseText) {
-                    var response=JSON.parse(responseText);
-                    if(response==0||response==-1){
-                        finish_pic.style.className="notfinish_pic";
-                        finish_text.innerHTML=response.msg;
-                    }else if(response==1){
-                        finish_pic.style.className="finish_pic";
-                        finish_text.innerHTML=response.msg+'，'+'请返回首页进行登录';
+            if(phone_confirm_count==1){
+                finish.style.display="block";
+                ajax({
+                    url: "http://192.168.137.1:8082/reg",
+                    type: 'post',  
+                    data: {password:hex_md5(input2.value),yzm:btn_input3.value}, //只有11位的时候验证码才会出来，所以不用再判断了
+                    async: true,
+                    success: function (responseText) {
+                        var response=JSON.parse(responseText);
+                        if(response.style==0||response.style==-1){
+                            finish_pic.className="notfinish_pic";
+                            finish_text.innerHTML=response.msg;
+                        }else if(response.style==1){
+                            finish_pic.className="finish_pic";
+                            finish_text.innerHTML=response.msg+'<br>请返回首页进行登录';
+                        }
+                    },
+                    fail: function (err) {
+                        // console.log("aaa123456");
                     }
-                },
-                fail: function (err) {
-                    // console.log("aaa123456");
-                }
-            }); 
+                });   //调用ajax函数，传入一个对象
+            }
         })
         finish_confirm.addEventListener("mousedown", function()//不论确定还是取消都是回到前一页
         {
@@ -484,7 +571,7 @@ btn_picnum.addEventListener("mousedown", function () {
         back_a_btn.appendChild(div);
         var back_btn=document.getElementsByClassName("back_btn")[0];
         back_btn.addEventListener("mousedown", function () {
-            Router.route('/main', function() //主页面路径
+            Rout.route('/main', function() //主页面路径
             {  
                 mark='login';  //分装函数标志
                 fmain();
@@ -510,7 +597,10 @@ function flogup() {
         logup_register.style.display="block";
         var back_a_logup_btn=document.getElementsByClassName("back_a_logup_btn")[0];
         back_a_logup_btn.style.display="block";
-        
+        var fgt=document.getElementsByClassName("fgt")[0];
+        fgt.style.display="block";
+        var fgt_text=document.getElementsByClassName("fgt_text")[0];
+        fgt_text.style.display="block";
     }
     else{
         btn_login.style.display="none";
@@ -534,27 +624,27 @@ function flogup() {
         input1.value="Mobile Phone/Student ID";
         var logup_btn1=document.getElementsByClassName("logup_btn1")[0];
         logup_btn1.insertBefore(input1,logup_btn1.children[0]); 
-        var logup_btn1=document.getElementsByClassName("logup_btn1")[0];
+        var logup_input1=document.getElementsByClassName("logup_input1")[0];
         
-        var div = document.createElement("div");
-        div.setAttribute("class","logup_text1");
-        logup_btn1.insertBefore(div,logup_btn1.children[1]);  
-        var logup_text1=document.getElementsByClassName("logup_text1")[0];
-        logup_text1.style.display="none";
+        // var div = document.createElement("div");
+        // div.setAttribute("class","logup_text1");
+        // logup_btn1.insertBefore(div,logup_btn1.children[1]);  
+        // var logup_text1=document.getElementsByClassName("logup_text1")[0];
+        // logup_text1.style.display="none";
         
         input1.onfocus= function () {
             if(this.value=='Mobile Phone/Student ID'){
                 this.value='';
             }
-            logup_text1.style.display="block";
-            logup_text1.innerHTML='手机号/学号';
+            // logup_text1.style.display="block";
+            // logup_text1.innerHTML='手机号/学号';
         }
         input1.onblur= function () {
             if(this.value==''){
                 this.value='Mobile Phone/Student ID';
             }
-            var logup_text1=document.getElementsByClassName("logup_text1")[0];
-            logup_text1.innerHTML='';
+            // var logup_text1=document.getElementsByClassName("logup_text1")[0];
+            // logup_text1.innerHTML='';
         }
         
         var div = document.createElement("div");//2
@@ -572,7 +662,7 @@ function flogup() {
         div.setAttribute("class","logup_text2");
         logup_btn2.insertBefore(div,logup_btn2.children[1]);  
         var logup_text2=document.getElementsByClassName("logup_text2")[0];
-        logup_text1.style.display="none";
+        // logup_text1.style.display="none";
 
         input2.onfocus= function () {
             if(this.value=='Password'){
@@ -587,7 +677,7 @@ function flogup() {
         var div = document.createElement("div");//眼睛
         div.setAttribute("id","logup_see"); 
         logup_btn2.insertBefore(div,logup_btn2.children[2]);
-        logup_see=document.getElementById("logup_see");
+        var logup_see=document.getElementById("logup_see");
         logup_see.style.display="none";
         //眼睛部分
         function blur()  {
@@ -601,7 +691,7 @@ function flogup() {
         }
         input2.onblur = blur;
 
-        count=1;
+        var count=1;
         logup_see.addEventListener("mousedown", function () {
             console.log(count);
             input2.onblur=null;
@@ -640,7 +730,8 @@ function flogup() {
         logup_finish.appendChild(div); 
 
         var logup_finish_pic=document.getElementsByClassName("logup_finish_pic")[0];
-        var logup_notfinish_text=document.getElementsByClassName("logup_finish_text")[0];
+        var logup_finish_text=document.getElementsByClassName("logup_finish_text")[0];
+        var logup_notfinish_text=document.getElementsByClassName("logup_notfinish_text")[0];
 
         var div = document.createElement("div"); //取消
         div.setAttribute("class","logup_finish_unconfirm");
@@ -664,17 +755,17 @@ function flogup() {
             logup_finish.style.display="block";
             ajax  //调用ajax函数，传入一个对象
             ({
-                url: "/login",
+                url: "http://192.168.137.1:8082/login",
                 type: 'post',  
-                data: {password:'hex_md5(input2.value)',yhm:'logup_btn1.value'}, //只有11位的时候验证码才会出来，所以不用再判断了
+                data: {password:hex_md5(input2.value),yhm:logup_input1.value}, //只有11位的时候验证码才会出来，所以不用再判断了
                 async: true,
                 success: function (responseText) {
                     var logup_response=JSON.parse(responseText);
-                    if(logup_response==0){
-                        logup_finish_pic.style.className="logup_notfinish_pic";
+                    if(logup_response.style==0){
+                        logup_finish_pic.className="logup_notfinish_pic";
                         logup_finish_text.innerHTML=logup_response.msg;
-                    }else if(logup_response==1){
-                        logup_finish_pic.style.className="logup_finish_pic";
+                    }else if(logup_response.style==1){
+                        logup_finish_pic.className="logup_finish_pic";
                         logup_finish_text.innerHTML=logup_response.msg;
                     }
                 },
@@ -685,10 +776,12 @@ function flogup() {
         logup_finish_confirm.addEventListener("mousedown", function()//不论确定还是取消都是回到前一页
         {
             logup_finish.style.display="none"
+            logup_cloth.style.display="none";
         })
         logup_finish_unconfirm.addEventListener("mousedown", function()  
         {
             logup_finish.style.display="none"
+            logup_cloth.style.display="none";
         })
         var a = document.createElement("a");  //a包图片
         a.setAttribute("class","back_a_logup_btn");
@@ -700,23 +793,38 @@ function flogup() {
         back_a_logup_btn.appendChild(div);
         var back_logup_btn=document.getElementsByClassName("back_logup_btn")[0];
         back_logup_btn.addEventListener("mousedown", function () {
-            Router.route('/main', function() //主页面路径
+            Rout.route('/main', function() //主页面路径
             {  
                 mark='logup';  //分装函数标志
                 fmain();
             });
         })
+        var div = document.createElement("div"); //忘记密码图标
+        div.setAttribute("class","fgt");
+        html.appendChild(div); 
+        var fgt=document.getElementsByClassName("fgt")[0];
+        var a = document.createElement("a"); //忘记密码提示文字
+        a.setAttribute("class","fgt_text");
+        html.appendChild(a); 
+        var fgt_text=document.getElementsByClassName("fgt_text")[0];
+        fgt_text.style.display="none";
+        fgt.addEventListener("mousedown",function(){
+            fgt_text.style.display="block";
+            fgt_text.innerHTML="忘记密码？";
+        })
     }
 }
 
 //注册界面
-Router.route('/login', function() {
+// console.log(Rout.route);
+
+Rout.route('/login', function() {
     flogin();
     login_count++;  //从第二次开始login_count就不等于一了
 });
 
 //登录界面
-Router.route('/logup', function() {
+Rout.route('/logup', function() {
     flogup();
     logup_count++;
 });
@@ -725,7 +833,7 @@ Router.route('/logup', function() {
 function fmain() {
     if(mark=='login')  //从login往main跳
     { 
-        console.log('bbbb');
+        // console.log('bbbb');
         var pagepic=document.getElementsByClassName("pagepic")[0];
         pagepic.style.display="none";
         var login_btn1=document.getElementsByClassName("login_btn1")[0];
@@ -741,7 +849,7 @@ function fmain() {
     }
     if(mark=='logup')  //从logup往main跳
     {
-        console.log('aaaaa');
+        // console.log('aaaaa');
         var logup_pagepic=document.getElementsByClassName("logup_pagepic")[0];
         logup_pagepic.style.display="none";
         var logup_btn1=document.getElementsByClassName("logup_btn1")[0];
@@ -752,6 +860,11 @@ function fmain() {
         logup_register.style.display="none";
         var back_a_logup_btn=document.getElementsByClassName("back_a_logup_btn")[0];
         back_a_logup_btn.style.display="none";
+        var fgt=document.getElementsByClassName("fgt")[0];
+        fgt.style.display="none";
+        var fgt_text=document.getElementsByClassName("fgt_text")[0];
+        fgt_text.style.display="none";
+       
     }
     var main_a_login=document.getElementsByClassName("main_a_login")[0]; //主页左按钮
     main_a_login.style.display="block";

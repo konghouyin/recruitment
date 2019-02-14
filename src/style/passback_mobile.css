@@ -7,7 +7,8 @@
 html{
     width: 100%;
     height:100%;
-    background-color:#232a34;
+    /* background-color:#232a34; */
+    background-color:#fff;
     position:relative;
     font-size:62.5%;
 }
@@ -22,10 +23,9 @@ input{
     position:relative;
     width: 100%;
     height:5rem;
-    /* background-color: #303741; */
-    border-bottom-color:#7c7d80;
+    border-bottom-color: #F7F7F7;;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
 }
 .back_btn{
     position: absolute;
@@ -34,7 +34,7 @@ input{
     width: 2.5rem;
     height: 2.5rem;
     margin-top:-1.25rem;
-    background-image: url(../img/back.png);
+    background-image: url(../img/pass_back.png);
     background-size: 2.5rem;
     background-repeat: no-repeat;
 }
@@ -46,8 +46,8 @@ input{
     height: 5rem;
     text-align: center;
     line-height:5rem;
-    font-size:1.8rem;
-    color:#fff;
+    font-size:2.4rem;
+    color: #3285f9;
 }
 .bodybox{
     width: 85%;
@@ -59,38 +59,38 @@ input{
     position:relative;
     width: 100%;
     height:5rem;
-    border-bottom-color:#7c7d80;
+    border-bottom-color:#E5E5E5;
     border-bottom-style: solid;
     border-bottom-width: 1px;
 }
 .btn2_pic{
     position: absolute;
     top: 50%;
-    left:8%;
+    left:3%;
     width: 2.3rem;
     height: 2.3rem;
     margin-top:-1.15rem;
-    background-image: url(../img/pass_btn2.png);
+    background-image: url(../img/pass_btn20.png);
     background-size: 2.3rem;
     background-repeat: no-repeat;
 }
 .btn1_pic{
     position: absolute;
     top: 50%;
-    left:7.5%;
-    width: 2.5rem;
-    height: 2.5rem;
+    left:3%;
+    width: 2.3rem;
+    height: 2.3rem;
     margin-top:-1.25rem;
-    background-size: 2.5rem;
+    background-size: 2.3rem;
     background-repeat: no-repeat;                                                                                             
-    background-image: url(../img/pass_btn1.png);
+    background-image: url(../img/pass_btn10.png);
 }
 .btn3_pic{
-    width: 2.1rem;
-    height: 2.1rem;
+    width: 2.3rem;
+    height: 2.3rem;
     position: absolute;
     top: 50%;
-    left:8.35%;
+    left:3%;
     margin-top:-1.05rem;
     background-image: url(../img/pass_btn3.png);
     background-size: 2.1rem;
@@ -101,36 +101,29 @@ input{
     display: inline-block;
     position: absolute;
     top: 50%;
-    left:16%;
+    left: -30%;
     width:4.6rem;
     height:2.3rem;
     margin-top:-1.15rem;
-    border-right-color:#7c7d80;
+    border-right-color:#E8E8E8;
     border-right-style: solid;
     border-right-width: 1px;
 }
-.btn1_text,.btn2_text{
+.btn1_text,.btn2_text,.btn3_text{
     position: absolute;
     top: 50%;
-    left:26.5%;
+    left:20%;
     width:10rem;
     height:5rem;
     margin-top:-2.5rem;
     font-size:1.8rem;
     line-height:5rem;
-    color:#7c7d80;
+    /* color:#C7C7C7; */
+    color:rgb(46, 45, 45);
 }
-.btn3_text{
-    position: absolute;
-    top: 50%;
-    left:24.5%;
-    width:10rem;
-    height:5rem;
-    margin-top:-2.5rem;
-    font-size:1.8rem;
-    line-height:5rem;
-    color:#7c7d80;
-}
+/* .btn3_text{
+    margin-left:-2%;
+} */
 .btn1_dlt{
     position: absolute;
     width: 1.6rem;
@@ -152,29 +145,303 @@ input{
     font-size:1.5rem;
     text-align: center;
     line-height:2.5rem;
-    color:#7c7d80;
-    border:1px solid #c4c4c7;
+    /* color:#7c7d80;
+    border:1px solid #c4c4c7; */
+    color:#3285f9;
+    border:1px solid #3285f9;
     border-radius: 6px;
 }
-.btn3_eye{
+#see{
     position: absolute;
     width: 1.6rem;
     height: 1.6rem;
     top: 50%;
     right:0%;
     margin-top:-0.7rem;
-    background-image: url(../img/see.png);
+    background-image: url(../img/pass_notsee.png);
     background-size: 1.6rem;
     background-repeat: no-repeat;
 }
-.confirm{
+.pass_see {
+    position:absolute;
+    top: 50%;
+    right:0%;
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: url(../img/pass_see.png) !important;
+    background-size:1.6rem;
+    background-repeat: no-repeat;
+}
+.pass_notsee{
+    position:absolute;
+    top: 50%;
+    right:0%;
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: url(../img/pass_notsee.png) !important;
+    background-size:1.6rem;
+    background-repeat: no-repeat;
+}
+.passback_con{
     width: 100%;
     height:4rem;
     margin:5rem auto;
-    background-color: #303741;
+    /* background-color: #303741; */
+    background-color: #3285f9;
     border-radius: 6px;
-    color:#7c7d80;
+    color:#fff;
     font-size:1.8rem;
     text-align: center;
     line-height:4rem;
+}
+.phone_noenf{
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    width: 15rem;
+    height: 4rem;
+    margin-left: -7.5rem;
+    margin-top: -1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+    background-color: rgb(0,0,0,0.3);
+}
+
+.newbtn_picnum{
+    position:absolute;
+    width: 6.5rem;
+    height: 2.8rem;
+    background-color:#303741;
+    border:1px solid #9599a2;
+    border-radius: 1rem;
+    right:0%;
+    top:50%;
+    margin-top:-1.4rem;
+    font-size:1.3rem;
+    font-weight:90;
+    text-align:center;
+    line-height:2.8rem;
+    color: #9599a2;
+    opacity: 1;
+    transition:opacity 10s;
+}
+.cloth{
+    width: 100%;
+    height:100%;
+    background-color:#fff;
+    position:relative;
+    font-size:62.5%;
+    opacity: 0.3;
+    z-index: 1;
+}
+.reminder_pic,.phone_num,.finish{
+    position: absolute;
+    width: 26rem;
+    height: 17rem;
+    background-color: #fff;
+    left: 50%;
+    margin-left: -13rem;
+    margin-top: -8.5rem;
+    top: 50%;
+    font-size: 2rem;
+    font-weight: 90;
+    border-radius: 1rem;
+    z-index: 2;
+}
+.picnum_headline,.phone_headline{
+    position: absolute;
+    width:26rem;
+    height: 4rem;
+    left: 50%;
+    margin-left: -13rem;
+    top: 0%;
+    text-align:center;
+    font-size: 1.7rem;
+    font-weight: 550;
+    line-height:4rem;
+    z-index: 2;
+}
+.picnum_pic{
+    position: absolute;
+    width: 10rem;
+    height: 5rem;
+    left: 35%;
+    margin-left: -5rem;
+    top: 21%;
+    z-index: 2;
+    background-size: 5rem;
+    background-repeat: no-repeat;
+    background-color: #386eb9;
+}
+.picnum_pic_change{
+    position: absolute;
+    width: 7rem;
+    height: 2rem;
+    left: 55%;
+    top: 38.5%;
+    line-height: 3rem;
+    font-size: 1rem;
+    color: #000;
+    z-index: 2;
+}
+.picnum_reminder_text{
+    position: absolute;
+    width: 18rem;
+    height: 2rem;
+    left: 50%;
+    margin-left: -9rem;
+    top: 50%;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 90;
+    line-height: 2rem;
+    z-index: 2;
+    color:#ACACAC;
+}
+.phone_text{
+    position: absolute;
+    width: 18rem;
+    height: 2rem;
+    left: 50%;
+    margin-left: -9rem;
+    top: 34%;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 90;
+    line-height: 2rem;
+    z-index: 2;
+    color: #ACACAC;
+}
+.picnum_text1{
+    position: absolute;
+    width: 6rem;
+    height: 2.4rem;
+    left: 20%;
+    top: 62%;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 90;
+    line-height: 2.4rem;
+    z-index: 2;
+}
+.picnum_input1_div{
+    position: absolute;
+    width: 9rem;
+    height: 2rem;
+    left: 40%;
+    top: 62%;
+    border: 1px solid #000;
+    border-radius: 0.2rem;
+    line-height: 1.8rem;
+    z-index: 2;
+}
+.picnum_input1{
+    width: 9rem !important;
+    height: 2rem !important;
+    font-size: 1.3rem !important;
+    font-weight:90;
+    text-align:center;
+    color: #000;
+}
+.unconfirm,.phone_unconfirm,.finish_unconfirm{
+    position: absolute;
+    width: 49.5%;
+    height: 3.5rem;
+    left: 0%;
+    bottom: 0%;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 550;
+    line-height: 3.5rem;
+    z-index: 2;
+    border: 1px solid #EDEDED;
+    border-radius: 0 0 0 1rem;
+    color:#000;
+}
+.confirm,.phone_confirm,.finish_confirm{
+    position: absolute;
+    width: 49.5%;
+    height: 3.5rem;
+    right: 0%;
+    bottom: 0%;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 550;
+    line-height: 3.5rem;
+    z-index: 2;
+    border: 1px solid #EDEDED;
+    border-left:0px;
+    border-radius: 0 0 1rem 0;
+    color:#576A95;
+}
+.phone_giveinfor{
+    position: absolute;
+    height: 1.5rem;
+    left: 34%;
+    top: 74%;
+    position: absolute;
+    text-align: center;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+    z-index: 2;
+    color: #000;
+    border-style:solid;
+    border-color: rgb(148, 169, 196);
+    border-width: 1px 1px 1px 1px;
+    border-radius: 2px;
+    background-color: rgb(234, 240, 247);
+}
+.phone_giveinfor::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: -29%;
+    left:20%;
+    transform:rotate(45deg);
+    width: 0.6rem;
+    height: 0.6rem;
+    text-align: center;
+    z-index: 1.5;
+    border-style:solid;
+    border-color: rgb(148, 169, 196);
+    border-width: 1px 0 0 1px;
+    color: #000;
+    background-color: rgb(234, 240, 247);
+}
+.finish_pic{
+    position: absolute;
+    top: 30%;
+    left:10%;
+    width: 3rem;
+    height: 3rem;
+    z-index: 2;
+    background-image: url(../img/ok1.png);
+    background-size: 3rem;
+    background-repeat: no-repeat;
+}
+.notfinish_pic{
+    position: absolute;
+    top: 30%;
+    left:10%;
+    width: 3rem;
+    height: 3rem;
+    z-index: 2;
+    background-image: url(../img/warn.png);
+    background-size: 3rem;
+    background-repeat: no-repeat;
+}
+
+.finish_text{
+    position: absolute;
+    top: 25%;
+    left: 27%;
+    width: 16rem;
+    height: 3rem;
+    text-align: center;
+    font-size:2rem;
+    z-index: 2;
+    color: #576A95;
+    line-height: 3rem;
 }
