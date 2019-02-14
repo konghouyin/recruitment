@@ -36,7 +36,7 @@ server.use(cookieSession({
 
 
 server.all('*', function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", 'http://localhost:8888'); //需要显示设置来源
+	res.header("Access-Control-Allow-Origin", 'http://192.168.137.1:8848'); //需要显示设置来源
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 	res.header("Access-Control-Allow-Credentials", true); //带cookies7     res.header("Content-Type", "application/json;charset=utf-8");
@@ -113,7 +113,7 @@ server.use('/picyzm', function(req, res) {
 function canvas(req, res) {
 	var codeConfig = {
 		size: 4, // 验证码长度
-		ignoreChars: '0o1il', // 验证码字符中排除 0o1i
+		ignoreChars: '0o1iIlL', // 验证码字符中排除 
 		noise: 2, // 干扰线条的数量
 		width: 100,
 		viewwidth: 150,
@@ -147,13 +147,13 @@ server.post('/phone', function(req, res) {
 			res.end();
 		} else if (req.session.picyzm == undefined) {
 			res.write(JSON.stringify({
-				msg: "图片验证码已失效，请重新验证！",
+				msg: "图片验证码已失效，<br>请重新验证！",
 				style: -1
 			}));
 			res.end();
 		} else if (obj.picyzm.toLocaleLowerCase() != req.session.picyzm) {
 			res.write(JSON.stringify({
-				msg: "图片验证码错误，请再次验证！",
+				msg: "图片验证码错误，<br>请再次验证！",
 				style: 0
 			}));
 			res.end();
@@ -170,7 +170,7 @@ server.post('/phone', function(req, res) {
 			req.session.picyzm = null; //成功后验证码失效
 			req.session.phone = obj.phone;//session保存电话号码
 			res.write(JSON.stringify({
-				msg: "短信已发送！",
+				msg: "短信已发送至"+obj.phone,
 				style: 1
 			}));
 			console.log("发送短信" + req.session.yzm);
