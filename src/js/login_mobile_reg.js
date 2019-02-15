@@ -4,6 +4,8 @@ var md5 = require('./public_md5.js');
 var message_flag = 1; //ajax节流
 var phone_btn = document.getElementsByClassName('phonebtn')[0];
 var yhm = document.getElementById('reg_yhm');
+var passwordinput = document.getElementById('reg_password');
+var yzminput = document.getElementById('reg_yzm');
 
 phone_btn.addEventListener('click', function() {
 	var wrong = document.getElementsByClassName('wrong')[1];
@@ -73,11 +75,40 @@ back.addEventListener('click', function() {
 })
 //再试一次
 
+var reg = document.getElementsByClassName('reg')[0];
+var backimg = document.getElementsByClassName('backimg')[0];
 
 yhm.addEventListener('focus', function() {
 	yhm.style.borderBottom = "5px solid #ccc";
+	reg.style.marginTop = "0";
+	backimg.style.opacity="0";
 })
-//电话号码-恢复
+passwordinput.addEventListener('focus', function() {
+	passwordinput.style.borderBottom = "5px solid #ccc";
+	reg.style.marginTop = "0";
+	backimg.style.opacity="0";
+})
+yzminput.addEventListener('focus', function() {
+	yzminput.style.borderBottom = "5px solid #ccc";
+	reg.style.marginTop = "0";
+	backimg.style.opacity="0";
+})
+
+yhm.addEventListener('blur', function() {
+	reg.style.marginTop = "250px";
+	backimg.style.opacity="1";
+})
+passwordinput.addEventListener('blur', function() {
+	reg.style.marginTop = "250px";
+	backimg.style.opacity="1";
+})
+yzminput.addEventListener('blur', function() {
+	reg.style.marginTop = "250px";
+	backimg.style.opacity="1";
+})
+//页面适配input显示，恢复红线
+
+
 
 
 var picyzmbtn = document.getElementsByClassName('picyzmbtn')[0];
@@ -97,7 +128,7 @@ picyzmbtn.addEventListener('click', function() {
 	if (returnflag) {
 		return;
 	}
-
+message_flag=0;
 
 	ajax({
 		url: "http://192.168.137.1:8082/phone", //请求地址
@@ -151,8 +182,16 @@ reg_picyzm.addEventListener('focus', function() {
 	reg_picyzm.placeholder = "输入图片验证码";
 	reg_picyzm.value = "";
 	reg_picyzm.style.border = "3px solid #ccc";
+	var card = document.getElementsByClassName('pic')[1];
+	console.log(card);
+	card.style.margin="0 auto";
 })
-//图片验证码-恢复
+
+reg_picyzm.addEventListener('blur', function() {
+	var card = document.getElementsByClassName('pic')[1];
+	card.style.margin="200px auto";
+})
+//图片验证码-恢复,适配input
 
 function showpage(e) {
 	if (e == 1) {

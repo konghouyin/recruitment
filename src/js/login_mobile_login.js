@@ -20,10 +20,10 @@ btn.addEventListener('click', function() {
 		wrong.innerHTML += "请输入密码";
 		password.style.borderBottom = "5px solid #f40"
 	}
-	if(message_flag!=1){
+	if (message_flag != 1) {
 		returnflag = 1;
 	}
-	
+
 	if (returnflag) {
 		return;
 	}
@@ -44,9 +44,9 @@ btn.addEventListener('click', function() {
 		success: function(responseText) {
 			var mess = JSON.parse(responseText)
 			message_flag = 1;
-			if(mess.style==1){
+			if (mess.style == 1) {
 				window.location.href = mess.url;
-			}else{
+			} else {
 				var msg = document.getElementsByClassName('back-mess')[0];
 				msg.innerHTML = mess.msg;
 				var loading = document.getElementsByClassName('loading')[0];
@@ -64,14 +64,30 @@ btn.addEventListener('click', function() {
 	});
 })
 //请求登录
+var login = document.getElementsByClassName('login')[0];
+var backimg = document.getElementsByClassName('backimg')[0];
 
 yhm.addEventListener('focus', function() {
-	yhm.style.borderBottom = "5px solid #ccc"
+	yhm.style.borderBottom = "5px solid #ccc";
+		login.style.marginTop = "0";
+		backimg.style.opacity="0";
 })
 password.addEventListener('focus', function() {
-	password.style.borderBottom = "5px solid #ccc"
+	password.style.borderBottom = "5px solid #ccc";
+		login.style.marginTop = "0";
+		backimg.style.opacity="0";
 })
 //还原红色文本
+yhm.addEventListener('blur', function() {
+		login.style.marginTop = "250px";
+		backimg.style.opacity="1";
+
+})
+password.addEventListener('blur', function() {
+		login.style.marginTop = "250px";
+		backimg.style.opacity="1";
+})
+
 
 var back = document.getElementsByClassName('back')[0];
 back.addEventListener('click', function() {
@@ -81,3 +97,4 @@ back.addEventListener('click', function() {
 	loginPic.style.display = 'none';
 })
 //再试一次
+

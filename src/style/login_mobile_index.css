@@ -40,15 +40,15 @@ body,
 
 .tittle-name,
 .tittle-thing {
-	margin: 14% auto 0 auto;
+	margin: 17% auto 0 auto;
 	text-align: center;
 	color: #fff;
-	font-size: 60px;
+	font-size: 55px;
 }
 
 .tittle-thing {
 	margin: 3% auto;
-	font-size: 55px;
+	font-size: 50px;
 }
 
 .login .tip {
@@ -60,13 +60,13 @@ body,
 }
 
 .button {
-	margin: 38% auto;
+	margin: 45% auto;
 	text-align: center;
-	line-height: 60px;
+	line-height: 69px;
 	color: #fff;
-	border: 5px solid #fff;
+	border: 3px solid #fff;
 	border-radius: 40px;
-	font-size: 50px;
+	font-size: 40px;
 	width: 300px;
 	height: 69px;
 }
@@ -102,8 +102,13 @@ body,
 		opacity: 1;
 	}
 
+	99% {
+		display: block;
+	}
+
 	100% {
 		top: -80%;
+		display: none;
 	}
 }
 
@@ -112,6 +117,7 @@ body,
 	margin-top: 250px;
 	opacity: 0;
 	transition: all 0.4s;
+	position: relative;
 }
 
 .reg .tittle,
@@ -191,7 +197,7 @@ input::-webkit-input-placeholder {
 	color: #f40;
 	text-align: center;
 	width: 500px;
-	top: 500px;
+	top: 240px;
 	left: 50%;
 	margin-left: -250px;
 	line-height: 57px;
@@ -286,7 +292,7 @@ input::-webkit-input-placeholder {
 	right: 22px;
 	width: 200px;
 	text-align: center;
-	line-height: 56px;
+	line-height: 65px;
 	border: 2px solid #aaa;
 	border-radius: 11px;
 	height: 65px;

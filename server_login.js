@@ -86,10 +86,13 @@ server.post('/login', function(req, res) {
 				maxAge: 5 * 1000,
 				signed: true
 			});
-			//data根据情况判断是否跳转补全页面，不同身份的页面----------------------------------------------------------------？？？
+			var sendurl = "http://127.0.0.1:8848/test/index.html";
+			if(data[0].xuehao==null||data[0].selfgroup==null){
+				sendurl = "http://127.0.0.1:8848/test/index2.html";
+			}
 			res.write(JSON.stringify({
 				msg: "登录成功！",
-				url: "http://127.0.0.1:8848/test/index.html",
+				url: sendurl,
 				style: 1
 			}));
 			res.end();
@@ -217,8 +220,23 @@ server.post('/reg', function(req, res) {
 
 	function end(data) {
 		req.session.yzm = null; //成功后验证码失效
+		
+		var cookieSend = "" + req.session.phone + "~" + obj.password + "~" + new Date().getTime(); //保存cookie验证，防止跨站session失效
+		
+		var str = JSON.stringify(cookieSend); //明文
+		var secret = 'niyidingjiebuchulai'; //密钥--可以随便写
+		var cipher = crypto.createCipher('aes192', secret);
+		var enc = cipher.update(str, 'utf8', 'hex'); //编码方式从utf-8转为hex;
+		enc += cipher.final('hex'); //编码方式从转为hex;
+		
+		res.cookie('pbl', enc, {
+			path: '/',
+			maxAge: 5 * 1000,
+			signed: true
+		});
 		res.write(JSON.stringify({
 			msg: "注册成功。",
+			url:"xxx",
 			style: 1
 		}));
 		res.end();

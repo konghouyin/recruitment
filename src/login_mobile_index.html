@@ -23,10 +23,10 @@
 			<div class="login">
 				<div class="tittle">系统登录</div>
 				<div class="wrong"></div>
-				<input type="password" style="height: 0;opacity: 0; margin-top: 240px;" class="a" autocomplete="off">
+				<input type="password" style="height: 0;opacity: 0; margin-top: 260px;" class="a" autocomplete="off">
 				<!-- 防止浏览器自动填充密码 -->
 				<div class="wrap yhm">
-					<input type="text" placeholder="输入学号/手机号" class="inputimp" id='login_yhm' autocomplete="off">
+					<input type="text" placeholder="输入学号/手机号" class="inputimp" id='login_yhm' autocomplete="off"  onkeyup="value=value.replace(/[^\d]/g,'')" ng-pattern="/[^a-zA-Z]/">
 				</div>
 				<div class="wrap password">
 					<input type="password" placeholder="输入密码" class="inputimp" id='login_password' autocomplete="off">
@@ -38,10 +38,10 @@
 			<div class="reg">
 				<div class="tittle">注册账号</div>
 				<div class="wrong"></div>
-				<input type="password" style="height: 0;opacity: 0; margin-top: 160px;" class="a" autocomplete="off">
+				<input type="password" style="height: 0;opacity: 0; margin-top: 180px;" class="a" autocomplete="off">
 				<!-- 防止浏览器自动填充密码 -->
 				<div class="wrap phone">
-					<input type="text" placeholder="输入手机号" class="inputimp" id='reg_yhm' autocomplete="off">
+					<input type="text" placeholder="输入手机号" class="inputimp" id='reg_yhm' autocomplete="off"  onkeyup="value=value.replace(/[^\d]/g,'')" ng-pattern="/[^a-zA-Z]/">
 					<div class="phonebtn">获取验证码</div>
 				</div>
 				<div class="wrap password">
