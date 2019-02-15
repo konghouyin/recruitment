@@ -32,21 +32,23 @@
 }
 
 .list .list_btn {
-	padding: 20px 50px;
-	font-size: 18px;
-	width: 180px;
-	position: relative;
+    padding: 20px 60px;
+    font-size: 18px;
+    font-weight: 600;
+    width: 180px;
+    position: relative;
 }
 
-.list .list_btn::before {
-	content: "";
+.list .btn-pic{
 	display: block;
 	position: absolute;
 	width: 30px;
 	height: 30px;
-	top: 15px;
+	top: 16px;
 	left: 10px;
-	background: #f40;
+	background-size:100%;
+	background-repeat:no-repeat ;
+	
 }
 
 .list .list_btn:hover {

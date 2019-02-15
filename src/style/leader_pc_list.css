@@ -1,15 +1,61 @@
-.list .btn1{
-	
+.headpic {
+	background-size: 100%;
+	background-image: url(../pic/leader_headpic.png);
+	position: relative;
 }
-.list .btn2{
-	
+
+.headpic::after {
+	content: "纳新管理员";
+    display: block;
+    position: absolute;
+    top: 144px;
+    left: 6px;
+    width: 104px;
+    height: 27px;
+    background-color: #3c87fb;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff;
+    line-height: 27px;
 }
-.list .btn3{
-	
+
+ .list .btn1 .btn-pic{
+	background-image: url(../pic/leader_home.png);
 }
-.list .btn4{
-	
+
+.list .btn2 .btn-pic{
+	background-image: url(../pic/leader_person.png);
 }
-.list .btn5{
-	
+
+.list .btn3 .btn-pic{
+	background-image: url(../pic/leader_list.png);
 }
+
+.list .btn4 .btn-pic{
+	background-image: url(../pic/leader_message.png);
+}
+
+.list .btn5 .btn-pic{
+	background-image: url(../pic/leader_notice.png);
+}
+/* 蓝色图标 */
+ 
+.list .btn1:hover .btn-pic{
+	background-image: url(../pic/leader_home_b.png);
+}
+.list .btn2:hover .btn-pic{
+	background-image: url(../pic/leader_person_b.png);
+}
+
+.list .btn3:hover .btn-pic{
+	background-image: url(../pic/leader_list_b.png);
+}
+
+.list .btn4:hover .btn-pic{
+	background-image: url(../pic/leader_message_b.png);
+}
+
+.list .btn5:hover .btn-pic{
+	background-image: url(../pic/leader_notice_b.png);
+}
+/* 白色图标 */
