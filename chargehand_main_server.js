@@ -19,7 +19,7 @@ let pool = sql.createPool({
   connectionLimit: 10,
   host: '132.232.169.227',
   user: 'god',
-  password: '',
+  password: 'godmanager',
   database: 'recruitment'
 });
 
