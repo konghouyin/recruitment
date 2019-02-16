@@ -55,7 +55,7 @@ server.get('/new', function(req, res) {
 // 		res.write(JSON.stringify({
 // 			msg: "sesson失效",
 // 			url: "跳转到登录页面",
-// 			style: 0
+// 			style: -200
 // 		}));
 // 		res.end();
 // 	} else {

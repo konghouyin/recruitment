@@ -1,4 +1,4 @@
-const sql = require('./server/public_sql');
+const sql = require('./public_sql');
 //组长组员公共功能
 
 module.exports = {
