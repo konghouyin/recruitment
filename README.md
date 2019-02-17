@@ -597,7 +597,7 @@ res.send(JSON.stringify(a));
 ```js
 {
     "score":[{"id":2,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"第一题\":10,\"第二题\":10,\"第三题\":10}","advice":"继续努力","history":"xxxx"},{},...]
-    "info":[{{"xuehao":4171197,"name":"张三","xueyuan":"计算机学院","zhuanye":"软件工程","banji":"软件1702","xingbie":"女","selfgroup":3,"style":1,"pass":1}},{},{}...]
+    "info":[{"xuehao":4171197,"name":"张三","xueyuan":"计算机学院","zhuanye":"软件工程","banji":"软件1702","xingbie":"女","selfgroup":3,"style":1,"pass":1},{},{}...]
     "msg":"具体情况"，
     "style":1代表成功，0代表失败
 }
