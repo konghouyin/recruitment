@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link type="text/css" rel="stylesheet" href=".\user_mobile.css" />
+    <!-- <link type="text/css" rel="stylesheet" href=".\user_mobile.css" /> -->
     <title>main</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
             <div class="body_btn">
                 <div class="person">
                     <div class="pic_box">
-                        <div class="pic_border">
+                        <div class="pic_border1">
                             <div class="person_pic"></div>  
                         </div>
                     </div>   
@@ -28,15 +28,15 @@
                 </div>
                 <div class="meet">
                     <div class="pic_box">
-                        <div class="pic_border">
-                            <div class="meet_pic"></div>  
+                        <div class="pic_border2 active">
+                            <div class="meet_newpic meet_pic"></div>  
                         </div>
                     </div>
                     <div class="text_box">面试查询</div>
                 </div>
                 <div class="notice">
                     <div class="pic_box">
-                            <div class="pic_border">
+                            <div class="pic_border3">
                                 <div class="notice_pic"></div>  
                             </div>
                     </div> 
@@ -44,19 +44,12 @@
                 </div>
                 <div class="change">
                     <div class="pic_box">
-                            <div class="pic_border">
+                            <div class="pic_border4">
                                 <div class="change_pic"></div>  
                             </div>
                     </div> 
-                    <div class="text_box">修改密码</div>
+                    <div class="text_box">更多功能</div>
                 </div>
-            
-                <div class="dotbox">
-                        <span></span>
-                        <span style="background-color: #1b4d82"></span>
-                        <span></span>
-                        <span></span>
-                    </div>
             </div>
 
             <div class="body_bottom">
@@ -66,16 +59,41 @@
                     <div class="right"></div>
                 </div>
                 <div class="content">
-                    <div class="meet_result"></div>
+                    <div class="meet_result">
+                        <div class="pole">
+                            <div class="dot1"></div>
+                            <div class="dot2"></div>  
+                            <div class="dot3"></div>  
+                            <div class="dot4"></div> 
+                        </div>
+                    </div>
                     <div class="explain">
-                        <div class="ex_headline">面试信息说明</div>
+                        <div class="now_state">
+                            <div class="you">您的状态</div>
+                            <div class="you_btm">
+                                <div class="you_meet">报名</div>
+                                <div class="you_state">通过</div>
+                            </div>
+                        </div>
                         <div class="ex_text">
-                            <div class="state">面试状态说明
-                                <div class="state_text">未面试:面试已开始，还未面试<br>待审核:已完成面试，还未审核</div>
+                            <div class="ex_headline">状态说明</div>
+                            <div class="state1">
+                                <div class="state_btn1">未面试</div>
+                                <div class="state_text">面试已开始，请准时参加面试</div>
                             </div>
-                            <div class="path">面试流程说明
-                                <div class="path_text">共有三次面试，状态包括未面试<br>已面试未审核、通过面试、未通过面试。</div>
+                            <div class="state2">
+                                <div class="state_btn2">待审核</div>
+                                <div class="state_text">已完成面试，请等待面试结果</div>
                             </div>
+                            <div class="state3">
+                                <div class="state_btn3">已通过</div>
+                                <div class="state_text">已通过面试，请等待下次面试通知</div>
+                            </div>
+                            <div class="state4">
+                                <div class="state_btn4">未通过</div>
+                                <div class="state_text">未通过面试，很遗憾</div> 
+                            </div>
+                         
                         </div>
                     </div>
                 </div>
@@ -86,4 +104,5 @@
 
     </div>
 </body>
+<script src="./user_mobile.js"></script>
 </html>

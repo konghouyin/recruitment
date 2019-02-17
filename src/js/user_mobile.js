@@ -1,10 +1,14 @@
 import css from './user_mobile.css';
 var ajax=require("./Ajax.js").ajax;
+var notice=require("./notice.js").notice;
 var person_msg=require("./person_msg.js").person_msg;
 var meet=require("./meet.js").meet;
-var notice=require("./notice.js").notice;
 var change=require("./change.js").change;
 
+var notice_box=document.getElementsByClassName("notice_box")[0]; 
+console.log(notice_box);
+var person_box=document.getElementsByClassName("person_box")[0]; 
+console.log(person_box);
 
 ajax({
     url: "http://192.168.137.1:8082/new",
@@ -12,7 +16,12 @@ ajax({
     data: null,
     async: true,
     success: function (responseText) {
-        //空
+        var response=JSON.parse(responseText);
+        if(response.style==1){
+            //
+        }else{
+            //提醒重试
+        }
     },
     fail: function (err) {
         //空
