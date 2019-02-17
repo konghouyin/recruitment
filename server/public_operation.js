@@ -20,7 +20,7 @@ module.exports = {
         })
         function serachSelfInfoState(name) {
             let where = "phoneNum=" + sql.escape(name);
-            return sql.select(["*"], "registryinformation", where);
+            return sql.select(["xuehao","name","xueyuan","zhuanye","banji","xingbie","selfgroup","style","pass"], "registryinformation", where);
         }
     },
     searchInfoBynum: function (req, res, pool) {//输入学号查看个人信息*
@@ -29,8 +29,9 @@ module.exports = {
             message += data;
         });
         req.on('end', function () {
-            let num = querystring.parse(message);
-            sql.sever(pool, sql.select(["*"], "registryinformation", "xuehao=" + num.xuehao), function (data) {
+            let num = querystring.parse(message); 
+            xuehao=num.xuehao;
+            sql.sever(pool, sql.select(["xuehao","name","xueyuan","zhuanye","banji","xingbie","selfgroup","style","pass"], "registryinformation", "xuehao=" + sql.escape(xuehao)), function (data) {
                 if (data.length) {
                     res.write(JSON.stringify({
                         info: data[0],
@@ -64,7 +65,7 @@ module.exports = {
         });
         function serachViewsState(selfgroup) {
             let where = "selfgroup=" + selfgroup + " and level=1";
-            return sql.select(["xuehao", "name", "xueyuan", "zhuanye", "banji", "phoneNum", "style"], "registryinformation", where);
+            return sql.select(["xuehao","name","xueyuan","zhuanye","banji","xingbie","phoneNum","selfgroup","style","pass"], "registryinformation", where);
         }
     },
     rank: function (req, res, pool) {//查询排名 number表示几面*
@@ -75,10 +76,11 @@ module.exports = {
         });
         req.on('end', function () {
             let number = querystring.parse(message).number;
-            sql.sever(pool, rankState(req.session.selfgroup, number), function (data) {//成绩信息
+            let group =req.session.selfgroup;
+            sql.sever(pool, rankState(group, number), function (data) {//成绩信息
                 if (data.length) {
                     rankList.score = data;
-                    sql.sever(pool, infoState(req.session.selfgroup, number), function (data) {//个人信息
+                    sql.sever(pool, infoState(group, number), function (data) {//个人信息
                         rankList.info = data;
                         rankList.style = 1;
                         rankList.msg = "查询成功";
@@ -100,10 +102,10 @@ module.exports = {
         }
         function infoState(selfgroup, number) {
             let where = "selfgroup=" + selfgroup + " and level=" + "1" + " and pass>=" + sql.escape(number);
-            return sql.select(["xuehao", "name", "xueyuan", "zhuanye", "banji", "xingbie"], "registryinformation", where);
+            return sql.select(["xuehao","name","xueyuan","zhuanye","banji","xingbie","selfgroup","style","pass"], "registryinformation", where);
         }
     },
-    rankDetails: function (req, res, pool) {//每面具体成绩信息*
+    rankDetails: function (req, res, pool) {//某人每面具体成绩信息*
         let message = "";
         res.on('data', function (data) {
             message += data;
@@ -294,7 +296,7 @@ module.exports = {
                                 sql.sever(pool, markState(req, markText.xuehao), function (data) {//result登录人所携带session,state当前是第几面,xuehao面试者学号,markText打分内容
                                     if (data.length) {
                                         sql.sever(pool, sql.insert("scoringrecord", ["xuehao", "selfgroup", "type", "time", "person", "obj", "history"], [sql.escape(markText.xuehao), req.session.selfgroup, state, "NOW()", sql.escape(name), sql.escape(markText.obj), sql.escape(markText.history)]), function () {
-                                            sql.sever(pool, sql.update("registryinformation", ["style"], [1], "xuehao=" + sql.escape(markText.xuehao)), function () {
+                                            sql.sever(pool, sql.update("registryinformation", ["style"], [2], "xuehao=" + sql.escape(markText.xuehao)), function () {
                                                 res.write(JSON.stringify({
                                                     style: 1,
                                                     msg: "打分记录提交成功"
@@ -397,7 +399,7 @@ module.exports = {
     },
     showNoticeQue: function (req, res, pool) {//查询本组公告队列公告*
         let group = req.session.selfgroup;
-        sql.sever(pool, sql.select(["obj"], "notice", "type=3"), function (data) {
+        sql.sever(pool, sql.select(["obj"], "notice", "type="+group), function (data) {
             if (data.length) {
                 res.write(JSON.stringify({
                     text: data[0].obj,
@@ -414,20 +416,21 @@ module.exports = {
             }
         })
     },
-    showNotice: function (req, res, pool) {//查询本组公告*
+    showNotice: function (req, res, pool) {//查询本组公告和实验室公告*
         let group = req.session.selfgroup;
-        sql.sever(pool, sql.select(["obj"], "notice", "type=" + group), function (data) {
-            if (data.length) {
+        sql.sever(pool, sql.select(["obj"], "notice", "type=" + group +" OR type=6"), function (data) {
+            if (data.length){
                 res.write(JSON.stringify({
-                    text: data[0].obj,
                     style: 1,
-                    msg: "查找成功"
+                    msg: "查找成功",
+                    group:data[0].obj,
+                    main:data[1].obj
                 }));
                 res.end();
-            } else {
+            }else{
                 res.write(JSON.stringify({
                     style: 0,
-                    msg: "暂无本组公告"
+                    msg: "数据库查询异常"
                 }));
                 res.end();
             }

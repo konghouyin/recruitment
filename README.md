@@ -569,9 +569,9 @@ res.send(JSON.stringify(a));
 - 返回
 ```js
 {
-    style:1代表成功，0代表失败，
-    msg:"具体情况"，
-    selfInfo:[{"xingming":1,"xuehao":2,.....}]
+    "style":1代表成功，0代表失败，
+    "msg":"具体情况"，
+    "selfInfo":[{"xuehao":4171196,"name":"张银鸽","xueyuan":"计算机学院","zhuanye":"计算机科学与技术","banji":"计科1706","xingbie":"女","selfgroup":3,"style":0,"pass":1}]
 }
 ```
 5.查看本组报名数据
@@ -581,9 +581,9 @@ res.send(JSON.stringify(a));
 - 返回
 ```js
 {
-    selfInfo:[{xuehao:123,name:'嘻嘻嘻',xueyuan:'计算机学院'，....},{},{}...]
-    msg:"具体情况"，
-    style:1代表成功，0代表失败
+    "selfInfo":[{"xuehao":4171196,"name":"张银鸽","xueyuan":"计算机学院","zhuanye":"计算机科学与技术","banji":"计科1706","xingbie":"女","phoneNum":123,"selfgroup":3,"style":0,"pass":1},{},{}...]
+    "msg":"具体情况"，
+    "style":1代表成功，0代表失败
 }
 ```
 6.查询每面排名数据
@@ -593,8 +593,8 @@ res.send(JSON.stringify(a));
 - 返回
 ```js
 {
-    "score":[{id:1,xuehao:41711,selfgruop:1,...},{},...]
-    info:[{xuehao:123,name:'嘻嘻嘻',xueyuan:'计算机学院'，....},{},{}...]
+    "score":[{"id":2,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"第一题\":10,\"第二题\":10,\"第三题\":10}","advice":"继续努力","history":"xxxx"},{},...]
+    "info":[{"xuehao":4171197,"name":"张三","xueyuan":"计算机学院","zhuanye":"软件工程","banji":"软件1702","xingbie":"女","selfgroup":3,"style":1,"pass":1},{},{}...]
     "msg":"具体情况"，
     "style":1代表成功，0代表失败
 }
@@ -606,9 +606,9 @@ res.send(JSON.stringify(a));
 - 返回
 ```js
 {
-    scoreInfo:[{id:1,xuehao:41711,selfgruop:1,...},{},...],//包括这人目前为止所有面试信息
-    msg:"具体情况"，
-    style:1代表成功，0代表失败
+    "scoreInfo":[{"id":2,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"C语言\":45,\"沟通能力\":20,...}","advice":"继续努力","history":"xxxx"},{"id":4,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"C语言\":45,\"沟通能力\":19,...}","advice":"继续努力","history":"xxxx"},{"id":7,"xuehao":4171196,"selfgroup":3,"type":2,"time":"2019-02-02T16:48:05.000Z","person":"wanjianxin","obj":"{\"第一题\":10,\"第二题\":10}","history":"xxxx"}],,//包括这人目前为止所有面试信息,其中一面有几个人给面试者打分就有几条一面成绩信息，二面面试信息只有一条
+    "msg":"具体情况"，
+    "style":1代表成功，0代表失败
 }
 ```
 8.一面打分
@@ -657,19 +657,21 @@ message={
 - 返回
 ```js
 {
-    "text":"{ \"title\":\"通知\"，\"context\":\"hhhh\"}",
     "style":1成功，0失败,
-    "msg":"具体状态"
+    "msg":"具体状态",
+    "group":"{\"title\":\"通知\"，\"context\":\"hhhh\"}",
+    "mian":"{\"title\":\"通知\"，\"context\":\"hhhh\"}"
 }
 ```
+- 注明：经过讨论，这个接口的使用要基于公告数据表的初始化。即，面试开始前每组公告内容为null。
 12.查询公告队列公告
 - url: /shownoticeque
 - 方法：get
 - 参数：无
 - 返回
-```
+```js
 {
-    "text":"{\"title\":\"通知\"，\"context\":\"hhhh\"},
+    "text":"{\"title\":\"通知\"，\"context\":\"hhhh\"}",
     "style":1成功，0失败,
     "msg":"具体状态"
 }
@@ -681,8 +683,7 @@ message={
 - 返回
 ```js
 {
-    "info":{"xuehao":4171196,"name":"张银鸽","xueyuan":"计算机学院","zhuanye":"计算机科学与技术","banji":"计科1706","xingbie":"女","password":"1256","phoneNum":"183","selfgroup":3,"level":2,"style":0,"pass":1,"time":"2019-01-30T08:39:00.000Z"
-    },
+    "info":{"xuehao":4171196,"name":"张银鸽","xueyuan":"计算机学院","zhuanye":"计算机科学与技术","banji":"计科1706","xingbie":"女","selfgroup":3,"style":0,"pass":1},
     "style":1成功，0失败
     "msg":"具体情况"
 }
@@ -770,7 +771,7 @@ message = {
 {
     "style":1代表成功，0代表失败，
     "msg":"具体情况"，
-    "selfInfo":[{"xingming":1,"xuehao":2,.....}]
+    "selfInfo":[{"name":1,"xuehao":2,.....}]
 }
 ```
 4.查看本组报名数据
@@ -780,7 +781,7 @@ message = {
 - 返回
 ```js
 {
-    "selfInfo":[{"xuehao":123,"name":'嘻嘻嘻',"xueyuan":'计算机学院'，....},{},{}...]
+    "selfInfo":[{"xuehao":4171196,"name":"张银鸽","xueyuan":"计算机学院","zhuanye":"计算机科学与技术","banji":"计科1706","xingbie":"女","phoneNum":123,"selfgroup":3,"style":0,"pass":1},{},{}...]
     "msg":"具体情况"，
     "style":1代表成功，0代表失败
 }
@@ -792,8 +793,8 @@ message = {
 - 返回
 ```js
 {
-    "score":[{id:1,xuehao:41711,selfgruop:1,...},{},...]
-    "info":[{xuehao:123,name:'嘻嘻嘻',xueyuan:'计算机学院'，....},{},{}...]
+    "score":[{"id":2,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"第一题\":10,\"第二题\":10,\"第三题\":10}","advice":"继续努力","history":"xxxx"},{},...]
+    "info":[{{"xuehao":4171197,"name":"张三","xueyuan":"计算机学院","zhuanye":"软件工程","banji":"软件1702","xingbie":"女","selfgroup":3,"style":1,"pass":1}},{},{}...]
     "msg":"具体情况"，
     "style":1代表成功，0代表失败
 }
@@ -805,7 +806,7 @@ message = {
 - 返回
 ```js
 {
-    "scoreInfo":"scoreInfo":[{"id":2,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"C语言\":45,\"沟通能力\":20,...}","advice":"继续努力","history":"xxxx"},{"id":4,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"C语言\":45,\"沟通能力\":19,...}","advice":"继续努力","history":"xxxx"},{"id":7,"xuehao":4171196,"selfgroup":3,"type":2,"time":"2019-02-02T16:48:05.000Z","person":"wanjianxin","obj":"{\"第一题\":10,\"第二题\":10}","history":"xxxx"}],,//包括这人目前为止所有面试信息,其中一面有几个人给面试者打分就有几条一面成绩信息，二面面试信息只有一条
+    "scoreInfo":[{"id":2,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"C语言\":45,\"沟通能力\":20,...}","advice":"继续努力","history":"xxxx"},{"id":4,"xuehao":4171196,"selfgroup":3,"type":1,"time":"2019-02-02T16:46:35.000Z","person":"wanjianxin","obj":"{\"C语言\":45,\"沟通能力\":19,...}","advice":"继续努力","history":"xxxx"},{"id":7,"xuehao":4171196,"selfgroup":3,"type":2,"time":"2019-02-02T16:48:05.000Z","person":"wanjianxin","obj":"{\"第一题\":10,\"第二题\":10}","history":"xxxx"}],,//包括这人目前为止所有面试信息,其中一面有几个人给面试者打分就有几条一面成绩信息，二面面试信息只有一条
     "msg":"具体情况"，
     "style":1代表成功，0代表失败
 }
@@ -839,11 +840,13 @@ message = {
 - 返回
 ```js
 {
-    "text":"{ \"title\":\"通知\"，\"context\":\"hhhh\"}",
     "style":1成功，0失败,
-    "msg":"具体状态"
+    "msg":"具体状态",
+    "group":"{\"title\":\"通知\"，\"context\":\"hhhh\"}",
+    "mian":"{\"title\":\"通知\"，\"context\":\"hhhh\"}"
 }
 ```
+- 注明：经过讨论，这个接口的使用要基于公告数据表的初始化。即，面试开始前每组公告内容为null。
 10.输入学号查看个人信息
 - url: /searchinfobynum
 - 方法：get
@@ -851,8 +854,7 @@ message = {
 - 返回
 ```js
 {
-    "info":{"xuehao":4171196,"name":"张银鸽","xueyuan":"计算机学院","zhuanye":"计算机科学与技术","banji":"计科1706","xingbie":"女","password":"1256","phoneNum":"183","selfgroup":3,"level":2,"style":0,"pass":1,"time":"2019-01-30T08:39:00.000Z"
-    },
+    "info":{"xuehao":4171196,"name":"张银鸽","xueyuan":"计算机学院","zhuanye":"计算机科学与技术","banji":"计科1706","xingbie":"女","selfgroup":3,"style":0,"pass":1},
     "style":1成功，0失败
     "msg":"具体情况"
 }
