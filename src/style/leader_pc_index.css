@@ -1,0 +1,55 @@
+.main>.list {
+	position: absolute;
+	float: left;
+	width: 50px;
+	background-color: #f1f2f4;
+	height: 100%;
+	overflow: hidden;
+	transition: all 0.8s;
+}
+
+.main>.list:hover {
+	width: 240px;
+}
+
+.headpic {
+	opacity: 0;
+	margin: 70px auto;
+	border-radius: 50%;
+	width: 130px;
+	height: 130px;
+	background: #f40;
+	transition: all 0.3s;
+}
+
+.main>.list:hover .headpic {
+	transition: all 0.5s 0.3s;
+	opacity: 1;
+}
+
+.main>.thing {
+	margin-left: 50px;
+}
+
+.list .list_btn {
+	padding: 20px 50px;
+	font-size: 18px;
+	width: 180px;
+	position: relative;
+}
+
+.list .list_btn::before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	top: 15px;
+	left: 10px;
+	background: #f40;
+}
+
+.list .list_btn:hover {
+	background-color: #3c87fb !important;
+	color: #fff !important;
+}

@@ -36,7 +36,7 @@ server.use(cookieSession({
 
 
 server.all('*', function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", 'http://127.0.0.1:8848'); //需要显示设置来源
+	res.header("Access-Control-Allow-Origin", 'http://192.168.137.1:8848'); //需要显示设置来源
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 	res.header("Access-Control-Allow-Credentials", true); //带cookies7     res.header("Content-Type", "application/json;charset=utf-8");
@@ -86,9 +86,13 @@ server.post('/login', function(req, res) {
 				maxAge: 5 * 1000,
 				signed: true
 			});
+			var sendurl = "http://127.0.0.1:8848/test/index.html";
+			if(data[0].xuehao==null||data[0].selfgroup==null){
+				sendurl = "http://127.0.0.1:8848/test/index2.html";
+			}
 			res.write(JSON.stringify({
 				msg: "登录成功！",
-				url: "http://127.0.0.1:8848/test/index.html",
+				url: sendurl,
 				style: 1
 			}));
 			res.end();
@@ -112,7 +116,7 @@ server.use('/picyzm', function(req, res) {
 function canvas(req, res) {
 	var codeConfig = {
 		size: 4, // 验证码长度
-		ignoreChars: '0o1il', // 验证码字符中排除 0o1i
+		ignoreChars: '0o1iIlL', // 验证码字符中排除 
 		noise: 2, // 干扰线条的数量
 		width: 100,
 		viewwidth: 150,
@@ -146,13 +150,13 @@ server.post('/phone', function(req, res) {
 			res.end();
 		} else if (req.session.picyzm == undefined) {
 			res.write(JSON.stringify({
-				msg: "图片验证码已失效，请重新验证！",
+				msg: "图片验证码已失效，<br>请重新验证！",
 				style: -1
 			}));
 			res.end();
 		} else if (obj.picyzm.toLocaleLowerCase() != req.session.picyzm) {
 			res.write(JSON.stringify({
-				msg: "图片验证码错误，请再次验证！",
+				msg: "图片验证码错误，<br>请再次验证！",
 				style: 0
 			}));
 			res.end();
@@ -169,7 +173,7 @@ server.post('/phone', function(req, res) {
 			req.session.picyzm = null; //成功后验证码失效
 			req.session.phone = obj.phone;//session保存电话号码
 			res.write(JSON.stringify({
-				msg: "短信已发送！",
+				msg: "短信已发送至"+obj.phone,
 				style: 1
 			}));
 			console.log("发送短信" + req.session.yzm);
@@ -197,18 +201,18 @@ server.post('/reg', function(req, res) {
 		obj = querystring.parse(message);
 		if (req.session.yzm == undefined) {
 			res.write(JSON.stringify({
-				msg: "验证码已失效，请重新验证！",
+				msg: "短信验证码已失效<br>请重新验证。",
 				style: -1
 			}));
 			res.end();
 		} else if (obj.yzm != req.session.yzm) {
 			res.write(JSON.stringify({
-				msg: "验证码错误，请再次验证！",
+				msg: "验证码错误，请再次验证。",
 				style: 0
 			}));
 			res.end();
 		} else {
-			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password'], [sql.escape(req.session.phone), sql.escape(obj.password)],
+			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password','time'], [sql.escape(req.session.phone), sql.escape(obj.password),'NOW()'],
 				true);
 			sql.sever(pool, sqlString, end); //数据库存入手机号和密码
 		}
@@ -216,8 +220,23 @@ server.post('/reg', function(req, res) {
 
 	function end(data) {
 		req.session.yzm = null; //成功后验证码失效
+		
+		var cookieSend = "" + req.session.phone + "~" + obj.password + "~" + new Date().getTime(); //保存cookie验证，防止跨站session失效
+		
+		var str = JSON.stringify(cookieSend); //明文
+		var secret = 'niyidingjiebuchulai'; //密钥--可以随便写
+		var cipher = crypto.createCipher('aes192', secret);
+		var enc = cipher.update(str, 'utf8', 'hex'); //编码方式从utf-8转为hex;
+		enc += cipher.final('hex'); //编码方式从转为hex;
+		
+		res.cookie('pbl', enc, {
+			path: '/',
+			maxAge: 5 * 1000,
+			signed: true
+		});
 		res.write(JSON.stringify({
-			msg: "注册成功！",
+			msg: "注册成功。",
+			url:"xxx",
 			style: 1
 		}));
 		res.end();
@@ -225,7 +244,7 @@ server.post('/reg', function(req, res) {
 })
 //请求--注册信息
 
-server.listen(8081);
+server.listen(8082);
 
 
 
@@ -240,5 +259,3 @@ function rexXuehao(text) {
 	return reg.test(text);
 }
 //通用学号
-
-

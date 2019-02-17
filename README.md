@@ -348,7 +348,7 @@ m.mailepass("Android组 提出公告申请，请及时审核！");
 ```js
 var validate = require('./server/public_validate.js');
 server.get('/new',function(req,res){
-	validate.prove(pool,req,res);
+	validate.prove(pool,req,res,level);
 })
 ```
 
@@ -357,6 +357,7 @@ server.get('/new',function(req,res){
 - pool：<Pool> 数据库连接池
 - req：<Object>请求
 - res：<Object>  响应
+- level: <Int> 登录权限（1.用户2.组员3.组长4.管理员）
 
 **注意：** 使用时一定要在调用之前处理好cookie，session。使用这个模块，会自动向前端返回状态，即new接口的返回结果。
 
@@ -364,7 +365,7 @@ server.get('/new',function(req,res){
 失败返回：
 {
     msg: "cookie超时！",//错误原因
-	style: -2,//0没有cookie，-1cookie解析错误，-2cookie超时，-3验证错误
+	style: 0,//0没有cookie，-1cookie解析错误，-2cookie超时，-3权限有误
 	url: "登陆页面url"
 }
 成功返回：
@@ -442,7 +443,7 @@ server.get('/new',function(req,res){
 ```json
 {
     msg："具体情况"，
-    url："http",//跳转路径
+    url："http",//跳转路径（两种跳转路径，个人页面或是补全页面）
     style：0	//1成功，0用户名或错误
 }
 ```
@@ -487,7 +488,7 @@ server.get('/new',function(req,res){
 
 - url：/passback
 - 方法：post
-- 参数：password=（MD5加密）&yhm=8位或11位
+- 参数：password=（MD5加密）&yzm=728332
 - 返回
 
 ```json
@@ -504,18 +505,6 @@ server.get('/new',function(req,res){
 #### b.后端 
 
 ##### 1）接口
-
-##### 2）教务系统验证
-
-user_teachSystem.js为教务系统验证文件，验证输入学号，密码是否正确，并可以从个人页面爬取个人信息。此模块用于身份验证绑定。
-
-西安邮电大学新教务系统代理登录请求交互步骤
-
--  请求session-id，之后的所有请求必须要添加此session-id，否则会被返回至主页面。
-- 解析html从中提取csrftoken
-- 请求加密公钥，将用于用户RSA加密。
-- 验证身份，发送csrftoken，学号，加密后的用户密码
-- 请求并解析个人数据
 
 ### 5.组长
 
@@ -884,6 +873,70 @@ message = {
 
 #### b.后端
 
+### 9.补全用户信息和报名
+
+#### a.前端
+
+#### b.后端
+
+##### 1.计算机学院完善个人信息
+
+- url：/person/computer
+- 方法：post
+- 参数：xuehao=04xxxxxx&name=xxx
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    style：0	//1成功，0没有查到此学号，-1姓名与学号不匹配，-2账号已经绑定学号，-3数据库异常，-5此学号已绑定
+}
+```
+
+验证逻辑：session---> 学号合法性---> 学号唯一性--->当前账号是否已有绑定---> 输入信息正确性---> 存入
+
+##### 2.教务系统验证补全个人信息
+
+- url：/person/teach
+- 方法：post
+- 参数：xuehao=xxxxxxxx&password=xxx
+- 返回
+
+```json
+{
+    msg："具体情况"，
+    style：0	//1成功，0用户名或密码有误，-2已经绑定学号，-3数据库异常，-4教务代理请求异常，-5此学号已绑定
+}
+```
+
+验证逻辑：session---> 学号合法性---> 学号唯一性--->当前账号是否已有绑定---> 教务密码正确性---> 存入
+
+user_teachSystem.js为教务系统验证文件，验证输入学号，密码是否正确，并可以从个人页面爬取个人信息。此模块用于身份验证绑定。
+
+西安邮电大学新教务系统代理登录请求交互步骤
+
+- 请求session-id，之后的所有请求必须要添加此session-id，否则会被返回至主页面。
+- 解析html从中提取csrftoken
+- 请求加密公钥，将用于用户RSA加密。
+- 验证身份，发送csrftoken，学号，加密后的用户密码
+- 请求并解析个人数据
+
+##### 3.分组报名
+
+- url：/signin
+- 方法：post
+- 参数：selfgroup=1（1Android，2ios，3web，4后台，5产品）
+- 返回
+```json
+{
+    msg："具体情况"，
+    style：0	//1成功，0报名已截止，-1已经分组，-2还未完成身份信息填写，-3数据库异常
+    url："http://xxx.com"//报名成功后跳转页面
+}
+```
+
+- 注意：报名成功和已分组都会返回跳转个人主页的操作，跳转有效时间暂定5秒。
+
 ## 五、重要问题记录
 
 ### 1.上线需要调整参数
@@ -894,5 +947,11 @@ message = {
 - 各后台session，cookie，秘钥数组，签名
 - 短信平台秘钥，配置ip
 
+### 2.安全问题
 
+#### 1.恶意绑定学号
+
+​	存在一个安全隐患，根据之前收集的数据，有1/5的人会忘记教务密码，为了减小手动输入的问题，引入计算机学院学号，姓名验证模式。但是这样存在恶意绑定的问题。考虑到恶意注入数据量（每个手机号只能绑定一个），以及恶意注入可能性，暂时不修复此漏洞。
+
+​	修复方案：数据库筛选信息，过滤掉无意义数据，保证此手机号无法再次注入，新增电话号码黑名单，并提交到短信平台，进行封杀。
 
