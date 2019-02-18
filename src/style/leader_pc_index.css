@@ -6,6 +6,7 @@
 	height: 100%;
 	overflow: hidden;
 	transition: all 0.8s;
+	z-index: 100;
 }
 
 .main>.list:hover {
@@ -14,7 +15,7 @@
 
 .headpic {
 	opacity: 0;
-	margin: 70px auto;
+	margin: 90px auto;
 	border-radius: 50%;
 	width: 130px;
 	height: 130px;
@@ -32,26 +33,377 @@
 }
 
 .list .list_btn {
-    padding: 20px 60px;
-    font-size: 18px;
-    font-weight: 600;
-    width: 180px;
-    position: relative;
+	padding: 20px 60px;
+	font-size: 18px;
+	font-weight: 600;
+	width: 180px;
+	position: relative;
 }
 
-.list .btn-pic{
+.list .btn-pic {
 	display: block;
 	position: absolute;
 	width: 30px;
 	height: 30px;
 	top: 16px;
 	left: 10px;
-	background-size:100%;
-	background-repeat:no-repeat ;
-	
+	background-size: 100%;
+	background-repeat: no-repeat;
+
 }
 
 .list .list_btn:hover {
 	background-color: #3c87fb !important;
 	color: #fff !important;
+}
+
+/* 整体布局 */
+.page1,
+.page2,
+.page3,
+.page4,
+.page5{
+	overflow: hidden;
+}
+
+.wrap_top {
+	color: #3c87fb;
+	font-size: 27px;
+	margin: 22px 0 27px 0;
+	text-align: center;
+}
+
+.col {
+	width: 31%;
+	margin-left: 1.5%;
+	border: 2px solid #aaa;
+	box-shadow: #CCCCCC 3px 4px 9px 0px;
+	float: left;
+}
+
+.tittle {
+	text-align: center;
+	font-size: 26px;
+	margin: 20px;
+}
+
+.main-message {
+	border-collapse: separate;
+	border: 2px solid #aaa;
+	width: 90%;
+	margin: 10px 5%;
+}
+
+.main-message tr,
+.main-message td {
+	border: 1px solid #aaa;
+	width: 25%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+
+.all-num {
+	width: 95%;
+	margin: 0 auto;
+}
+
+.all-num .people-num {
+	width: 16%;
+	height: 82px;
+	border: 2px solid #ddd;
+	float: left;
+	margin: 3%;
+	font-size: 50px;
+	text-align: center;
+	line-height: 84px;
+}
+
+.writeren {
+	vertical-align: bottom;
+	height: 100px;
+	display: table-cell;
+	font-size: 30px;
+}
+
+.group-change {
+	margin: 35px 26px;
+	overflow: hidden;
+}
+
+.group-each {
+	float: left;
+	width: 27%;
+	height: 80px;
+	margin: 1.5% 3%;
+	text-align: center;
+	background-color: #7cb5ec;
+	overflow: hidden;
+	border-radius: 3px;
+}
+
+.group-each .name {
+	color: #fff;
+	line-height: 56px;
+	height: 43px;
+	font-size: 19px;
+}
+
+.group-each .num {
+	color: #fff;
+}
+
+
+.search {
+	border-top: 4px solid #f1f2f4;
+	padding: 17px;
+}
+
+.search input,
+.search select,
+.search div {
+	display: inline-block;
+	font-size: 19px;
+	line-height: 40px;
+	height: 30px;
+}
+
+.search select {
+	width: 130px;
+}
+
+
+.search>div {
+	margin: 0 20px;
+}
+
+.searchbtn {
+	background-color: #3c87fb;
+	width: 70px;
+	height: 30px;
+	line-height: 30px !important;
+	text-align: center;
+	border-radius: 4px;
+	color: #fff;
+}
+
+.main-list-message {
+	font-size: 18px;
+	width: 90%;
+	margin: 1% 5%;
+	text-align: center;
+	border: 2px solid #ccc;
+	height: 35px;
+	line-height: 35px;
+}
+
+.main-list-message th {
+	background: #666;
+	color: #fff;
+
+
+	border: 1px solid #fff;
+}
+
+.main-list-message td {
+	border: 1px solid #aaa;
+}
+
+.main-list-message .less td {
+	background: #3c87fb2b;
+}
+
+.page2 .left {
+	margin: 20px 8%;
+	font-size: 17px;
+	float: left;
+}
+
+.page2 .changepage {
+	margin: 20px 8%;
+	font-size: 17px;
+	float: right;
+}
+
+.page2 .changepage>div {
+	padding: 5px;
+	margin: 0 5px;
+	border: 2px solid #ccc;
+	float: left;
+	text-align: center;
+	min-width: 12px;
+	border-radius: 1px;
+}
+
+.page3 .liucheng-show,
+.page3 .thing {
+	overflow: hidden;
+}
+
+.page3 .list1,
+.page3 .list2 {
+	width: 46.5%;
+	margin-left: 2%;
+	margin-top: 16px;
+	border: 2px solid #aaa;
+	box-shadow: #CCCCCC 3px 4px 9px 0px;
+	float: left;
+}
+
+.page3 .old {
+	background-color: chartreuse;
+}
+
+.page3 .now {
+	background-color: #2E8AFE;
+}
+
+.page3 .new {
+	background-color: #ccc;
+}
+
+.page3 .liucheng-show>div {
+	float: left;
+	width: 8%;
+	margin: 2% 4.5%;
+	padding: 12px 10px;
+	color: #fff;
+	text-align: center;
+	font-size: 18px;
+
+}
+
+.ECalendar {
+	width: 180px;
+	height: 24px;
+	font-size: 17px;
+}
+
+.tuli-show {
+	overflow: hidden;
+	width: 400px;
+	margin: 17px auto;
+}
+
+.tuli-show .tuli {
+	color: #000;
+}
+
+.tuli-show>div {
+	width: 97px;
+	float: left;
+	padding: 6px 0;
+	color: #fff;
+	text-align: center;
+}
+
+.licheng {
+	border-bottom: 2px solid #ccc;
+}
+
+.timechoose .input {
+	margin: 20px;
+}
+
+.timechoose .input>input {
+	width: 100px;
+	height: 20px;
+}
+
+.timechoose {
+	margin: 20px;
+	font-size: 18px;
+}
+
+.calendarWarp {
+	margin: 0 20px;
+}
+
+.page3 .mess-show {
+	font-size: 18px;
+	margin: 10px 40px;
+}
+
+.main-mess {
+	border-bottom: 2px solid #ccc;
+	padding-bottom: 10px;
+}
+
+.height-max {
+	height: 566px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.page3 .page3btn,
+.page3 .group-style {
+	float: left;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #2E8AFE;
+	text-align: center;
+	color: #fff;
+	border-radius: 20px;
+	margin: 19px 9px;
+}
+
+.page3 .page3btn {
+	width: 150px;
+	background-color: #d18a1f;
+}
+
+.choosetimebtn {
+	background-color: #2E8AFE;
+	color: #fff;
+	text-align: center;
+	width: 230px;
+	height: 35px;
+	line-height: 34px;
+	margin: 25px auto;
+	border-radius: 4px;
+}
+
+.page4 .group-list {
+	overflow: hidden;
+	margin: 0 150px;
+}
+
+.page4 .group-style {
+	float: left;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #2E8AFE;
+	text-align: center;
+	color: #fff;
+	border-radius: 20px;
+	margin: 19px 9px;
+}
+
+.main-list {
+	max-height: 600px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.page4 .message {
+	float:left;
+	padding: 10px;
+	font-size: 18px;
+	margin-left:200px ;
+}
+
+
+.page4 .passbtn {
+	float: right;
+	margin-right: 200px;
+	font-size: 20px;
+	width: 131px;
+	line-height: 40px;
+	height: 40px;
+	background-color: #d18a1f;
+	color: #fff;
+	text-align: center;
+	border-radius: 30px;
 }
