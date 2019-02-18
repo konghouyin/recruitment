@@ -14,7 +14,6 @@ module.exports={
         var explain=document.getElementsByClassName("explain")[0];
         var mid=document.getElementsByClassName("mid")[0];
         var content=document.getElementsByClassName("content")[0];
-        var notice_box=document.getElementsByClassName("notice_box")[0]; 
         
         
         //大盒子
@@ -100,6 +99,8 @@ module.exports={
 
         person_box.style.display="none";
         pic_border1.addEventListener("mousedown",function(){
+            var change_box=document.getElementsByClassName("change_box")[0];
+            var notice_box=document.getElementsByClassName("notice_box")[0]; 
             pic_border1.className="active";
             person_pic.className="person_newpic";
             pic_border2.className="pic_border2";
@@ -116,6 +117,7 @@ module.exports={
 
             person_box.style.display="block";
             notice_box.style.display="none";
+            change_box.style.display="none";
 
             // ajax({
             //     url: "http://192.168.137.1:8082/personmessage",

@@ -58,6 +58,8 @@ module.exports={
         notice_box.style.display="none";
 
         pic_border3.addEventListener("mousedown",function(){
+            var change_box=document.getElementsByClassName("change_box")[0];
+
             mid.innerHTML="面试公告";
             pic_border3.className="active";
             notice_pic.className="notice_newpic";
@@ -72,6 +74,7 @@ module.exports={
             explain.style.display="none";
             person_box.style.display="none";
             notice_box.style.display="block";
+            change_box.style.display="none";
 
             ajax({
                 url: "http://192.168.137.1:8082/personmessage",

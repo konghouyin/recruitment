@@ -1,0 +1,212 @@
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+    text-decoration: none;
+}
+html{
+    width: 100%;
+    height:100%;
+    /* background-color:#232a34; */
+    background-color:#fff;
+    position:relative;
+    font-size:62.5%;
+}
+input{
+    background:none;
+    outline:none;
+    border:0px;
+    font-weight:90;
+    text-align:center;
+}
+.headbox{
+    position:relative;
+    width: 100%;
+    height:5rem;
+    border-bottom-color: #F7F7F7;;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+.back_btn{
+    position: absolute;
+    top: 50%;
+    left:5%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top:-1.25rem;
+    background-image: url(../img/pass_back.png);
+    background-size: 2.5rem;
+    background-repeat: no-repeat;
+}
+.head_text{
+    position: absolute;
+    left:50%;
+    width:10rem;
+    margin-left:-5rem;
+    height: 5rem;
+    text-align: center;
+    line-height:5rem;
+    font-size:2rem;
+    color: #3285f9;
+}
+.bodybox{
+    width: 85%;
+    height:18rem;
+    margin:3rem auto;
+    /* background-color: #303741; */
+}
+.btn1{
+    position:relative;
+    width: 100%;
+    height:5rem;
+    border-bottom-color:#E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+.btn1_head{
+    width: 9rem;
+    height: 5rem;
+    position: absolute;
+    top: 50%;
+    left:0;
+    margin-top:-2.5rem;
+    font-size: 1.5rem;
+    line-height: 5rem;
+    color: rgb(46, 45, 45);
+}
+.btn1_text{
+    position: absolute;
+    top: 50%;
+    left:23%;
+    width:15rem;
+    height:5rem;
+    margin-top:-2.5rem;
+    font-size:1.4rem;
+    line-height:5rem;
+    color:rgb(46, 45, 45);
+    /* background-color: rgb(235, 193, 10); */
+}
+.btn1_dlt{
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    top: 50%;
+    right:0%;
+    margin-top:-0.7rem;
+    background-image: url(../img/dlt.png);
+    background-size: 1.6rem;
+    background-repeat: no-repeat;
+}
+.passback_con{
+    width: 100%;
+    height:4rem;
+    margin:5rem auto;
+    /* background-color: #303741; */
+    background-color: #3285f9;
+    border-radius: 6px;
+    color:#fff;
+    font-size:1.8rem;
+    text-align: center;
+    line-height:4rem;
+}
+.phone_noenf{
+    position: absolute;
+    left: 50%;
+    top: 27%;
+    width: 15rem;
+    height: 4rem;
+    margin-left: -7.5rem;
+    margin-top: -1.5rem;
+    font-size: 1.6rem;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+    background-color: rgb(0,0,0,0.3);
+}
+.cloth{
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background-color: rgb(0,0,0,0.02);
+    z-index: 2;
+}
+.msg_path2{
+    position: absolute;
+    left: 50%;
+    top: 27%;
+    width: 26rem;
+    height: 16rem;
+    margin-left: -13rem;
+    margin-top: -8rem;
+    background-color: #fff;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
+    border-radius: 3px;
+}
+.msg2_headline{
+    position: relative;
+    width: 100%;
+    height: 5rem;
+    border-bottom-color: #E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    text-align: center;
+    line-height: 5rem;
+    font-size:1.6rem;
+}
+.msg2_back{
+    position: absolute;
+    top: 50%;
+    left:5%;
+    width: 2rem;
+    height: 2rem;
+    margin-top:-1rem;
+    background-image: url(../img/msg_back.png);
+    background-size: 2rem;
+    background-repeat: no-repeat;
+}
+.msg2_btn{
+    position: relative;
+    width: 100%;
+    height: 5rem;
+    border-bottom-color: #E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+.msg2_head{
+    width: 7rem;
+    height: 5rem;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    margin-top: -2.5rem;
+    font-size: 1.5rem;
+    line-height: 5rem;
+    text-align: center;
+}
+.msg2_text{
+    position: absolute;
+    top: 50%;
+    left: 31%;
+    width: 13rem;
+    height: 5rem;
+    margin-top: -2.5rem;
+    font-size: 1.4rem;
+    line-height: 5rem;
+    color: rgb(46, 45, 45);
+    text-align: center;
+}
+.msg2_con {
+    position: relative;
+    width: 8rem;
+    height: 3rem;
+    top:5%;
+    left:50%;
+    margin-left:-4rem;
+    border:1px solid #3285f9;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 3rem;
+}

@@ -5,11 +5,6 @@ var person_msg=require("./person_msg.js").person_msg;
 var meet=require("./meet.js").meet;
 var change=require("./change.js").change;
 
-var notice_box=document.getElementsByClassName("notice_box")[0]; 
-console.log(notice_box);
-var person_box=document.getElementsByClassName("person_box")[0]; 
-console.log(person_box);
-
 ajax({
     url: "http://192.168.137.1:8082/new",
     type: 'post',  

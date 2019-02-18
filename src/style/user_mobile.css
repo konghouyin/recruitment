@@ -627,5 +627,112 @@ html{
     overflow:auto;
     /* background-color: #0d3247; */
 }
-.notice::-webkit-scrollbar {display:none}
-.group::-webkit-scrollbar {display:none}
+.change_box{
+    position: absolute;
+    width:24rem;
+    height:24rem;
+    top:50%;
+    left:50%;
+    margin-top:-13rem;
+    margin-left:-12rem;
+    /* background-color: #5be689; */
+}
+.box1{
+    position: absolute;
+    top:0;
+    left:0;
+    width:11.9rem;
+    height:11.9rem;
+    border-color:#E5E5E5;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-bottom-width: 0.1rem;
+    border-right-width: 0.1rem;
+
+    /* background-color: #e6ba5b; */
+}
+.box2{
+    position: absolute;
+    top:0;
+    right:0;
+    width:11.9rem;
+    height:11.9rem;  
+    border-color:#E5E5E5;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-bottom-width: 0.1rem;
+    border-left-width: 0.1rem;
+    /* background-color: #e6ba5b; */
+}
+.box3{
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:11.9rem;
+    height:11.9rem;
+    border-color:#E5E5E5;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-top-width: 0.1rem;
+    border-right-width: 0.1rem;
+    /* background-color: #e6ba5b; */
+}
+.box4{
+    position: absolute;
+    bottom:0;
+    right:0;
+    width:11.9rem;
+    height:11.9rem;
+    border-color:#E5E5E5;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-top-width: 0.1rem;
+    border-left-width: 0.1rem;
+    /* background-color: #e6ba5b; */
+}
+.box_msg{
+    position: relative;
+    width:8rem;
+    height:6rem;
+    top:50%;
+    left:50%;
+    margin-top:-4rem;
+    margin-left:-4rem;
+    /* background-color: #5be689; */
+}
+.box_pic1,.box_pic2,.box_pic3,.box_pic4{
+    position: relative;
+    width:3rem;
+    height:3rem;
+    top:0;
+    left:50%;
+    margin-left:-1.5rem;
+    /* background-color: #b1e65b; */
+}
+.box_pic1{
+    background-image: url(../img/change_pass.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+}
+.box_pic2{
+    background-image: url(../img/help.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+}
+.box_pic3{
+    background-image: url(../img/group.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+}
+.box_pic4{
+    background-image: url(../img/public.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+}
+.box_text1,.box_text2,.box_text3,.box_text4{
+    position: relative;
+    height:3rem;
+    text-align: center;
+    line-height:3rem;
+    /* background-color: #e6d15b; */
+}

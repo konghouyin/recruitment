@@ -28,13 +28,13 @@ module.exports={
         var person_box=document.getElementsByClassName("person_box")[0]; 
         var mid=document.getElementsByClassName("mid")[0];
         dot1.className="newdot1";
-        // console.log(notice_box);
-        // console.log(person_box);
+        var change_box=document.getElementsByClassName("change_box")[0];
 
 
         pic_border2.addEventListener("mousedown",function(){
             
             var notice_box=document.getElementsByClassName("notice_box")[0]; 
+            
             pic_border2.className="active";
             meet_pic.className="meet_newpic";
             pic_border1.className="pic_border1";
@@ -49,6 +49,7 @@ module.exports={
             explain.style.display="block";
             person_box.style.display="none";
             notice_box.style.display="none";
+            change_box.style.display="none";
 
            
             //个人的面试状态
