@@ -1,5 +1,4 @@
 const express = require('express');
-var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 const validate = require('./server/public_validate.js');
@@ -54,61 +53,9 @@ app.use('*', function (req, res, next) {//查看session是否存在
   }
 }); */
 
-app.post('/addrule', function (req, res) {//添加打分标准 post请求 
-  let message = "";
-  req.on('data', function (data) {
-    message += data;
-  }); 
-  req.end('end', function () { 
-   sql.sever(pool, sql.select(["style"], "process"), function (data) {
-      if (data[0].style == 0) {//一面前可以添加
-        let selfgroup = req.session.selfgroup;
-        sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup=" + selfgroup), function (data) {//判断打分标准是否存在
-          if (!data.length) {//无打分标准
-           sql.sever(pool, sql.insert("scoringstandard", ["selfgroup", "obj"], [selfgroup, message]), function (data) {
-              res.write(JSON.stringify({ "msg": "添加成功", "style": 1 }));
-              res.end();
-            });
-          } else {
-            res.write(JSON.stringify({ "msg": "已有打分标准", "style": 0 }));
-            res.end();
-          }
-        });
-      } else {//面试已开始不能添加
-        res.write(JSON.stringify({ "msg": "面试已开始，不能添加打分标准", "style": 0 }))
-        res.end();
-      }
-    })
-  });
-});
-
-app.post('/moderule', function (req, res) {//修改打分标准 一面前可修改
-  let message = '';
-  req.on('data', function (data) {
-    message += data;
-  });
-  req.end('end', function () { 
-   sql.sever(pool, sql.select(["style"], "process"), function (data) {
-      if (data[0].style == 0) {//面试开始前可修改
-        let selfgroup = req.session.selfgroup;
-        sql.sever(pool, sql.select(["obj"], "scoringstandard", "selfgroup=" + selfgroup), function (data) {//判断打分标准是否存在
-          if (data.length) {//已经添加过，则可修改
-           sql.sever(pool, sql.update("scoringstandard", ["obj"], [message], "selfgroup=" + selfgroup), function (data) {
-              res.write(JSON.stringify({ msg: "修改成功", style: 1 }));
-              res.end();
-            });
-          } else {//未添加
-            res.write(JSON.stringify({ msg: "无打分标准", style: 0 }))
-            res.end();
-          }
-        });
-      } else {
-        res.write(JSON.stringify({ msg: "面试已开始，不能修改打分标准", style: 0 }))
-        res.end();
-      }
-    })
-  });
-});
+app.post('/releaserule', function (req, res) {//添加打分标准 post请求 
+  operation.releaseRules(req,res,pool);
+})
 
 app.get('/searchrule', function (req, res) {//查询打分规则
   operation.searchMarkRules(req,res, pool);
@@ -135,27 +82,31 @@ app.get('/rank', function (req, res) {//查询每面排名数据
     operation.rank(req,res,pool);
 });
 
-app.get('/rankdetails', function (req, res) {//当前每面信息!!!
+app.get('/rankdetails', function (req, res) {//当前每面信息
     operation.rankDetails(req,res, pool);
 });
-
-
 app.get('/searchState',function(req,res){//查找当前面试进度，即第几面
   operation.searchState(res,pool);
 })
-app.get('/findSecondTime',function(req,res){//查找二面上次提交时间
-    operation.findSecondTime(req,res,pool,);
-
+app.get('/findSecond',function(req,res){//查找二面上次提交时间及打分记录
+    operation.findSecond(req,res,pool);
 });
-app.post('/addnotice', function (req, res) {//添加公告 添加至公告队列 发送邮件等待管理员审核
-    operation.addNotice(req,res,pool)
+app.post('/releasenotice', function (req, res) {//添加公告 添加至公告队列 发送邮件等待管理员审核
+    operation.releaseNotice(req,res,pool)
 })
 
+app.get('/shownoticeque', function (req, res) {//查看公告队列
+  operation.showNoticeQue(req,res,pool);
+});
 app.get('/shownotice', function (req, res) {//查看公告
   operation.showNotice(req,res,pool);
 });
 
-app.post('/selectviews',function(req,res){
+app.post('/selectviews',function(req,res){//通过人员选择
   operation.selectViews(req,res,pool);
+})
+
+app.get('/searchperson',function(req,res){//查找本组审核人员队列
+  operation.searchPersQ(req,res,pool);
 })
 app.listen(8080);

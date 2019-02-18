@@ -6,7 +6,7 @@ module.exports = {
 	prove: prove
 }
 
-function prove(pool,req, res) {
+function prove(pool,req, res,level) {
 	let ss = req.signedCookies.pbl;
 	var ans = decodeCookies(ss);
 	if (ans.style == 0) {
@@ -34,7 +34,8 @@ function prove(pool,req, res) {
 		var where = "phoneNum="+ans.name+" and "+"password="+ans.pass;
 		var sqlString = sql.select(['*'],'registryinformation',where);
 		sql.sever(pool,sqlString, function(data) {
-			if (data.length == 1) {
+			if (data.length == 1 && data[0].level==level) {
+				req.session.phone = data[0].phoneNum;
 				req.session.selfgroup = data[0].selfgroup;
 				req.session.xuehao = data[0].xuehao;
 				req.session.name = data[0].name;
@@ -49,7 +50,7 @@ function prove(pool,req, res) {
 			} else {
 				connection.release();
 				res.write(JSON.stringify({
-					msg: "两次验证不同！",
+					msg: "登录权限有误！",
 					style: -3,
 					url: "登陆页面url"
 				}));
