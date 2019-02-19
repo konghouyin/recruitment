@@ -285,6 +285,7 @@ a {
 	background-color: #7cb5ec;
 	overflow: hidden;
 	border-radius: 3px;
+	cursor: pointer;
 }
 
 .group-each .name {
@@ -301,7 +302,6 @@ a {
 
 .search {
 	border-top: 4px solid #f1f2f4;
-	padding: 17px;
 }
 
 .search input,
@@ -319,7 +319,7 @@ a {
 
 
 .search>div {
-	margin: 0 20px;
+	margin: 11px 20px 0 20px;
 }
 
 .searchbtn {
@@ -373,7 +373,7 @@ a {
 .page2 .changepage>div {
 	padding: 5px;
 	margin: 0 5px;
-	border: 2px solid #ccc;
+	border: 2px solid #aaa;
 	float: left;
 	text-align: center;
 	min-width: 12px;
@@ -552,7 +552,14 @@ a {
 	text-align: center;
 	border-radius: 30px;
 }
-.headpic {
+
+
+.pointer{
+	cursor: pointer;
+}
+.active{
+	background-color: #ddd;
+}.headpic {
 	background-size: 100%;
 	background-image: url(../pic/772e5b6a3db12516a4049e469bdb21db.png);
 	position: relative;

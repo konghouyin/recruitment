@@ -10,25 +10,25 @@
 			<div class="list">
 				<div class="headpic"></div>
 				<ul>
-					<li class="list_btn btn1">
+					<li class="list_btn btn1" nonce="0">
 						<div class="btn-pic"></div>数据监控
 					</li>
-					<li class="list_btn btn2">
+					<li class="list_btn btn2" nonce="1">
 						<div class="btn-pic"></div>人员信息
 					</li>
-					<li class="list_btn btn3">
+					<li class="list_btn btn3" nonce="2">
 						<div class="btn-pic"></div>流程与短信
 					</li>
-					<li class="list_btn btn4">
+					<li class="list_btn btn4" nonce="3">
 						<div class="btn-pic"></div>人员审核
 					</li>
-					<li class="list_btn btn5">
+					<li class="list_btn btn5" nonce="4">
 						<div class="btn-pic"></div>公告
 					</li>
 				</ul>
 			</div>
 			<div class="thing">
-				<div class="page1" style="display:none;">
+				<div class="page1 page" style="display:none;">
 					<div class="wrap_top">移动应用开发实验室2019年纳新--数据监控</div>
 					<div class="list1 col">
 						<div class="part1 border">
@@ -42,21 +42,21 @@
 								</tr>
 								<tr>
 									<td>入围人数</td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td class="writein"></td>
+									<td class="writein"></td>
+									<td class="writein"></td>
 								</tr>
 								<tr>
 									<td>通过人数</td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td class="writein"></td>
+									<td class="writein"></td>
+									<td class="writein"></td>
 								</tr>
 								<tr>
 									<td>通过率</td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td class="writein"></td>
+									<td class="writein"></td>
+									<td class="writein"></td>
 								</tr>
 							</table>
 						</div>
@@ -68,59 +68,53 @@
 						<div class="tittle">全体信息</div>
 						<div class="all-num">
 							<div class="people-num">0</div>
-							<div class="people-num">3</div>
-							<div class="people-num">9</div>
-							<div class="people-num">2</div>
+							<div class="people-num">0</div>
+							<div class="people-num">0</div>
+							<div class="people-num">0</div>
 							<div class="writeren">人</div>
 						</div>
 						<div class="group-change">
-							<div class="group-each">
+							<div class="group-each" nonce="1">
 								<div class="name">Android</div>
-								<div class="num">120</div>
+								<div class="num">0</div>
 							</div>
-							<div class="group-each">
+							<div class="group-each" nonce="2">
 								<div class="name">IOS</div>
-								<div class="num">120</div>
+								<div class="num">0</div>
 							</div>
-							<div class="group-each">
+							<div class="group-each" nonce="3">
 								<div class="name">Web</div>
-								<div class="num">120</div>
+								<div class="num">0</div>
 							</div>
-							<div class="group-each">
+							<div class="group-each" nonce="4">
 								<div class="name">后台</div>
-								<div class="num">120</div>
+								<div class="num">0</div>
 							</div>
-							<div class="group-each">
+							<div class="group-each" nonce="5">
 								<div class="name">产品</div>
-								<div class="num">120</div>
+								<div class="num">0</div>
 							</div>
-							<div class="group-each">
+							<div class="group-each" nonce="6">
 								<div class="name">全体</div>
-								<div class="num">120</div>
+								<div class="num">0</div>
 							</div>
 						</div>
 						<div id="group-part" style="width: 100%;height:300px;float:left"></div>
 					</div>
 					<div class="list3 col">
 						<div class="tittle">信息比例</div>
-						<div id="circle1" style="width: 50%;height:328px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
-						<div id="circle2" style="width: 50%;height:328px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
-						<div id="circle3" style="width: 50%;height:328px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
-						<div id="circle4" style="width: 50%;height:328px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
+						<div id="circle1" style="width: 50%;height:348px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
+						<div id="circle2" style="width: 50%;height:348px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
+						<div id="circle3" style="width: 50%;height:308px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
+						<div id="circle4" style="width: 50%;height:308px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
 					</div>
 				</div>
-				<div class="page2"style="display:none;">
+				<div class="page2 page" >
 					<div class="wrap_top">移动应用开发实验室2019年纳新--人员管理</div>
 					<div class="search">
 						<div class="xuehao">
 							<div class="serchtext">学号：</div>
 							<input type="text" id="search-xuehao" style="width:154px;height:25px">
-						</div>
-						<div class="zhuanye">
-							<div class="serchtext">专业：</div>
-							<select>
-								<option value="0">全部</option>
-							</select>
 						</div>
 						<div class="selfgroup">
 							<div class="serchtext">分组：</div>
@@ -144,6 +138,16 @@
 								<option value="4">进入实验室</option>
 							</select>
 						</div>
+						<div class="pass">
+							<div class="serchtext">状态：</div>
+							<select>
+								<option value="-1">全部</option>
+								<option value="0">未面试</option>
+								<option value="1">待审核</option>
+								<option value="2">通过</option>
+								<option value="3">未通过</option>
+							</select>
+						</div>
 						<div class="grant">
 							<div class="serchtext">年级：</div>
 							<select>
@@ -152,32 +156,41 @@
 								<option value="2">大二</option>
 							</select>
 						</div>
+						<div class="grant">
+							<div class="serchtext">权限：</div>
+							<select>
+								<option value="1">个人</option>
+								<option value="3">组长</option>
+								<option value="2">组员</option>
+							</select>
+						</div>
 						<div class="searchbtn">搜索</div>
 					</div>
 					<div class="main-list">
 						<table class="main-list-message">
-							<tr>
-								<th>学号</th>
-								<th>姓名</th>
-								<th>学院/专业/班级</th>
-								<th>手机号</th>
-								<th>流程</th>
-								<th>状态</th>
-								<th>详细</th>
-							</tr>
+							<tbody id="personlist">
+								<tr>
+									<th>权限</th>
+									<th>学号</th>
+									<th>姓名</th>
+									<th>学院/专业/班级</th>
+									<th>手机号</th>
+									<th>流程</th>
+									<th>状态</th>
+									<th>详细</th>
+								</tr>
+							</tbody>
 						</table>
 					</div>
 					<div class="bottom">
-						<div class="left">查询到：254条数据---本页显示30-45</div>
+						<div class="left">查询到：0条数据</div>
 						<div class="changepage">
-							<div class="pre">上一页</div>
-							<div>1</div>
-							<div>2</div>
-							<div class="next">下一页</div>
+							<div class="pre pointer" nonce="pre">上一页</div>
+							<div class="next pointer" nonce="next">下一页</div>
 						</div>
 					</div>
 				</div>
-				<div class="page3" style="display:none;">
+				<div class="page3 page" style="display:none;">
 					<div class="wrap_top">移动应用开发实验室2019年纳新--流程控制与短信</div>
 					<div class="thing">
 						<div class="list1">
@@ -251,7 +264,7 @@
 					</div>
 
 				</div>
-				<div class="page4" style="display:none;">
+				<div class="page4 page" style="display:none;">
 					<div class="wrap_top">移动应用开发实验室2019年纳新--人员审核</div>
 					<div class="group-list">
 						<div class="group-style">Android</div>
@@ -285,7 +298,7 @@
 						<div class="passbtn">通过审核</div>
 					</div>
 				</div>
-				<div class="page5">
+				<div class="page5 page" style="display:none;">
 					<div class="wrap_top">移动应用开发实验室2019年纳新--公告</div>
 					<div class="list1 col">
 						<div class="tittle">公告队列</div>

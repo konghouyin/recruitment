@@ -6,82 +6,53 @@ import '../leader_pc_index.html';
 //引入样式模块
 
 
-var Highcharts = require('./leader_highcharts.js').a;
-//引入绘图模块
+var pagechange = document.getElementsByTagName('ul')[0];
+pagechange.addEventListener('click',function(e){
+	if(e.path.length>7){
+		showpage(e.path[e.path.length-8].nonce);
+	}
+})
+//翻页
 
-// 图表初始化函数
-
-var options = {
-	chart: {
-		plotBackgroundColor: null,
-		plotBorderWidth: null,
-		plotShadow: false,
-		type: 'pie'
-	},
-	credits: {
-		enabled: false
-	},
-	title: {
-		text: '各组占比分布'
-	},
-	legend: {
-		layout: 'horizontal',
-		align: 'center',
-
-		navigation: {
-			activeColor: '#3E576F',
-			animation: true,
-			arrowSize: 12,
-			inactiveColor: '#CCC',
-			style: {
-				fontWeight: 'bold',
-				color: '#333',
-				fontSize: '12px'
-			}
+function showpage(num){
+	var page = document.getElementsByClassName('page');
+	for(var i=0;i<5;i++){
+		if(i==num){
+			page[i].style.display="block";
+		}else{
+			page[i].style.display="none";
 		}
-	},
-	tooltip: {
-		pointFormat: '{series.name}: {point.percentage:.1f}%<br>人数：{point.y}',
-	},
-	plotOptions: {
-		pie: {
-			allowPointSelect: true,
-			cursor: 'pointer',
-			dataLabels: {
-				enabled: false
-			},
-			showInLegend: true
+	}
+}
+
+
+
+
+var page1=require('./leader_pc_page1.js');
+
+var groupchange = document.getElementsByClassName('group-change')[0];
+groupchange.addEventListener('click',function(e){
+	console.log(e.path)
+	if(e.path.length>9){
+		if(e.path[e.path.length-10].nonce<6){
+			page1.show(e.path[e.path.length-10].nonce);
+		}else{
+			page1.showall();
 		}
-	},
-	series: [{
-		name: '占比',
-		colorByPoint: true,
-		data: [{
-			name: 'Android',
-			y: 120,
-		}, {
-			name: 'IOS',
-			y: 55
-		}, {
-			name: 'Web',
-			y: 210
-		}, {
-			name: '后台',
-			y: 157
-		}, {
-			name: '产品',
-			y: 32
-		}]
-	}]
-};
+	}
+})
+//page1小组切换
+
+var page2=require('./leader_pc_page2.js');
 
 
-var chart = Highcharts.chart('circle1', options);
-var chart = Highcharts.chart('circle2', options);
-var chart = Highcharts.chart('circle3', options);
-var chart = Highcharts.chart('circle4', options);
-var chart = Highcharts.chart('group-part', options);
-//使用实例
+
+function init(){
+	page1.getmessage();
+	page2.getmessage();
+}
+init();
+
 
 
 $(function() {
@@ -103,3 +74,4 @@ $(function() {
 		callback: function(v, e) {} //回调函数
 	});
 })
+

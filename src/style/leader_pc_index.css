@@ -140,6 +140,7 @@
 	background-color: #7cb5ec;
 	overflow: hidden;
 	border-radius: 3px;
+	cursor: pointer;
 }
 
 .group-each .name {
@@ -156,7 +157,6 @@
 
 .search {
 	border-top: 4px solid #f1f2f4;
-	padding: 17px;
 }
 
 .search input,
@@ -174,7 +174,7 @@
 
 
 .search>div {
-	margin: 0 20px;
+	margin: 11px 20px 0 20px;
 }
 
 .searchbtn {
@@ -228,7 +228,7 @@
 .page2 .changepage>div {
 	padding: 5px;
 	margin: 0 5px;
-	border: 2px solid #ccc;
+	border: 2px solid #aaa;
 	float: left;
 	text-align: center;
 	min-width: 12px;
@@ -406,4 +406,12 @@
 	color: #fff;
 	text-align: center;
 	border-radius: 30px;
+}
+
+
+.pointer{
+	cursor: pointer;
+}
+.active{
+	background-color: #ddd;
 }
