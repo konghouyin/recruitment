@@ -38,6 +38,17 @@ input{
     background-size: 2.5rem;
     background-repeat: no-repeat;
 }
+.line_back{
+    position: absolute;
+    top: 50%;
+    left:5%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top:-1.25rem;
+    background-image: url(../img/line_back.png);
+    background-size: 2.5rem;
+    background-repeat: no-repeat;
+}
 .head_text{
     position: absolute;
     left:50%;
@@ -54,6 +65,11 @@ input{
     height:18rem;
     margin:3rem auto;
     /* background-color: #303741; */
+}
+.line_box{
+    width: 85%;
+    height:40rem;
+    margin:3rem auto;
 }
 .btn1{
     position:relative;
@@ -74,6 +90,63 @@ input{
     line-height: 5rem;
     color: rgb(46, 45, 45);
 }
+.line1,.line2,.line3,.line4{
+    position:relative;
+    width: 100%;
+    height:5rem;
+    border-bottom-color:#E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+.line1_pic{
+    position: absolute;
+    width: 2.6rem;
+    height: 2.6rem;
+    top: 44%;
+    left: 10%;
+    margin-top: -1.3rem;
+    background-image: url(../img/andriod.png);
+    background-size: 2.6rem;
+    background-repeat: no-repeat;
+    /* background-color: red; */
+}
+.line2_pic{
+    position: absolute;
+    width: 2.6rem;
+    height: 2.6rem;
+    top: 44%;
+    left: 10%;
+    margin-top: -1.3rem;
+    background-image: url(../img/ios.png);
+    background-size: 2.6rem;
+    background-repeat: no-repeat;
+    /* background-color: red; */
+}
+.line3_pic{
+    position: absolute;
+    width: 2.6rem;
+    height: 2.6rem;
+    top: 44%;
+    left: 10%;
+    margin-top: -1.3rem;
+    background-image: url(../img/前端.png);
+    background-size: 2.6rem;
+    background-repeat: no-repeat;
+    /* background-color: red; */
+} 
+.line4_pic{
+    position: absolute;
+    width: 2.6rem;
+    height: 2.6rem;
+    top: 44%;
+    left: 10%;
+    /* margin-left: -0.8rem; */
+    margin-top: -1.3rem;
+    background-image: url(../img/后台.png);
+    background-size: 2.6rem;
+    background-repeat: no-repeat;
+    /* background-color: red; */
+}  
 .btn1_text{
     position: absolute;
     top: 50%;
@@ -82,6 +155,19 @@ input{
     height:5rem;
     margin-top:-2.5rem;
     font-size:1.4rem;
+    line-height:5rem;
+    color:rgb(46, 45, 45);
+    /* background-color: rgb(235, 193, 10); */
+}
+.line1_text,.line2_text,.line3_text,.line4_text{
+    position: absolute;
+    top: 50%;
+    left:23%;
+    width:15rem;
+    height:5rem;
+    margin-top:-2.5rem;
+    font-size:1.4rem;
+    text-align: center;
     line-height:5rem;
     color:rgb(46, 45, 45);
     /* background-color: rgb(235, 193, 10); */
@@ -97,6 +183,17 @@ input{
     background-size: 1.6rem;
     background-repeat: no-repeat;
 }
+.line1_btn,.line2_btn,.line3_btn,.line4_btn{
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    top: 50%;
+    right:9%;
+    margin-top:-0.8rem;
+    background-image: url(../img/go.png);
+    background-size: 1.6rem;
+    background-repeat: no-repeat;
+}
 .passback_con{
     width: 100%;
     height:4rem;
@@ -109,6 +206,17 @@ input{
     text-align: center;
     line-height:4rem;
 }
+/* .line_con{
+    width: 100%;
+    height:4rem;
+    margin:5rem auto;
+    background-color: #3285f9;
+    border-radius: 6px;
+    color:#fff;
+    font-size:1.8rem;
+    text-align: center;
+    line-height:4rem;
+} */
 .phone_noenf{
     position: absolute;
     left: 50%;
@@ -122,6 +230,7 @@ input{
     line-height: 4rem;
     color: #fff;
     background-color: rgb(0,0,0,0.3);
+    z-index: 3;
 }
 .cloth{
     position: absolute;
@@ -156,15 +265,26 @@ input{
     font-size:1.6rem;
 }
 .msg2_back{
-    position: absolute;
+    position: absolute;;
     top: 50%;
     left:5%;
-    width: 2rem;
-    height: 2rem;
+    width: 1.8rem;
+    height: 1.8rem;
     margin-top:-1rem;
     background-image: url(../img/msg_back.png);
-    background-size: 2rem;
+    background-size: 1.8rem;
     background-repeat: no-repeat;
+    z-index: 3;
+}
+.msg2_headtext{
+    position: relative;
+    height: 5rem;
+    border-bottom-color: #E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    text-align: center;
+    line-height: 5rem;
+    font-size:1.6rem;
 }
 .msg2_btn{
     position: relative;
@@ -201,7 +321,7 @@ input{
     position: relative;
     width: 8rem;
     height: 3rem;
-    top:5%;
+    top:7.5%;
     left:50%;
     margin-left:-4rem;
     border:1px solid #3285f9;
