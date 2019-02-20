@@ -59,7 +59,10 @@ function pageF() {
 		dom.nonce = i
 		changepage.insertBefore(dom, changepage.lastElementChild);
 	}
-	changepage.children[1].classList.add('active');
+	if (now.length != 0) {
+		changepage.children[1].classList.add('active');
+	}
+
 	pageto(1);
 
 }
@@ -86,24 +89,26 @@ changepage.addEventListener('click', function(e) {
 //翻页按钮点击事件
 
 function pageto(num) {
-	console.log(num);
 	changepage.children[page.now].classList.remove('active');
-	changepage.children[num].classList.add('active');
+	if (now.length != 0) {
+		changepage.children[num].classList.add('active');
+	}
 	page.now = num;
 	var start;
 	var end;
 
 	var message = document.getElementsByClassName('left')[0];
-	if (page.now != page.all) {
+	if (now.length == 0) {
+		start = 0;
+		end = 0;
+	} else if (page.now != page.all) {
 		start = page.now * 15 - 14;
 		end = page.now * 15;
-	} else if (now.length == 0) {
-		start=0;
-		end=0;
 	} else {
 		start = page.now * 15 - 14;
 		end = now.length;
 	}
+	console.log(start, end);
 	message.innerHTML = "查询到：" + now.length + "条数据---本页显示" + start + "-" + end;
 	inHtml(start, end)
 
@@ -113,8 +118,8 @@ function inHtml(start, end) {
 	while (personlist.children.length != 1) {
 		personlist.removeChild(personlist.lastElementChild);
 	}
-	if(now.length==0){
-		return ;
+	if (now.length == 0) {
+		return;
 	}
 	for (var n = start - 1; n < end; n++) {
 		var tr = document.createElement('tr');

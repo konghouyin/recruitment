@@ -45,7 +45,6 @@ server.all('*', function(req, res, next) {
 //处理跨域
 
 server.post('/login', function(req, res) {
-	console.log("asd");
 	var obj = {};
 	var message = '';
 	req.on('data', function(data) {

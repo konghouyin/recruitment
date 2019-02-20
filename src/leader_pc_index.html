@@ -109,7 +109,7 @@
 						<div id="circle4" style="width: 50%;height:308px;float:left;border:1px solid #ccc;box-sizing:border-box;"></div>
 					</div>
 				</div>
-				<div class="page2 page" >
+				<div class="page2 page" style="display:none;">
 					<div class="wrap_top">移动应用开发实验室2019年纳新--人员管理</div>
 					<div class="search">
 						<div class="xuehao">
@@ -164,7 +164,7 @@
 								<option value="2">组员</option>
 							</select>
 						</div>
-						<div class="searchbtn">搜索</div>
+						<div class="searchbtn" style="cursor: pointer;">搜索</div>
 					</div>
 					<div class="main-list">
 						<table class="main-list-message">
@@ -267,30 +267,25 @@
 				<div class="page4 page" style="display:none;">
 					<div class="wrap_top">移动应用开发实验室2019年纳新--人员审核</div>
 					<div class="group-list">
-						<div class="group-style">Android</div>
-						<div class="group-style">IOS</div>
-						<div class="group-style">Web</div>
-						<div class="group-style">后台</div>
-						<div class="group-style">产品</div>
+						<div class="group-style gpst" nonce="1">Android</div>
+						<div class="group-style gpst" nonce="2">IOS</div>
+						<div class="group-style gpst" nonce="3">Web</div>
+						<div class="group-style gpst" nonce="4">后台</div>
+						<div class="group-style gpst" nonce="5">产品</div>
 					</div>
 					<div class="main-list">
 						<table class="main-list-message">
-							<tr>
-								<th style="width:180px">选项（全选<input name="list" type="checkbox" value="04173167" />）</th>
-								<th>学号</th>
-								<th>姓名</th>
-								<th>组别</th>
-								<th>提交时间</th>
-								<th>详细</th>
-							</tr>
-							<tr>
-								<td><input name="list" type="checkbox" value="04173167" /></td>
-								<td>04173167</td>
-								<td>樊宗渤</td>
-								<td>Web</td>
-								<td>2019-3-19 23：12</td>
-								<td>详细</td>
-							</tr>
+							<tbody id="main-list-message">
+								<tr>
+									<th style="width:180px">选项（全选<input class="allinput" nonce="all" type="checkbox" value="04173167" />）</th>
+									<th>学号</th>
+									<th>姓名</th>
+									<th>组别</th>
+									<th>提交时间</th>
+									<th>流程</th>
+									<th>详细</th>
+								</tr>
+							</tbody>
 						</table>
 					</div>
 					<div class="bottom">
@@ -298,16 +293,50 @@
 						<div class="passbtn">通过审核</div>
 					</div>
 				</div>
-				<div class="page5 page" style="display:none;">
+				<div class="page5 page" >
 					<div class="wrap_top">移动应用开发实验室2019年纳新--公告</div>
-					<div class="list1 col">
+					<div class="list1 col" id="noticequeue">
 						<div class="tittle">公告队列</div>
 					</div>
 					<div class="list2 col">
 						<div class="tittle">实验室公告发布</div>
+						<input type="text" id="title" value="" placeholder="输入标题">
+						<textarea type="text" id="context" value="" placeholder="输入内容" style="height: 300px;"></textarea>
+						<div class="sysnotice" style="background-color: #d18a1f;">提交</div>
+						<div class="clear">清空</div>
 					</div>
 					<div class="list3 col">
 						<div class="tittle">所有公告显示</div>
+						<div class="notice-list">
+							<div class="group">Android</div>
+							<div class="title"></div>
+							<div class="context"></div>
+						</div>
+						<div class="notice-list">
+							<div class="group">IOS</div>
+							<div class="title"></div>
+							<div class="context"></div>
+						</div>
+						<div class="notice-list">
+							<div class="group">Web</div>
+							<div class="title"></div>
+							<div class="context"></div>
+						</div>
+						<div class="notice-list">
+							<div class="group">后台</div>
+							<div class="title"></div>
+							<div class="context"></div>
+						</div>
+						<div class="notice-list">
+							<div class="group">产品</div>
+							<div class="title"></div>
+							<div class="context"></div>
+						</div>
+						<div class="notice-list">
+							<div class="group">实验室</div>
+							<div class="title"></div>
+							<div class="context"></div>
+						</div>
 					</div>
 				</div>
 			</div>

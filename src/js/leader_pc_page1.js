@@ -76,7 +76,6 @@ exports.getmessage = function getmessage() {
 }
 // 请求所有的人员数据
 
-exports.showall = showall;
 function showall() {
 	var mid = midMessage();
 	var side = sideMessage(allPeopleMessage);
@@ -85,7 +84,7 @@ function showall() {
 }
 //数组筛选所有面试人员
 
-exports.show = function(num) {
+function show(num) {
 	var out = new Array();
 	for (var i = 0; i < allPeopleMessage.length; i++) {
 		if (allPeopleMessage[i].selfgroup == num) {
@@ -364,5 +363,18 @@ function showSide(side) {
 	}
 
 }
-
 //使用实例
+
+
+
+var groupchange = document.getElementsByClassName('group-change')[0];
+groupchange.addEventListener('click',function(e){
+	if(e.path.length>9){
+		if(e.path[e.path.length-10].nonce<6){
+			show(e.path[e.path.length-10].nonce);
+		}else{
+			showall();
+		}
+	}
+})
+//page1小组切换

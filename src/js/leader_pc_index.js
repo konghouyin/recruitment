@@ -29,27 +29,12 @@ function showpage(num){
 
 
 var page1=require('./leader_pc_page1.js');
-
-var groupchange = document.getElementsByClassName('group-change')[0];
-groupchange.addEventListener('click',function(e){
-	console.log(e.path)
-	if(e.path.length>9){
-		if(e.path[e.path.length-10].nonce<6){
-			page1.show(e.path[e.path.length-10].nonce);
-		}else{
-			page1.showall();
-		}
-	}
-})
-//page1小组切换
-
 var page2=require('./leader_pc_page2.js');
-
-
+var page4=require('./leader_pc_page4.js');
+var page5=require('./leader_pc_page5.js');
 
 function init(){
-	page1.getmessage();
-	page2.getmessage();
+	page4.getmessage();
 }
 init();
 

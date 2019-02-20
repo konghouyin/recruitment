@@ -48,19 +48,190 @@ server.get('/new', function(req, res) {
 
 server.get('/allpeople', function(req, res) {
 	var sqlString = sql.select(['xuehao', 'name', 'xueyuan', 'zhuanye', 'banji', 'xingbie', 'phoneNum', 'selfgroup',
-		'level', 'pass','style'
+		'level', 'pass', 'style'
 	], 'registryinformation', 'xuehao<>""');
 	sql.sever(pool, sqlString, end); //验证学号唯一性
 
 	function end(data) {
 		res.write(JSON.stringify({
-			obj:data,
+			obj: data,
 			msg: "数据查询成功",
 			style: 1
 		}));
 		res.end();
 
 	}
+})
+
+server.get('/peoplelist', function(req, res) {
+	var sqlString = sql.select(['*'], 'personnelqueue');
+	sql.sever(pool, sqlString, end); //验证学号唯一性
+
+	function end(data) {
+		var back = {
+			"1": new Array(),
+			"2": new Array(),
+			"3": new Array(),
+			"4": new Array(),
+			"5": new Array()
+		}
+		for (var i = 0; i < data.length; i++) {
+			back[data[i].selfgroup].push(data[i]);
+		}
+
+
+		res.write(JSON.stringify({
+			obj: back,
+			msg: "数据查询成功",
+			style: 1
+		}));
+		res.end();
+
+	}
+})
+
+
+
+server.post('/peoplepass', function(req, res) {
+	var obj = {};
+	var message = '';
+	req.on('data', function(data) {
+		message += data;
+	})
+	req.on('end', function() {
+		obj = querystring.parse(message);
+		var selfgroup = obj.selfgroup;
+		var num = -1;
+
+		var deleteString = sql.del("personnelqueue", "selfgroup=" + sql.escape(selfgroup));
+
+		var sqlString = sql.update('registryinformation', ['style'], ['2']);
+		sqlString += " WHERE ";
+
+		for (each in obj) {
+			sqlString += "xuehao=" + obj[each] + " OR ";
+			num++;
+		}
+		if (num == 0) {
+			sql.sever(pool, deleteString, function() {
+				res.write(JSON.stringify({
+					msg: "审核通过" + num + "人",
+					style: 1
+				}));
+				res.end();
+			})
+			return;
+		}
+		sqlString = sqlString.slice(0, -4);
+		sql.sever(pool, sqlString, function() {
+			sql.sever(pool, deleteString, function() {
+				res.write(JSON.stringify({
+					msg: "审核通过" + num + "人",
+					style: 1
+				}));
+				res.end();
+			})
+		})
+	})
+})
+
+
+server.get('/notice', function(req, res) {
+	var sqlString = sql.select(['*'], 'notice');
+	sql.sever(pool, sqlString, end); //验证学号唯一性
+
+	function end(data) {
+		res.write(JSON.stringify({
+			obj: data,
+			msg: "数据查询成功",
+			style: 1
+		}));
+		res.end();
+
+	}
+})
+
+
+server.get('/noticequeue', function(req, res) {
+	var sqlString = sql.select(['*'], 'noticequeue');
+	sql.sever(pool, sqlString, end); //验证学号唯一性
+
+	function end(data) {
+		res.write(JSON.stringify({
+			obj: data,
+			msg: "数据查询成功",
+			style: 1
+		}));
+		res.end();
+
+	}
+})
+
+server.get('/noticequeuepass', function(req, res) {
+	var num = querystring.parse(req.url.split("?")[1])[0];
+
+	var sqlString = sql.select(['obj'], 'noticequeue', 'type=' + sql.escape(num));
+	sql.sever(pool, sqlString, end); //验证学号唯一性
+
+	function end(data) {
+		if (data.length == 1) {
+			var sqlString = sql.update('notice', ['obj'], [sql.escape(data[0].obj)], 'type=' + sql.escape(num));
+			sql.sever(pool, sqlString, function(data) {
+				var deleteString = sql.del("noticequeue", "type=" + sql.escape(num));
+				sql.sever(pool, deleteString, function(data) {
+					res.write(JSON.stringify({
+						obj: data,
+						msg: "公告审核通过",
+						style: 1
+					}));
+					res.end();
+				})
+			});
+		} else {
+			res.write(JSON.stringify({
+				obj: data,
+				msg: "公告队列没有此消息",
+				style: 0
+			}));
+			res.end();
+		}
+	}
+})
+
+
+server.get('/noticequeuefinish', function(req, res) {
+	var num = querystring.parse(req.url.split("?")[1])[0];
+
+	var deleteString = sql.del("noticequeue", "type=" + sql.escape(num));
+	sql.sever(pool, deleteString, function(data) {
+		res.write(JSON.stringify({
+			obj: data,
+			msg: "公告已经驳回",
+			style: 1
+		}));
+		res.end();
+	})
+
+})
+
+
+server.post('/sysnotice', function(req, res) {
+	var obj = {};
+	var message = '';
+	req.on('data', function(data) {
+		message += data;
+	})
+	req.on('end', function() {
+		obj=querystring.parse(message);
+		var sqlString = sql.update('notice', ['obj'], [sql.escape(JSON.stringify(obj))], 'type=6');
+		sql.sever(pool, sqlString, function() {
+			res.write(JSON.stringify({
+				msg: "公告已添加",
+				style: 1
+			}));
+			res.end();
+		})
+	})
 })
 
 server.listen(8083);
