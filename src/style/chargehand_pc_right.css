@@ -68,9 +68,8 @@
 .grouphand_tell_{
 	color:pink;
 	position:absolute;
-
-	left:-90rem;
-	top:0rem;
+	left:-.8rem;
+	top:4rem;
 }
 .grouphand_tell{
 	width:11rem;
@@ -82,11 +81,12 @@
 	border-radius:.5rem;
 	padding:.7rem;
 	display:none;
-	left:27rem;
-	top:3rem;
+	left:8rem;
+	top:-1.5em;
 }
 .push_tell form{
 	margin-left:3rem;
+	margin-top:3rem;
 }
 .page_5back{
 	position:absolute;
@@ -98,4 +98,21 @@
 .push_tell textarea{
 	background-color:transparent;
 }
-/*--page-6-------------------------------------------------------------------*/
+.telltitle{
+	position:absolute;
+	left:50%;
+	transform:translate(-50%);
+	background-color:transparent;
+	top:4rem;
+	height:2rem;
+}
+.tellgong{
+	margin-top:3rem;
+	margin-left:3rem;
+}
+.tellbutton{
+	position:relative;
+	width:4rem;
+	height:2rem;
+	background-color:transparent;
+}
