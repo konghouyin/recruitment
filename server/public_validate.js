@@ -13,25 +13,25 @@ function prove(pool,req, res,level) {
 		res.write(JSON.stringify({
 			msg: "没有cookie！",
 			style: 0,
-			url: "登陆页面url"
+			url: "http://192.168.137.1:8858/login.html"
 		}));
 		res.end();
 	} else if (ans.style == -1) {
 		res.write(JSON.stringify({
 			msg: "cookie解析错误！",
 			style: -1,
-			url: "登陆页面url"
+			url: "http://192.168.137.1:8858/login.html"
 		}));
 		res.end();
 	} else if (ans.style == -2) {
 		res.write(JSON.stringify({
 			msg: "cookie超时！",
 			style: -2,
-			url: "登陆页面url"
+			url: "http://192.168.137.1:8858/login.html"
 		}));
 		res.end();
 	} else if (ans.style == 1) {
-		var where = "phoneNum="+ans.name+" and "+"password="+ans.pass;
+		var where = "phoneNum="+sql.escape(ans.name)+" and "+"password="+sql.escape(ans.pass);
 		var sqlString = sql.select(['*'],'registryinformation',where);
 		sql.sever(pool,sqlString, function(data) {
 			if (data.length == 1 && data[0].level==level) {
@@ -52,7 +52,7 @@ function prove(pool,req, res,level) {
 				res.write(JSON.stringify({
 					msg: "登录权限有误！",
 					style: -3,
-					url: "登陆页面url"
+					url: "http://192.168.137.1:8858/login.html"
 				}));
 				res.end();
 			}

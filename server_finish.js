@@ -8,7 +8,7 @@ var express = require('express');
 var crypto = require('crypto');
 
 
-var router=express.Router();//路由
+var router = express.Router(); //路由
 var server = express(); //使用express框架
 
 var pool = sql.createPool({
@@ -37,7 +37,7 @@ server.use(cookieSession({
 //设置session
 
 server.all('*', function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", 'http://127.0.0.1:8848'); //需要显示设置来源
+	res.header("Access-Control-Allow-Origin", 'http://192.168.137.1:8858'); //需要显示设置来源
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 	res.header("Access-Control-Allow-Credentials", true); //带cookies7     res.header("Content-Type", "application/json;charset=utf-8");
@@ -47,7 +47,17 @@ server.all('*', function(req, res, next) {
 
 
 server.get('/new', function(req, res) {
-	validate.prove(pool, req, res);
+	if (req.session.style == 1) {
+		res.write(JSON.stringify({
+			xuehao: req.session.xuehao,
+			selfgroup: req.session.selfgroup,
+			name: req.session.name,
+			style: 1
+		}));
+		res.end();
+	}else{
+		validate.prove(pool, req, res, 1);
+	}
 })
 
 // server.all('*', function(req, res, next) {
@@ -63,7 +73,10 @@ server.get('/new', function(req, res) {
 // 	}
 // })
 
+
 server.use('/person', router);
+
+
 router.all('*', function(req, res, next) {
 	var obj = {};
 	var message = '';
@@ -72,7 +85,7 @@ router.all('*', function(req, res, next) {
 	})
 	req.on('end', function() {
 		req.obj = querystring.parse(message);
-		if (rexJSJXuehao(req.obj.xuehao)) {
+		if (rexXuehao(req.obj.xuehao)) {
 			var sqlString = sql.select(['xuehao'], 'registryinformation', 'xuehao=' + sql.escape(req.obj.xuehao));
 			sql.sever(pool, sqlString, end); //验证学号唯一性
 		} else {
@@ -102,6 +115,7 @@ router.post('/computer', function(req, res) {
 	var findfirst = sql.select(['xuehao'], 'registryinformation', 'phoneNum=' + sql.escape(
 		req.session.phone));
 	sql.sever(pool, findfirst, function(data) {
+		console.log(data[0].xuehao!=null);
 		if (data.length != 1) {
 			res.write(JSON.stringify({
 				msg: "查询数据异常，数据库中电话不匹配",
@@ -118,7 +132,7 @@ router.post('/computer', function(req, res) {
 			var sqlString = sql.select(['zhuanye', 'banji', 'xingming', 'xingbie', 'xuehao'], 'studentinformation',
 				'xuehao=' + sql.escape(
 					req.obj.xuehao));
-			sql.sever(pool, sqlString, end); //学号登录	
+			sql.sever(pool, sqlString, end); 
 		}
 	});
 
@@ -158,7 +172,6 @@ router.post('/computer', function(req, res) {
 //请求--计算机学院绑定账号
 
 router.post('/teach', function(req, res) {
-
 	var findfirst = sql.select(['xuehao'], 'registryinformation', 'phoneNum=' + sql.escape(
 		req.session.phone));
 	sql.sever(pool, findfirst, function(data) {
@@ -327,4 +340,10 @@ function rexJSJXuehao(text) {
 	var reg = /^04[0-9]{6}$/;
 	return reg.test(text);
 }
-//通用学号
+//计算机学院人员信息
+
+function rexXuehao(text) {
+	var reg = /[0-9]{8}$/;
+	return reg.test(text);
+}
+//计算机学院人员信息

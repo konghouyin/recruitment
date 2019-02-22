@@ -36,7 +36,7 @@ server.use(cookieSession({
 
 
 server.all('*', function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", 'http://192.168.137.1:8848'); //需要显示设置来源
+	res.header("Access-Control-Allow-Origin", 'http://192.168.137.1:8858'); //需要显示设置来源
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 	res.header("Access-Control-Allow-Credentials", true); //带cookies7     res.header("Content-Type", "application/json;charset=utf-8");
@@ -86,9 +86,9 @@ server.post('/login', function(req, res) {
 				maxAge: 5 * 1000,
 				signed: true
 			});
-			var sendurl = "http://127.0.0.1:8848/test/index.html";
+			var sendurl = "http://192.168.137.1:8858/user.html";
 			if(data[0].xuehao==null||data[0].selfgroup==null){
-				sendurl = "http://127.0.0.1:8848/test/index2.html";
+				sendurl = "http://192.168.137.1:8858/perfect_msg.html";
 			}
 			res.write(JSON.stringify({
 				msg: "登录成功！",
