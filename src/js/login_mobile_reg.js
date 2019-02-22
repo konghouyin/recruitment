@@ -270,13 +270,13 @@ reg_btn.addEventListener('click', function() {
 	wrong.innerHTML = "";
 	var returnflag = 0;
 
-	if (reg_password.value.length == 0) {
-		wrong.innerHTML = "请输入密码";
+	if (reg_password.value.length < 6) {
+		wrong.innerHTML = "密码长度6-18位";
 		reg_password.style.borderBottom = "5px solid #f40";
 		return;
 	}
 	if (reg_yzm.value.length != 6) {
-		wrong.innerHTML += "    请输入6位短信验证码";
+		wrong.innerHTML = "请输入6位短信验证码";
 		reg_yzm.style.borderBottom = "5px solid #f40";
 		return;
 	}

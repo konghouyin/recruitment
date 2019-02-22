@@ -33,7 +33,7 @@ server.use(cookieSession({
 //设置session
 
 server.all('*', function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", 'http://localhost:8848'); //需要显示设置来源
+	res.header("Access-Control-Allow-Origin", 'http://localhost:8858'); //需要显示设置来源
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 	res.header("Access-Control-Allow-Credentials", true); //带cookies7     res.header("Content-Type", "application/json;charset=utf-8");
@@ -50,7 +50,7 @@ server.get('/allpeople', function(req, res) {
 	var sqlString = sql.select(['xuehao', 'name', 'xueyuan', 'zhuanye', 'banji', 'xingbie', 'phoneNum', 'selfgroup',
 		'level', 'pass', 'style'
 	], 'registryinformation', 'xuehao<>""');
-	sql.sever(pool, sqlString, end); //验证学号唯一性
+	sql.sever(pool, sqlString, end); 
 
 	function end(data) {
 		res.write(JSON.stringify({
@@ -62,10 +62,11 @@ server.get('/allpeople', function(req, res) {
 
 	}
 })
+//返回注册表所有人
 
 server.get('/peoplelist', function(req, res) {
 	var sqlString = sql.select(['*'], 'personnelqueue');
-	sql.sever(pool, sqlString, end); //验证学号唯一性
+	sql.sever(pool, sqlString, end); 
 
 	function end(data) {
 		var back = {
@@ -89,6 +90,7 @@ server.get('/peoplelist', function(req, res) {
 
 	}
 })
+//请求所有人员队列
 
 
 
@@ -134,11 +136,13 @@ server.post('/peoplepass', function(req, res) {
 		})
 	})
 })
+//人员通过审核
+
 
 
 server.get('/notice', function(req, res) {
 	var sqlString = sql.select(['*'], 'notice');
-	sql.sever(pool, sqlString, end); //验证学号唯一性
+	sql.sever(pool, sqlString, end); 
 
 	function end(data) {
 		res.write(JSON.stringify({
@@ -150,11 +154,13 @@ server.get('/notice', function(req, res) {
 
 	}
 })
+//查询所有公告
+
 
 
 server.get('/noticequeue', function(req, res) {
 	var sqlString = sql.select(['*'], 'noticequeue');
-	sql.sever(pool, sqlString, end); //验证学号唯一性
+	sql.sever(pool, sqlString, end); 
 
 	function end(data) {
 		res.write(JSON.stringify({
@@ -166,12 +172,13 @@ server.get('/noticequeue', function(req, res) {
 
 	}
 })
+//查询公告队列
 
 server.get('/noticequeuepass', function(req, res) {
 	var num = querystring.parse(req.url.split("?")[1])[0];
 
 	var sqlString = sql.select(['obj'], 'noticequeue', 'type=' + sql.escape(num));
-	sql.sever(pool, sqlString, end); //验证学号唯一性
+	sql.sever(pool, sqlString, end); 
 
 	function end(data) {
 		if (data.length == 1) {
@@ -197,6 +204,7 @@ server.get('/noticequeuepass', function(req, res) {
 		}
 	}
 })
+//公告通过
 
 
 server.get('/noticequeuefinish', function(req, res) {
@@ -213,6 +221,7 @@ server.get('/noticequeuefinish', function(req, res) {
 	})
 
 })
+//公告驳回
 
 
 server.post('/sysnotice', function(req, res) {
@@ -233,5 +242,94 @@ server.post('/sysnotice', function(req, res) {
 		})
 	})
 })
+//实验室公告发布
+
+
+server.get('/getstyle', function(req, res) {
+	var back = {
+		'1':0,
+		'2':0,
+		'3':0,
+		'4':0,
+		'5':0
+	}
+	var sqlString = sql.select(['*'], 'process');
+	sql.sever(pool, sqlString, end); 
+
+	function end(data) {
+		back.style=data[0].style;
+		back.message=data[0].message;
+		var sqlString = sql.select(['selfgroup'], 'registryinformation','level=1 AND pass='+data[0].style);
+		
+		sql.sever(pool,sqlString,function(data){
+			for(var i=1;i<data.length;i++){
+				back[data[i].selfgroup]++;
+			}
+			
+			res.write(JSON.stringify({
+				obj: back,
+				msg: "数据查询成功",
+				style: 1
+			}));
+			res.end();
+		})
+	}
+})
+//查询当前状态
+
+
+server.post('/changestyle', function(req, res) {
+	var obj = {};
+	var message = '';
+	req.on('data', function(data) {
+		message += data;
+	})
+	req.on('end', function() {
+		obj=querystring.parse(message);
+		var sqlString = sql.select(['*'], 'process');
+		sql.sever(pool, sqlString, end1);
+	})
+	
+	
+	
+	function end1(data){
+		console.log(obj);
+		if(data[0].style+1==obj.styleto){
+			var sqlString = sql.select(['*'], 'personnelqueue');
+			sql.sever(pool, sqlString, end2);
+		}else{
+			res.write(JSON.stringify({
+				msg: "提交流程非法，请坚持提交正确",
+				style: -2
+			}));
+			res.end();
+		}
+	}
+	
+	
+	function end2(data){
+		if(data.length==0){
+			var sqlString = sql.update('process', ['style'], [obj.styleto]);
+			sql.sever(pool, sqlString, end3);
+		}else{
+			res.write(JSON.stringify({
+				msg: "人员审核队列不为空，请先审核",
+				style: -1
+			}));
+			res.end();
+		}
+	}
+	
+	function end3(){
+		res.write(JSON.stringify({
+			msg: "流程已切换",
+			style: 1
+		}));
+		res.end();
+	}
+})
+//查询当前状态
+
+
 
 server.listen(8083);

@@ -30,11 +30,12 @@ function showpage(num){
 
 var page1=require('./leader_pc_page1.js');
 var page2=require('./leader_pc_page2.js');
+var page3=require('./leader_pc_page3.js');
 var page4=require('./leader_pc_page4.js');
 var page5=require('./leader_pc_page5.js');
 
 function init(){
-	page4.getmessage();
+	page3.getmessage();
 }
 init();
 

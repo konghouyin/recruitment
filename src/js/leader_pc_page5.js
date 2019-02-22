@@ -4,6 +4,28 @@ exports.getmessage = getmessage;
 var noticeall;
 var noticequeue;
 
+Date.prototype.format = function(fmt) { 
+     var o = { 
+        "M+" : this.getMonth()+1,                 //月份 
+        "d+" : this.getDate(),                    //日 
+        "h+" : this.getHours(),                   //小时 
+        "m+" : this.getMinutes(),                 //分 
+        "s+" : this.getSeconds(),                 //秒 
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+        "S"  : this.getMilliseconds()             //毫秒 
+    }; 
+    if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+    }
+     for(var k in o) {
+        if(new RegExp("("+ k +")").test(fmt)){
+             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+         }
+     }
+    return fmt; 
+}
+//data格式化
+
 function getmessage() {
 	ajax({
 		url: "http://localhost:8083/notice", //请求地址
@@ -42,6 +64,7 @@ function publicInHtml() {
 		context[i].innerHTML = JSON.parse(noticeall[i].obj).context;
 	}
 }
+//显示所有公告
 
 function queueInHtml() {
 	var queue = document.getElementById('noticequeue');
@@ -69,7 +92,8 @@ function queueInHtml() {
 		context.innerHTML = JSON.parse(noticequeue[i].obj).context;
 		var time = document.createElement('div');
 		time.setAttribute('class', 'time');
-		time.innerHTML = noticequeue[i].time.replace(/[TZ]/g, "  ").split('.')[0];
+		var a = new Date(noticequeue[i].time);
+		time.innerHTML = a.format("yyyy-MM-dd hh:mm:ss");
 
 		var btn1 = document.createElement('div');
 		btn1.setAttribute('class', 'btn1');
@@ -97,6 +121,7 @@ function queueInHtml() {
 	}
 
 }
+//显示公告队列
 
 function xz(num) {
 	if (num == 1) {
@@ -158,7 +183,7 @@ function finish(num) {
 		}
 	})
 }
-
+//队列通过，驳回请求
 
 var clear = document.getElementsByClassName('clear')[0];
 var sysbtn = document.getElementsByClassName('sysnotice')[0];
@@ -167,7 +192,7 @@ clear.addEventListener('click', function() {
 	title.value = "";
 	context.value = "";
 })
-
+//实验室公告清除
 sysbtn.addEventListener('click', function() {
 	if(title.value == ""){
 		alert("请输入标题");
@@ -202,3 +227,4 @@ sysbtn.addEventListener('click', function() {
 		}
 	})
 })
+//实验室公告发布请求

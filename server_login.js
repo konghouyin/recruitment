@@ -36,7 +36,7 @@ server.use(cookieSession({
 
 
 server.all('*', function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", 'http://192.168.137.1:8848'); //需要显示设置来源
+	res.header("Access-Control-Allow-Origin", 'http://192.168.137.1:8858'); //需要显示设置来源
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 	res.header("Access-Control-Allow-Credentials", true); //带cookies7     res.header("Content-Type", "application/json;charset=utf-8");
@@ -57,7 +57,8 @@ server.post('/login', function(req, res) {
 				" and password=" + sql.escape(obj.password));
 			sql.sever(pool, sqlString, end); //学号登录
 		} else if (rexPhone(obj.yhm)) {
-			var sqlString = sql.select(['phoneNum', 'password'], 'registryinformation', "phoneNum=" + sql.escape(obj.yhm) +
+			var sqlString = sql.select(['phoneNum', 'password', 'level'], 'registryinformation', "phoneNum=" + sql.escape(
+					obj.yhm) +
 				" and password=" + sql.escape(obj.password));
 			sql.sever(pool, sqlString, end); //手机号登录
 		} else {
@@ -85,9 +86,21 @@ server.post('/login', function(req, res) {
 				maxAge: 5 * 1000,
 				signed: true
 			});
-			var sendurl = "http://127.0.0.1:8848/test/index.html";
-			if(data[0].xuehao==null||data[0].selfgroup==null){
-				sendurl = "http://127.0.0.1:8848/test/index2.html";
+
+			var sendurl;
+			if (data[0].level == '1') {
+				sendurl = "http://192.168.137.1:8858/user.html";
+			} else if (data[0].level == '2') {
+				sendurl = "http://192.168.137.1:8858/xxx.html";
+			} else if (data[0].level == '3') {
+				sendurl = "http://192.168.137.1:8858/xxx.html";
+			} else if (data[0].level == '4') {
+				sendurl = "http://192.168.137.1:8858/xxx.html";
+			}
+
+
+			if (data[0].xuehao == null || data[0].selfgroup == null) {
+				sendurl = "http://192.168.137.1:8858/perfect_msg.html";
 			}
 			res.write(JSON.stringify({
 				msg: "登录成功！",
@@ -170,16 +183,16 @@ server.post('/phone', function(req, res) {
 			req.session.yzm = "" + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() *
 				9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999) + parseInt(Math.random() * 9.9999);
 			req.session.picyzm = null; //成功后验证码失效
-			req.session.phone = obj.phone;//session保存电话号码
+			req.session.phone = obj.phone; //session保存电话号码
 			res.write(JSON.stringify({
-				msg: "短信已发送至"+obj.phone,
+				msg: "短信已发送至" + obj.phone,
 				style: 1
 			}));
 			console.log("发送短信" + req.session.yzm);
 			//shortMessage.send([obj.phone],req.session.yzm);//发送短信---------------------------------------------------------------------------
 			res.end();
 		} else {
-			req.session.picyzm = null;//查重后验证码失效
+			req.session.picyzm = null; //查重后验证码失效
 			res.write(JSON.stringify({
 				msg: "手机号已经注册！",
 				style: -2
@@ -211,7 +224,9 @@ server.post('/reg', function(req, res) {
 			}));
 			res.end();
 		} else {
-			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password','time'], [sql.escape(req.session.phone), sql.escape(obj.password),'NOW()'],
+			var sqlString = sql.insert('registryinformation', ['phoneNum', 'password', 'time'], [sql.escape(req.session.phone),
+					sql.escape(obj.password), 'NOW()'
+				],
 				true);
 			sql.sever(pool, sqlString, end); //数据库存入手机号和密码
 		}
@@ -219,15 +234,15 @@ server.post('/reg', function(req, res) {
 
 	function end(data) {
 		req.session.yzm = null; //成功后验证码失效
-		
+
 		var cookieSend = "" + req.session.phone + "~" + obj.password + "~" + new Date().getTime(); //保存cookie验证，防止跨站session失效
-		
+
 		var str = JSON.stringify(cookieSend); //明文
 		var secret = 'niyidingjiebuchulai'; //密钥--可以随便写
 		var cipher = crypto.createCipher('aes192', secret);
 		var enc = cipher.update(str, 'utf8', 'hex'); //编码方式从utf-8转为hex;
 		enc += cipher.final('hex'); //编码方式从转为hex;
-		
+
 		res.cookie('pbl', enc, {
 			path: '/',
 			maxAge: 5 * 1000,
@@ -235,7 +250,7 @@ server.post('/reg', function(req, res) {
 		});
 		res.write(JSON.stringify({
 			msg: "注册成功。",
-			url:"xxx",
+			url: "http://192.168.137.1:8858/perfect_msg.html",
 			style: 1
 		}));
 		res.end();

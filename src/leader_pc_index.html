@@ -190,18 +190,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="page3 page" style="display:none;">
+				<div class="page3 page" >
 					<div class="wrap_top">移动应用开发实验室2019年纳新--流程控制与短信</div>
 					<div class="thing">
 						<div class="list1">
 							<div class="licheng">
 								<div class="tittle">当前流程</div>
 								<div class="liucheng-show">
-									<div class="old">报名</div>
-									<div class="now">一面</div>
-									<div class="new">二面</div>
-									<div class="new">三面</div>
-									<div class="new">结束</div>
+									<div class="new" nonce="0">报名</div>
+									<div class="new" nonce="1">一面</div>
+									<div class="new" nonce="2">二面</div>
+									<div class="new" nonce="3">三面</div>
+									<div class="new" nonce="4">结束</div>
 								</div>
 								<div class="tuli-show">
 									<div class="tuli">图例：</div>
@@ -211,23 +211,25 @@
 								</div>
 							</div>
 							<div class="main-mess">
-								<div class="tittle">选择提示</div>
-								<div class="mess-show">总人数：135</div>
-								<div class="mess-show">每小时面试人数：6</div>
-								<div class="mess-show">同时可面试人数：3</div>
-								<div class="mess-show"> 已经选择（18/22）小时----还需4小时</div>
-							</div>
-							<div class="timechoose">
-								<div class="tittle">Android</div>
-								<div class="input">每小时面试人数：<input type="text" id="eachhour"></div>
-								<div class="input">同时可面试人数：<input type="text" id="eachperson"></div>
+								<div class="tittle">面试安排</div>
+								<div class="show">
+									<div class="group-style ap">Android</div>
+									<div class="group-style ap">IOS</div>
+									<div class="group-style ap">Web</div>
+									<div class="group-style ap">后台</div>
+									<div class="group-style ap">产品</div>
+								</div>
+								<div class="mess-show">人员安排情况：（6/136)</div>
+								<div class="mess-show"> 时间安排：22 小时</div>
+								<div class="input">预计每人面试时间：<input type="text" id="eachhour"></div>
+								<div class="input">同时可以面试人数：<input type="text" id="eachperson"></div>
 								<div class="choose">
 									<div class="timechoose">面试时间段选择:</div>
 									<div class="calendarWarp">开始时间：
-										<input type="text" name="date" class='ECalendar' id="ECalendar_date_start" value="2019-3-3 15:32" />
+										<input type="text" name="date" class='ECalendar' id="ECalendar_date_start" value="2019-3-15 8:00" />
 									</div>
 									<div class="calendarWarp">结束时间：
-										<input type="text" name="date" class='ECalendar' id="ECalendar_date_end" value="2019-3-4 15:32" />
+										<input type="text" name="date" class='ECalendar' id="ECalendar_date_end" value="2019-3-15 12:00" />
 									</div>
 								</div>
 								<div class="choosetimebtn">提交到时间列表&nbsp;&nbsp;&nbsp;>></div>
@@ -242,21 +244,15 @@
 											<th>组别</th>
 											<th>开始时间</th>
 											<th>结束时间</th>
-											<th>小时数</th>
-											<th>小时人数</th>
+											<th>每人时长</th>
 											<th>同时人数</th>
+											<th>总人数</th>
+											<th>删除</th>
 										</tr>
 									</table>
 								</div>
 							</div>
 							<div class="bottom">
-								<div class="show">
-									<div class="group-style">Android</div>
-									<div class="group-style">IOS</div>
-									<div class="group-style">Web</div>
-									<div class="group-style">后台</div>
-									<div class="group-style">产品</div>
-								</div>
 								<div class="page3btn">提交发送短信</div>
 							</div>
 						</div>
@@ -293,7 +289,7 @@
 						<div class="passbtn">通过审核</div>
 					</div>
 				</div>
-				<div class="page5 page" >
+				<div class="page5 page" style="display:none;">
 					<div class="wrap_top">移动应用开发实验室2019年纳新--公告</div>
 					<div class="list1 col" id="noticequeue">
 						<div class="tittle">公告队列</div>

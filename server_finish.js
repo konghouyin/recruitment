@@ -245,6 +245,16 @@ server.post('/signin', function(req, res) {
 					req.session.phone));
 				sql.sever(pool, sqlString, end1);
 			} else {
+				var rex1 = /[0-9]{2}18[0-9]{4}/;
+				if(rex1.text(data[0].xuehao) && obj.selfgroup == 5){
+					res.write(JSON.stringify({
+						msg: "产品组大一报名！",
+						style: -4
+					}));
+					res.end();
+					return;
+					}
+				
 				var sqlupdate = sql.update('registryinformation', ['selfgroup'], [sql.escape(obj.selfgroup)], 'phoneNum=' +
 					sql.escape(
 						req.session.phone));

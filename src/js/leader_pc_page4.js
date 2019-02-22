@@ -1,5 +1,29 @@
 var ajax = require('./public_Ajax.js').ajax;
 
+
+Date.prototype.format = function(fmt) { 
+     var o = { 
+        "M+" : this.getMonth()+1,                 //月份 
+        "d+" : this.getDate(),                    //日 
+        "h+" : this.getHours(),                   //小时 
+        "m+" : this.getMinutes(),                 //分 
+        "s+" : this.getSeconds(),                 //秒 
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+        "S"  : this.getMilliseconds()             //毫秒 
+    }; 
+    if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+    }
+     for(var k in o) {
+        if(new RegExp("("+ k +")").test(fmt)){
+             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+         }
+     }
+    return fmt; 
+}
+//data格式化
+
+
 var allPeopleMessage;
 var now = new Array();
 var group = {};
@@ -65,7 +89,7 @@ function inHtml() {
 		}
 		tr.innerHTML = '<td><input class="inputlist" type="checkbox" value="' + now[n].xuehao + '" /></td>' +
 			'<td>' + now[n].xuehao + '</td><td>' + now[n].name + '</td>' +
-			'<td>' + xz(now[n].selfgroup) + '</td><td>' + now[n].time.replace(/[TZ]/g, "  ").split('.')[0] + '</td>' +
+			'<td>' + xz(now[n].selfgroup) + '</td><td>' + new Date(now[n].time).format("yyyy-MM-dd hh:mm:ss") + '</td>' +
 			'<td>' + lc(now[n].pass) + '</td>' + '<td>详细</td>'
 		table.appendChild(tr);
 	}
@@ -100,7 +124,7 @@ function lc(num) {
 		return "进入实验室"
 	}
 }
-//文字切换
+//面试流程文字切换
 
 
 var change = document.getElementsByClassName('group-list')[0];
@@ -195,3 +219,4 @@ passbtn.addEventListener('click', function() {
 
 
 })
+//人员通过请求
