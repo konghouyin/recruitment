@@ -1,0 +1,738 @@
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+    text-decoration: none;
+}
+html{
+    width: 100%;
+    height:100%;
+    /* background-color:#232a34; */
+    background-color:#fff;
+    position:relative;
+    font-size:62.5%;
+}
+.headbox{
+    position: absolute;
+    width:100%;
+    height:100%;
+    background-image: url(../img/user.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+.headline{
+    position: absolute;
+    top: 0.7rem;
+    width:100%;
+    height:5rem;
+}
+.btn{
+    position: absolute;
+    top: 50%;
+    left:5%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top:-1.25rem;
+    background-image: url(../img/pass_back.png);
+    background-size: 2.5rem;
+    background-repeat: no-repeat;
+}
+.head_text{
+    position: absolute;
+    left:50%;
+    margin-left:-5rem;
+    height: 5rem;
+    text-align: center;
+    line-height:5rem;
+    font-size:2rem;
+    color: #fff;
+}
+.bodybox{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 79%;
+    border-radius: 2rem 2rem 0 0;
+    background-color: #fff;
+}
+.body{
+    position: absolute;
+    left: 50%;
+    bottom: 0%;
+    width: 84%;
+    height: 99%;
+    margin-top: -25%;
+    margin-left: -42%;
+}
+.body_btn{
+    position: relative;
+    width:100%;
+    height:8rem;
+    border-radius: 2rem 2rem 0 0;
+    border: 1px solid rgba(237, 237, 237, 0.774);
+    border-width:0 0 1px 0;
+    margin-bottom: 2rem;
+}
+.person{
+    position: absolute;
+    top:32%;
+    left:0;
+    width: 5rem;
+    height: 6.5rem;
+    margin-top:-2.5rem;
+}
+.meet{
+    position: absolute;
+    top:32%;
+    left:28%;
+    width: 5rem;
+    height: 6.5rem;
+    margin-top:-2.5rem;
+}
+.notice{
+    position: absolute;
+    top:32%;
+    right:28%;
+    width: 5rem;
+    height: 6.5rem;
+    margin-top:-2.5rem;
+}
+.change{
+    position: absolute;
+    top:32%;
+    right:0;
+    width: 5rem;
+    height: 6.5rem;
+    margin-top:-2.5rem;
+}
+.pic_box{
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+}
+.pic_border1,.pic_border2,.pic_border3,.pic_border4,.active{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-left:-1.75rem;
+    margin-top:-1.75rem;
+    border:2px solid #3285f9;
+    border-radius: 50%;
+}
+.pic_border::after{
+    content: "";
+    display: inline-block;
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 2.7rem;
+    height: 2.7rem;
+    margin-left:-1.35rem;
+    margin-top:-1.35rem;
+    /* background-color: #3285f9; */
+    border-radius: 50%;
+}
+/* 点击按钮换颜色 */
+.active::after{
+    content: "";
+    display: inline-block;
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 2.7rem;
+    height: 2.7rem;
+    margin-left:-1.35rem;
+    margin-top:-1.35rem;
+    background-color: #3285f9;
+    border-radius: 50%;
+}
+
+.person_newpic{
+   position:absolute;
+    top:50%;
+    left:50%;
+    width: 2rem;
+    height: 2rem;
+    margin-left:-1rem;
+    margin-top:-1rem;
+    background-image: url(../img/person1.png);
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    z-index:1;
+} 
+.meet_newpic{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 2rem;
+    height: 2rem;
+    margin-left:-1rem;
+    margin-top:-1rem;
+    background-image: url(../img/meet1.png) !important;
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    z-index:1;
+}  
+.notice_newpic{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 2rem;
+    height: 2rem;
+    margin-left:-1rem;
+    margin-top:-1rem;
+    background-image: url(../img/notice1.png);
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    z-index:1;
+}     
+.change_newpic{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 2rem;
+    height: 2rem;
+    margin-left:-1rem;
+    margin-top:-1rem;
+    background-image: url(../img/change1.png);
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    z-index:1;
+}  
+/* 点击按钮换颜色结束 */
+.person_pic,.meet_pic,.notice_pic,.change_pic{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 2rem;
+    height: 2rem;
+    margin-left:-1rem;
+    margin-top:-1rem;
+    background-image: url(../img/person.png);
+    background-size: 2rem;
+    background-repeat: no-repeat;
+}
+.meet_pic{
+    background-image: url(../img/meet.png);
+}
+.notice_pic{
+    background-image: url(../img/notice.png);
+}
+.change_pic{
+    background-image: url(../img/change.png);
+}
+
+.text_box{
+    position: absolute;
+    bottom:0;
+    width: 5rem;
+    height: 2rem;
+    font-size:1.3rem;
+    text-align:center;
+    line-height:2rem;
+    color:#3285f9;
+}
+/* 图标部分结束 */
+.body_bottom{
+    position: relative;
+    width:100%;
+    height:70%;
+    margin-bottom:3rem;
+    border: 1px solid #3285f9;
+    border-radius: 4px;
+    overflow: auto;
+}
+.content-headline{
+    position: relative;
+    width: 16rem;
+    height: 3.5rem;
+    top: 0%;
+    left: 50%;
+    margin-left: -8rem;
+}
+.left{
+    position:absolute;
+    top:50%;
+    left:0%;
+    width: 5rem;
+    height: 2.5rem;
+    margin-top:-2.5rem;
+    background-image: url(../img/line_left.png);
+    background-size: 5rem;
+    background-repeat: no-repeat;
+}
+.right{
+    position:absolute;
+    top:50%;
+    right:0%;
+    width: 5rem;
+    height: 2.5rem;
+    margin-top:-2.5rem;
+    background-image: url(../img/line_right.png);
+    background-size: 5rem;
+    background-repeat: no-repeat;
+}
+.mid{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 5rem;
+    height: 2.5rem;
+    margin-left:-2.5rem;
+    margin-top:-1.25rem;
+    line-height:2.5rem;
+    font-size:1.5rem;
+    color:#3285f9;
+    font-weight: bolder;
+}
+.content{
+    position: relative;
+    width: 100%;
+    height: 88%;
+}
+
+.explain{
+    position: relative;
+    left: 50%;
+    width: 100%;
+    height: 73%;
+    margin-left: -50%;
+    /* background-color: #f9327e; */
+}
+.now_state{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 90%;
+    height: 7rem;
+    margin-left: -45%;
+    color: #000;
+    /* background-color: #5af932; */
+}
+.you{
+    position:relative;
+    width:100%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 1.5rem;
+    color: #3285f9;
+}
+.you_btm{
+    position: relative;
+    font-size: 1.5rem;  
+    top:10%;
+    left:5%;
+}
+.you_meet{
+    position: absolute;
+    display: inline-block;
+    left:5%;
+}
+.you_state{
+    position: absolute;
+    display: inline-block;
+    right:12%;
+    width: 5rem;
+    height: 2rem;
+    background-color: #3285f9;
+    border-radius: 2rem;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #fff;
+    line-height: 2rem;
+}
+
+.ex_text{
+    position: absolute;
+    top: 27%;
+    left: 50%;
+    width: 100%;
+    height: 59%;
+    margin-left: -45%;
+    color: #000;
+    /* background-color: #ecf932; */
+  
+}
+.ex_headline{
+    height: 2.5rem;
+    line-height:2.5rem;
+    font-size:1.5rem;
+    color: #3285f9;
+    margin: 0.3rem;
+}
+.state_btn1,.state_btn2,.state_btn3,.state_btn4{
+    position:relative;
+    display: inline-block;
+    top:0;
+    left:0;
+    width:5.5rem;
+    height:2rem;
+    background-color: #3285f9;
+    border-radius: 2rem;
+    font-size:1.4rem;
+    text-align: center;
+    line-height:2rem;
+    margin: 1px 0.5rem;
+    color: #fff;
+}
+.state_btn2{
+    top:10%;
+    left:0;
+}
+.state_btn3{
+    top:20%;
+    left:0;
+}
+.state_btn4{
+    top:30%;
+    left:0;
+}
+.state_text{
+    display: inline-block;
+    font-size:1.2rem;
+    color: #000;
+    line-height: 2rem;
+}
+.meet_result{
+    position: relative;
+    left:50%;
+    width: 85%;
+    height: 8rem;
+    margin-left:-42.5%;
+    /* background-color: #3285f9; */
+}
+.pole{
+    position: absolute;
+    top:50%;
+    width: 100%;
+    height: 8px;
+    margin-top:-16px;
+    background-color: darkgray;
+}
+.dot1,.dot2,.dot3,.dot4{
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    left:10%;
+    margin-top:-0.7rem;
+    background-color: #3285f9;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
+    transition: 0.4s;
+}
+.dot2{
+    left:33%;
+}
+.dot3{
+    left:56%;
+}
+.dot4{
+    left:80%;
+}
+.dot1::after,.dot2::after,.dot3::after,.dot4::after{
+    content: "报名";
+    display: inline-block;
+    position: absolute;
+    top: 26px;
+    left: -21px;
+    width: 4.5rem;
+    height: 2rem;
+    text-align:center;
+    line-height:2rem;
+    color:#3285f9
+    /* background-color: #f97b32; */
+}
+.dot2::after{
+    content: "一面";
+}
+.dot3::after{
+    content: "二面";
+}
+.dot4::after{
+    content: "三面";
+}
+.person_text{
+    position:relative;
+    width: 100%;
+    height:5rem;
+    top:1rem;
+    border-bottom-color:#E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    /* background-color:#3285f9; */
+}
+.form_head{
+    position: absolute;
+    height: 2.5rem;
+    left: 3rem;
+    top: 1.5rem;
+    line-height: 2.5rem;
+    font-weight: bolder;
+    /* border: 2px solid #3285f9;
+    background-color: #3285f9;
+    border-radius: 1rem; */
+    /* color: #3285f9; */
+}
+.form_msg{
+    position: absolute;
+    height:2.5rem;
+    left:15rem;
+    top:1.5rem;
+    text-align:center;
+    line-height:2.5rem;
+    color:#576A95;
+}
+.newdot1,.newdot2,.newdot3,.newdot4{
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    left:10%;
+    margin-top:-0.7rem;
+    background-color:#3285f9;
+    border:0 solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
+    transform: scale(1,1);
+    transition: 1.5s;
+}
+.newdot2{
+    left:33%;
+}
+.newdot3{
+    left:56%;
+}
+.newdot4{
+    left:80%;
+}
+.newdot1::after,.newdot2::after,.newdot3::after,.newdot4::after{
+    content: "报名";
+    display: inline-block;
+    position: absolute;
+    top: 26px;
+    left: -16px;
+    width: 4.5rem;
+    height: 2rem;
+    font-weight: bold;
+    text-align:center;
+    line-height:2rem;
+    color:#3285f9
+}
+.passdot1,.passdot2,.passdot3,.passdot4{
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    left:10%;
+    margin-top:-0.7rem;
+    background-color: #1ec335;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
+    transition: 0.4s;
+}
+.passdot2{
+    left:33%;
+}
+.passdot3{
+    left:56%;
+}
+.passdot4{
+    left:80%;
+}
+.passdot1::after,.passdot2::after,.passdot3::after,.passdot4::after{
+    content: "报名";
+    display: inline-block;
+    position: absolute;
+    top: 26px;
+    left: -21px;
+    width: 4.5rem;
+    height: 2rem;
+    text-align:center;
+    line-height:2rem;
+    color:#3285f9
+    /* background-color: #f97b32; */
+}
+.notpass_dot1,.notpass_dot2,.notpass_dot3,.notpass_dot4{
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    left:10%;
+    margin-top:-0.7rem;
+    background-color: #1ec335;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
+    transition: 0.4s;
+}
+.notpass_dot2{
+    left:33%;
+}
+.notpass_dot3{
+    left:56%;
+}
+.notpass_dot4{
+    left:80%;
+}
+.notpass_dot1::after,.notpass_dot2::after,.notpass_dot3::after,.notpass_dot4::after{
+    content: "报名";
+    display: inline-block;
+    position: absolute;
+    top: 26px;
+    left: -21px;
+    width: 4.5rem;
+    height: 2rem;
+    text-align:center;
+    line-height:2rem;
+    color:#3285f9
+    /* background-color: #f97b32; */
+}
+.lab_notice{
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height:10.5rem;
+    margin-left: -45%;
+    margin-bottom:1rem;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
+    border-radius: 5px;
+}
+.group_notice{
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height:10.5rem;
+    margin-left: -45%;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
+    border-radius: 5px;
+}
+.notice_headline,.group_headline{
+    position: relative;
+    height:3rem;
+    text-align:center;
+    font-size:1.5rem;
+    /* font-weight:bold; */
+    line-height:3rem;
+    /* background-color: #32b0f9; */
+}
+.notice_text,.group_text{
+    position: absolute;
+    padding:0 1rem;
+    font-size:1.2rem;
+    line-height:2rem;
+    color: rgba(102, 100, 100, 0.973);
+    height: 6.5rem;
+    overflow:auto;
+    /* background-color: #0d3247; */
+}
+.change_box{
+    position: absolute;
+    width:24rem;
+    height:24rem;
+    top:50%;
+    left:50%;
+    margin-top:-13rem;
+    margin-left:-12rem;
+    /* background-color: #5be689; */
+}
+.box1{
+    position: absolute;
+    top:0;
+    left:0;
+    width:11.9rem;
+    height:11.9rem;
+    border-color:#E5E5E5;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-bottom-width: 0.1rem;
+    border-right-width: 0.1rem;
+
+    /* background-color: #e6ba5b; */
+}
+.box2{
+    position: absolute;
+    top:0;
+    right:0;
+    width:11.9rem;
+    height:11.9rem;  
+    border-color:#E5E5E5;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-bottom-width: 0.1rem;
+    border-left-width: 0.1rem;
+    /* background-color: #e6ba5b; */
+}
+.box3{
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:11.9rem;
+    height:11.9rem;
+    border-color:#E5E5E5;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-top-width: 0.1rem;
+    border-right-width: 0.1rem;
+    /* background-color: #e6ba5b; */
+}
+.box4{
+    position: absolute;
+    bottom:0;
+    right:0;
+    width:11.9rem;
+    height:11.9rem;
+    border-color:#E5E5E5;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-top-width: 0.1rem;
+    border-left-width: 0.1rem;
+    /* background-color: #e6ba5b; */
+}
+.box_msg{
+    position: relative;
+    width:8rem;
+    height:6rem;
+    top:50%;
+    left:50%;
+    margin-top:-4rem;
+    margin-left:-4rem;
+    /* background-color: #5be689; */
+}
+.box_pic1,.box_pic2,.box_pic3,.box_pic4{
+    position: relative;
+    width:3rem;
+    height:3rem;
+    top:0;
+    left:50%;
+    margin-left:-1.5rem;
+    /* background-color: #b1e65b; */
+}
+.box_pic1{
+    background-image: url(../img/change_pass.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+}
+.box_pic2{
+    background-image: url(../img/help.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+}
+.box_pic3{
+    background-image: url(../img/group.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+}
+.box_pic4{
+    background-image: url(../img/public.png);
+    background-size: 100%;;
+    background-repeat: no-repeat;
+}
+.box_text1,.box_text2,.box_text3,.box_text4{
+    position: relative;
+    height:3rem;
+    text-align: center;
+    line-height:3rem;
+    /* background-color: #e6d15b; */
+}

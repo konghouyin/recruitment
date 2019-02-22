@@ -1,0 +1,189 @@
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+    text-decoration: none;
+}
+html{
+    width: 100%;
+    height:100%;
+    /* background-color:#232a34; */
+    background-color:#fff;
+    position:relative;
+    font-size:62.5%;
+}
+input{
+    background:none;
+    outline:none;
+    border:0px;
+    font-weight:90;
+    text-align:center;
+}
+.headbox{
+    position:relative;
+    width: 100%;
+    height:5rem;
+    border-bottom-color: #F7F7F7;;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+.back_btn{
+    position: absolute;
+    top: 50%;
+    left:5%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top:-1.25rem;
+    background-image: url(../img/pass_back.png);
+    background-size: 2.5rem;
+    background-repeat: no-repeat;
+}
+.head_text{
+    position: absolute;
+    left:50%;
+    width:10rem;
+    margin-left:-5rem;
+    height: 5rem;
+    text-align: center;
+    line-height:5rem;
+    font-size:2rem;
+    color: #3285f9;
+}
+.bodybox{
+    width: 85%;
+    height:18rem;
+    margin:3rem auto;
+    /* background-color: #303741; */
+}
+.btn1,.btn2,.btn3{
+    position:relative;
+    width: 100%;
+    height:5rem;
+    border-bottom-color:#E5E5E5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+.btn1_head{
+    width: 9rem;
+    height: 5rem;
+    position: absolute;
+    top: 50%;
+    left:0;
+    margin-top:-2.5rem;
+    font-size: 1.5rem;
+    line-height: 5rem;
+    color: rgb(46, 45, 45);
+}
+.btn2_head{
+    width: 9rem;
+    height: 5rem;
+    position: absolute;
+    top: 50%;
+    left:0;
+    margin-top:-2.5rem;
+    font-size: 1.5rem;
+    line-height: 5rem;
+    color: rgb(46, 45, 45);
+}
+.btn3_head{
+    width: 9rem;
+    height: 5rem;
+    position: absolute;
+    top: 50%;
+    left:0;
+    margin-top:-2.5rem;
+    font-size: 1.5rem;
+    line-height: 5rem;
+    color: rgb(46, 45, 45);
+}
+.btn1_text,.btn2_text,.btn3_text{
+    position: absolute;
+    top: 50%;
+    left:30%;
+    width:15rem;
+    height:5rem;
+    margin-top:-2.5rem;
+    font-size:1.4rem;
+    line-height:5rem;
+    color:rgb(46, 45, 45);
+    /* background-color: rgb(235, 193, 10); */
+}
+.btn1_dlt{
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    top: 50%;
+    right:0%;
+    margin-top:-0.7rem;
+    background-image: url(../img/dlt.png);
+    background-size: 1.6rem;
+    background-repeat: no-repeat;
+}
+.btn2_dlt{
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    top: 50%;
+    right:0%;
+    margin-top:-0.7rem;
+    background-image: url(../img/dlt.png);
+    background-size: 1.6rem;
+    background-repeat: no-repeat;
+}
+#see{
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    top: 50%;
+    right:0%;
+    margin-top:-0.7rem;
+    background-image: url(../img/pass_notsee.png);
+    background-size: 1.6rem;
+    background-repeat: no-repeat;
+}
+.pass_see {
+    position:absolute;
+    top: 50%;
+    right:0%;
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: url(../img/pass_see.png) !important;
+    background-size:1.6rem;
+    background-repeat: no-repeat;
+}
+.pass_notsee{
+    position:absolute;
+    top: 50%;
+    right:0%;
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: url(../img/pass_notsee.png) !important;
+    background-size:1.6rem;
+    background-repeat: no-repeat;
+}
+.passback_con{
+    width: 100%;
+    height:4rem;
+    margin:5rem auto;
+    /* background-color: #303741; */
+    background-color: #3285f9;
+    border-radius: 6px;
+    color:#fff;
+    font-size:1.8rem;
+    text-align: center;
+    line-height:4rem;
+}
+.phone_noenf{
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    width: 15rem;
+    height: 4rem;
+    margin-left: -7.5rem;
+    margin-top: -1.5rem;
+    font-size: 1.6rem;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+    background-color: rgb(0,0,0,0.3);
+}
